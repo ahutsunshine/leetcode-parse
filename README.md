@@ -31,7 +31,7 @@ Here's the most direct way to contribute your work merged into leetcode-parse.
 * Clone down your fork
 * Implement your feature or bug fix and commit changes
 * Push the branch up to your fork
-* Send a pull request to Apache Griffin master branch
+* Send a pull request to leetcode-parse master branch
 
 ## Contract
 You can contact me via email or wechat group:
