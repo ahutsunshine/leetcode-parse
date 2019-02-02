@@ -1,7 +1,10 @@
 package com.leetcode.model.problem;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class Contributor {
     private String username;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String profileUrl;
     private String avatarUrl;
 

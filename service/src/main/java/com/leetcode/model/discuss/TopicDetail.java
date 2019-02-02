@@ -14,6 +14,7 @@ public class TopicDetail {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long updationDate;
     private Long creationDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String status;
     private User author;
     private Boolean isOwnPost;

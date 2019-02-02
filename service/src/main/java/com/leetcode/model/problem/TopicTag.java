@@ -1,8 +1,11 @@
 package com.leetcode.model.problem;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class TopicTag {
     private String name;
     private String slug;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String translatedName;
 
     public String getName() {

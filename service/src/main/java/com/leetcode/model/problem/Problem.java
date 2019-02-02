@@ -1,5 +1,7 @@
 package com.leetcode.model.problem;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +10,9 @@ import java.util.Map;
  */
 public class Problem {
     private String questionId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String questionFrontendId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String boundTopicId;
     private String title; //标题，如Two-Sum
     private String titleSlug;//标题段，如two-sum，
@@ -16,11 +20,13 @@ public class Problem {
     private String difficulty;//难以程度
     private Integer likes;
     private Integer dislikes;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isLiked;
     private String similarQuestions;//相似的题目
     private List<Contributor> contributors;
     private List<TopicTag> topicTags;//相关话题
     private List<CodeSnippet> codeSnippets;//语言方法模板
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String stats; //提交状态
     private List<String> hints;
     private Map<String, Object> solution;
