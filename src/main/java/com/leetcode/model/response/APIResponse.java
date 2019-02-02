@@ -1,20 +1,18 @@
 package com.leetcode.model.response;
 
-import java.util.Map;
-
 public class APIResponse {
     private Integer code;//自定义返回状态，2XX：成功，400：客户端请求的参数错误，500：服务器内部错误
-    private String msg;
+    private String message;
     private Object data;
 
-    public APIResponse(Integer code, String msg, Object data) {
+    public APIResponse(Integer code, String message, Object data) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.data = data;
     }
 
-    public APIResponse(Integer code, String msg){
-        this(code, msg, null);
+    public APIResponse(Integer code, String message){
+        this(code, message, null);
     }
 
     public APIResponse(Object data) {
@@ -29,12 +27,12 @@ public class APIResponse {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Object getData() {

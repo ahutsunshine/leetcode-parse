@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class ProblemController {
-    private static final String GRAPHQL_URL = "https://leetcode.com/graphql";
 
     private final ProblemService problemService;
 
@@ -21,8 +20,22 @@ public class ProblemController {
     }
 
     @RequestMapping(path = "/problems", method = RequestMethod.POST)
-    public APIResponse getProblem(String uri,
-                                  @RequestParam(defaultValue = GRAPHQL_URL) String dataUri) {
-        return problemService.getProblem(uri, dataUri);
+    public APIResponse getProblem(String uri) {
+        return problemService.getProblem(uri);
+    }
+
+    @RequestMapping(path = "/discussions", method = RequestMethod.POST)
+    public APIResponse getDiscussions(@RequestParam(required = true) String uri,
+                                      @RequestParam(required = true) int page,
+                                      @RequestParam(defaultValue = "most_votes") String orderBy,
+                                      @RequestParam(defaultValue = "") String query,
+                                      @RequestParam(defaultValue = "15") int pageSize,
+                                      @RequestParam(required = true) int questionId) {
+        return problemService.getDiscussions(uri, page, orderBy, query, pageSize, questionId);
+    }
+
+    @RequestMapping(path = "/topics", method = RequestMethod.POST)
+    public APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId) {
+        return problemService.getDiscussTopic(problemUri, discussUri, topicId);
     }
 }

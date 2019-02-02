@@ -24,6 +24,7 @@ import java.util.Map;
 
 public class HttpUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtil.class);
+    private static final String GRAPHQL_URL = "https://leetcode.com/graphql";
 
     public static CookieStore getCookies(String uri) {
         CookieStore cookieStore = new BasicCookieStore();
@@ -57,7 +58,7 @@ public class HttpUtil {
             }
             LOGGER.error("status:{},message:{}", res.getEntity().getContent());
             if (String.valueOf(statusCode).startsWith("4")) {
-                response = new APIResponse(403, "Forbidden 403. CSRF verification failed. Request aborted.");
+                response = new APIResponse(403, "Forbidden 403. CSRF verification failed.");
             } else {
                 response = new APIResponse(400, "Request failed.");
             }
@@ -107,7 +108,7 @@ public class HttpUtil {
     }
 
     private static HttpUriRequest buildPostRequest(String uri, String token, HttpEntity params) {
-        return RequestBuilder.post(uri)
+        return RequestBuilder.post(GRAPHQL_URL)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -137,7 +138,8 @@ public class HttpUtil {
                 .replace("problems","")
                 .replace("https:","")
                 .replace("http:","")
-                .replace("/","");
+                .replace("/","")
+                .replace("discuss","");
     }
 
     public static StringEntity buildRequestBody(String operationName, String variables, String query) {
@@ -148,49 +150,5 @@ public class HttpUtil {
         return new StringEntity(json.toString(), "UTF-8");
     }
 
-    public static StringEntity buildRequestBody(String titleSlug) {
-        String operationName = "questionData";
-        JSONObject variables = new JSONObject();
-        variables.put("titleSlug", titleSlug);
-        String query = "query questionData($titleSlug: String!) {\n" +
-                "question(titleSlug: $titleSlug) {\n" +
-                "questionId\n" +
-                "questionFrontendId\n" +
-                "boundTopicId\n" +
-                "title\n" +
-                "titleSlug\n" +
-                "content\n" +
-                "difficulty\n" +
-                "likes\n" +
-                "dislikes\n" +
-                "isLiked\n" +
-                "similarQuestions\n" +
-                "contributors {\n" +
-                "username\n" +
-                "profileUrl\n" +
-                "avatarUrl\n" +
-                "}\n" +
-                "topicTags {\n" +
-                "name\n" +
-                "slug\n" +
-                "translatedName\n" +
-                "}\n" +
-                "codeSnippets {\n" +
-                "lang\n" +
-                "langSlug\n" +
-                "code\n" +
-                "}\n" +
-                "stats\n" +
-                "hints\n" +
-                "solution {\n" +
-                "id\n" +
-                "canSeeDetail\n" +
-                "}\n" +
-                "status\n" +
-                "sampleTestCase\n" +
-                "metaData\n" +
-                "}\n" +
-                "}";
-        return buildRequestBody(operationName, variables.toString(), query);
-    }
+
 }

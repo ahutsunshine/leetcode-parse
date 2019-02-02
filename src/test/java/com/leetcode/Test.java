@@ -4,19 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.leetcode.model.problem.Problem;
 import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.cookie.BasicClientCookie;
 import org.json.JSONObject;
 import org.springframework.util.StringUtils;
 
 import static com.leetcode.util.HttpUtil.*;
+import static com.leetcode.util.RequestParamUtil.buildProblemReqBody;
 
 public class Test {
     public static void main(String[] args) {
         String uri = "https://leetcode.com/problems/trapping-rain-water";
         try {
             CookieStore cookieStore = getCookies(uri);
-            StringEntity stringEntity = buildRequestBody("trapping-rain-water");
+            StringEntity stringEntity = buildProblemReqBody("trapping-rain-water");
             String url = "https://leetcode.com/graphql";
             String res = post(url, cookieStore, stringEntity);
             JSONObject j = new JSONObject(res);
