@@ -65,7 +65,7 @@ public class HttpUtil {
             return JSON.toJSONString(response);
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
-            return JSON.toJSONString(new APIResponse(500, "Exception occurs"));
+            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
         }
     }
 
