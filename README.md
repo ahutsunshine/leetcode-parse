@@ -38,5 +38,5 @@ You can contact me via email or wechat group:
 - Email:  <a href="mailto:ahutsunshine@gmail.com"> ahutsunshine@gmail.com </a>
 - Wechat Group
 
-![wechat_gtoup](https://github.com/ahutsunshine/leetcode-parse/blob/master/src/main/resources/static/leetcode_parse_group.jpg)
+![wechat_gtoup](https://github.com/ahutsunshine/leetcode-parse/blob/master/service/src/main/resources/static/leetcode_parse_group.jpg)
 
