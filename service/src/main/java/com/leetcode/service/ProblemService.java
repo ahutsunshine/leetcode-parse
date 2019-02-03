@@ -12,5 +12,7 @@ public interface ProblemService {
 
     APIResponse getProblemList(String uri);
 
+    APIResponse getTopLikedProblems(String uri);
+
     APIResponse getTags(String uri);
 }

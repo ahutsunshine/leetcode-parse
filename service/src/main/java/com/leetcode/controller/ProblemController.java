@@ -29,6 +29,11 @@ public class ProblemController {
         return problemService.getProblemList(uri);
     }
 
+    @RequestMapping(path = "/top/problems", method = RequestMethod.POST)
+    public APIResponse getTopLikedProblems(String uri) {
+        return problemService.getTopLikedProblems(uri);
+    }
+
     @RequestMapping(path = "/discussions", method = RequestMethod.POST)
     public APIResponse getDiscussions(String uri, int page,
                                       @RequestParam(defaultValue = "most_votes") String orderBy,

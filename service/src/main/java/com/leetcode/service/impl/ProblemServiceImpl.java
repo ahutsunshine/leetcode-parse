@@ -82,6 +82,11 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    public APIResponse getTopLikedProblems(String uri) {
+        return getProblemList(uri);
+    }
+
+    @Override
     public APIResponse getTags(String uri) {
         String html = getHtmlContent(uri);
         if (html == null) return new APIResponse(500, "Request failed. Please try again.");
