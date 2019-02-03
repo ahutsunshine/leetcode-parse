@@ -46,9 +46,10 @@ Leetcode-parse project provides [leetcode_parse_demo.jar](https://github.com/ahu
 
 ### Request Api Sample
 
- `POST http://localhost:8080/api/v1/problems`
  
  Get problem detail
+ 
+ `POST http://localhost:8080/api/v1/problems`
  
  #### Request Params
  - uri：`required string` Problem url. For instance, https://leetcode.com/problems/two-sum/
@@ -92,6 +93,7 @@ Here's the most direct way to contribute your work merged into leetcode-parse.
 You can contact me via email or wechat group:
 - Email:  <a href="mailto:ahutsunshine@gmail.com"> ahutsunshine@gmail.com </a>
 - Wechat Group
-
-![wechat_gtoup](https://github.com/ahutsunshine/leetcode-parse/blob/master/service/src/main/resources/static/leetcode_parse_group.jpg)
+<p align="center">
+    <img src="https://github.com/ahutsunshine/leetcode-parse/blob/master/service/src/main/resources/static/leetcode_parse_group.jpg" alt="Sample"  width="220" height="305">
+</p>
 
