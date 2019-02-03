@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.discuss.Topic;
-import com.leetcode.model.problem.Problem;
+import com.leetcode.model.problem.detail.Problem;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
 import org.apache.http.client.CookieStore;

@@ -1,4 +1,4 @@
-package com.leetcode.model.problem;
+package com.leetcode.model.problem.detail;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

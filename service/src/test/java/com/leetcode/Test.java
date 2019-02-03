@@ -1,7 +1,7 @@
 package com.leetcode;
 
 import com.alibaba.fastjson.JSON;
-import com.leetcode.model.problem.Problem;
+import com.leetcode.model.problem.detail.Problem;
 import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.leetcode.model.problem;
+package com.leetcode.model.problem.detail;
 
 /**
  * 不同语言对应的模板方法
