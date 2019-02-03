@@ -25,12 +25,11 @@ public class ProblemController {
     }
 
     @RequestMapping(path = "/discussions", method = RequestMethod.POST)
-    public APIResponse getDiscussions(@RequestParam(required = true) String uri,
-                                      @RequestParam(required = true) int page,
+    public APIResponse getDiscussions(String uri, int page,
                                       @RequestParam(defaultValue = "most_votes") String orderBy,
                                       @RequestParam(defaultValue = "") String query,
                                       @RequestParam(defaultValue = "15") int pageSize,
-                                      @RequestParam(required = true) int questionId) {
+                                      int questionId) {
         return problemService.getDiscussions(uri, page, orderBy, query, pageSize, questionId);
     }
 
