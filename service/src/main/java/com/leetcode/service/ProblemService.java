@@ -9,4 +9,6 @@ public interface ProblemService {
                                String query, int pageSize, int questionId);
 
     APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId);
+
+    APIResponse getProblemList(String uri);
 }

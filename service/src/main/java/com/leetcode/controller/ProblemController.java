@@ -38,4 +38,9 @@ public class ProblemController {
     public APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId) {
         return problemService.getDiscussTopic(problemUri, discussUri, topicId);
     }
+
+    @RequestMapping(path = "/problems", method = RequestMethod.GET)
+    public APIResponse getProblemList(String uri) {
+        return problemService.getProblemList(uri);
+    }
 }

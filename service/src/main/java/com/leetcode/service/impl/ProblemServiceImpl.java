@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.discuss.Topic;
 import com.leetcode.model.problem.detail.Problem;
+import com.leetcode.model.problem.list.ProblemStatusList;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
 import org.apache.http.client.CookieStore;
@@ -61,6 +62,13 @@ public class ProblemServiceImpl implements ProblemService {
         j = j.getJSONObject("data").getJSONObject("topic");
         Topic topic = JSON.parseObject(j.toString(), Topic.class);
         return new APIResponse(topic);
+    }
+
+    @Override
+    public APIResponse getProblemList(String uri) {
+        String res = get(uri);
+        ProblemStatusList statusList = JSON.parseObject(res, ProblemStatusList.class);
+        return new APIResponse(statusList);
     }
 
     private String buildDiscussUri(String uri, int page, String orderBy, String query) {
