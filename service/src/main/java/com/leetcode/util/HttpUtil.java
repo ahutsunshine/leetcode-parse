@@ -50,6 +50,19 @@ public class HttpUtil {
         }
     }
 
+    public static String getHtmlContent(String uri) {
+        HttpUriRequest request = buildGetRequest(uri);
+        try (CloseableHttpClient httpClient = HttpClients.custom().build();
+             CloseableHttpResponse res = httpClient.execute(request)) {
+            if (res != null) {
+                return EntityUtils.toString(res.getEntity(), "UTF-8");
+            }
+        } catch (Exception e) {
+            LOGGER.error("Exception occurs.", e);
+        }
+        return null;
+    }
+
     public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
         String token = getCsrfToken(cookieStore);
         HttpUriRequest request = buildPostRequest(uri, token, params);
