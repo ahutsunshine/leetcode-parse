@@ -34,20 +34,6 @@ public class ProblemController {
         return problemService.getTopLikedProblems(uri);
     }
 
-    @RequestMapping(path = "/discussions", method = RequestMethod.POST)
-    public APIResponse getDiscussions(String uri, int page,
-                                      @RequestParam(defaultValue = "most_votes") String orderBy,
-                                      @RequestParam(defaultValue = "") String query,
-                                      @RequestParam(defaultValue = "15") int pageSize,
-                                      int questionId) {
-        return problemService.getDiscussions(uri, page, orderBy, query, pageSize, questionId);
-    }
-
-    @RequestMapping(path = "/topics", method = RequestMethod.POST)
-    public APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId) {
-        return problemService.getDiscussTopic(problemUri, discussUri, topicId);
-    }
-
     @RequestMapping(path = "/tags", method = RequestMethod.POST)
     public APIResponse getTags(String uri) {
         return problemService.getTags(uri);
