@@ -3,10 +3,7 @@ package com.leetcode.controller;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -29,18 +26,19 @@ public class ProblemController {
         return problemService.getProblemList(uri);
     }
 
-    @RequestMapping(path = "/top/problems", method = RequestMethod.POST)
-    public APIResponse getTopLikedProblems(String uri) {
-        return problemService.getTopLikedProblems(uri);
+    @RequestMapping(path = "/problems/top100", method = RequestMethod.GET)
+    public APIResponse getTopLikedProblems() {
+        return problemService.getTopLikedProblems();
     }
 
-    @RequestMapping(path = "/interview/problems", method = RequestMethod.POST)
-    public APIResponse getInterviewProblems(String uri) {
-        return problemService.getInterviewProblems(uri);
+    @RequestMapping(path = "/problems/interview", method = RequestMethod.GET)
+    public APIResponse getInterviewProblems() {
+        return problemService.getInterviewProblems();
     }
 
     @RequestMapping(path = "/tags", method = RequestMethod.POST)
     public APIResponse getTags(String uri) {
         return problemService.getTags(uri);
     }
+
 }

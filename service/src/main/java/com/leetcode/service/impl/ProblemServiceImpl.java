@@ -2,8 +2,6 @@ package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.leetcode.model.discuss.DiscussTopics;
-import com.leetcode.model.discuss.Topic;
 import com.leetcode.model.problem.detail.Problem;
 import com.leetcode.model.problem.list.ProblemStatusList;
 import com.leetcode.model.problem.list.TopicTag;
@@ -28,6 +26,9 @@ import static com.leetcode.util.RequestParamUtil.*;
 @Service
 public class ProblemServiceImpl implements ProblemService {
 
+    private static final String TOP_100_LIKED_URI = "https://leetcode.com/api/problems/favorite_lists/top-100-liked-questions/";
+    private static final String TOP_INTERVIEW_URI = "https://leetcode.com/api/problems/favorite_lists/top-interview-questions/";
+
     @Override
     public APIResponse getProblem(String uri) {
         CookieStore cookieStore = getCookies(uri);
@@ -50,13 +51,13 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
-    public APIResponse getTopLikedProblems(String uri) {
-        return getProblemList(uri);
+    public APIResponse getTopLikedProblems() {
+        return getProblemList(TOP_100_LIKED_URI);
     }
 
     @Override
-    public APIResponse getInterviewProblems(String uri) {
-        return getProblemList(uri);
+    public APIResponse getInterviewProblems() {
+        return getProblemList(TOP_INTERVIEW_URI);
     }
 
     @Override
