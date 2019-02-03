@@ -39,34 +39,49 @@ public class HttpUtil {
         return null;
     }
 
-    public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
-        String token = getCsrfToken(cookieStore);
-        HttpUriRequest request = buildPostRequest(uri, token, params);
-        APIResponse response;
-        try (CloseableHttpClient httpClient = HttpClients.custom()
-                .setDefaultCookieStore(cookieStore).build();
+    public static String get(String uri) {
+        HttpUriRequest request = buildGetRequest(uri);
+        try (CloseableHttpClient httpClient = HttpClients.custom().build();
              CloseableHttpResponse res = httpClient.execute(request)) {
-            if (res == null) {
-                LOGGER.error("HttpResponse is null, please check cookie, header and params!");
-                response = new APIResponse(400, "Please check request params");
-                return JSON.toJSONString(response);
-            }
-            int statusCode = res.getStatusLine().getStatusCode();
-            //返回200仍可能是错误信息,需要处理
-            if (statusCode == 200) {
-                return EntityUtils.toString(res.getEntity(), "UTF-8");
-            }
-            LOGGER.error("status:{},message:{}", res.getEntity().getContent());
-            if (String.valueOf(statusCode).startsWith("4")) {
-                response = new APIResponse(403, "Forbidden 403. CSRF verification failed.");
-            } else {
-                response = new APIResponse(400, "Request failed.");
-            }
-            return JSON.toJSONString(response);
+            return processResponse(res);
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
             return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
         }
+    }
+
+    public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
+        String token = getCsrfToken(cookieStore);
+        HttpUriRequest request = buildPostRequest(uri, token, params);
+        try (CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultCookieStore(cookieStore).build();
+             CloseableHttpResponse res = httpClient.execute(request)) {
+            return processResponse(res);
+        } catch (Exception e) {
+            LOGGER.error("Exception occurs.", e);
+            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
+        }
+    }
+
+    private static String processResponse(CloseableHttpResponse res) throws IOException {
+        APIResponse response;
+        if (res == null) {
+            LOGGER.error("HttpResponse is null, please check cookie, header and params!");
+            response = new APIResponse(400, "Please check request params");
+            return JSON.toJSONString(response);
+        }
+        int statusCode = res.getStatusLine().getStatusCode();
+        //返回200仍可能是错误信息,需要处理
+        if (statusCode == 200) {
+            return EntityUtils.toString(res.getEntity(), "UTF-8");
+        }
+        LOGGER.error("status:{},message:{}", res.getEntity().getContent());
+        if (String.valueOf(statusCode).startsWith("4")) {
+            response = new APIResponse(403, "Forbidden 403. CSRF verification failed.");
+        } else {
+            response = new APIResponse(400, "Request failed.");
+        }
+        return JSON.toJSONString(response);
     }
 
     /**
