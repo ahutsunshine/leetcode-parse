@@ -28,6 +28,7 @@ public class ProblemServiceImpl implements ProblemService {
 
     private static final String TOP_100_LIKED_URI = "https://leetcode.com/api/problems/favorite_lists/top-100-liked-questions/";
     private static final String TOP_INTERVIEW_URI = "https://leetcode.com/api/problems/favorite_lists/top-interview-questions/";
+    public static final String FILTER_URI = "https://leetcode.com/problems/api/filter-questions/";
 
     @Override
     public APIResponse getProblem(String uri) {
@@ -47,6 +48,7 @@ public class ProblemServiceImpl implements ProblemService {
     public APIResponse getProblemList(String uri) {
         String res = get(uri);
         ProblemStatusList statusList = JSON.parseObject(res, ProblemStatusList.class);
+        if (statusList == null) return JSON.parseObject(res, APIResponse.class);
         return new APIResponse(statusList);
     }
 
@@ -75,8 +77,22 @@ public class ProblemServiceImpl implements ProblemService {
         return new APIResponse(tags);
     }
 
+    @Override
+    public APIResponse filterProblems(String key) {
+        String res = get(FILTER_URI + key);
+        if (res.startsWith("[")) { // that's array
+            res = res.replace("[", "").replace("]", "");
+            List<Integer> ids = new ArrayList<>();
+            for (String id : res.split(",")) {
+                ids.add(Integer.valueOf(id));
+            }
+            return new APIResponse(ids);
+        }
+        return JSON.parseObject(res, APIResponse.class);
+    }
+
     private List<TopicTag> getTags(Elements tagElements) {
-        if(tagElements == null) return new ArrayList<>();
+        if (tagElements == null) return new ArrayList<>();
         List<TopicTag> tags = new ArrayList<>();
         for (Element e : tagElements) {
             TopicTag tag = new TopicTag();

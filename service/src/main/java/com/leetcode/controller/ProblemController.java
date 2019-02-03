@@ -41,4 +41,9 @@ public class ProblemController {
         return problemService.getTags(uri);
     }
 
+    @RequestMapping(value = "/problems/filtration/{key}", method = RequestMethod.GET)
+    public APIResponse filterProblems(@PathVariable("key") String key) {
+        return problemService.filterProblems(key);
+    }
+
 }
