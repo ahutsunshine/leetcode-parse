@@ -34,6 +34,11 @@ public class ProblemController {
         return problemService.getTopLikedProblems(uri);
     }
 
+    @RequestMapping(path = "/interview/problems", method = RequestMethod.POST)
+    public APIResponse getInterviewProblems(String uri) {
+        return problemService.getInterviewProblems(uri);
+    }
+
     @RequestMapping(path = "/tags", method = RequestMethod.POST)
     public APIResponse getTags(String uri) {
         return problemService.getTags(uri);

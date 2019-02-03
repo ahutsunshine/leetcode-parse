@@ -9,5 +9,7 @@ public interface ProblemService {
 
     APIResponse getTopLikedProblems(String uri);
 
+    APIResponse getInterviewProblems(String uri);
+
     APIResponse getTags(String uri);
 }
