@@ -24,6 +24,11 @@ public class ProblemController {
         return problemService.getProblem(uri);
     }
 
+    @RequestMapping(path = "/problems", method = RequestMethod.GET)
+    public APIResponse getProblemList(String uri) {
+        return problemService.getProblemList(uri);
+    }
+
     @RequestMapping(path = "/discussions", method = RequestMethod.POST)
     public APIResponse getDiscussions(String uri, int page,
                                       @RequestParam(defaultValue = "most_votes") String orderBy,
@@ -38,8 +43,8 @@ public class ProblemController {
         return problemService.getDiscussTopic(problemUri, discussUri, topicId);
     }
 
-    @RequestMapping(path = "/problems", method = RequestMethod.GET)
-    public APIResponse getProblemList(String uri) {
-        return problemService.getProblemList(uri);
+    @RequestMapping(path = "/tags", method = RequestMethod.POST)
+    public APIResponse getTags(String uri) {
+        return problemService.getTags(uri);
     }
 }

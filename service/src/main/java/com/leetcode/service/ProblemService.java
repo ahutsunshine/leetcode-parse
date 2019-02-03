@@ -11,4 +11,6 @@ public interface ProblemService {
     APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId);
 
     APIResponse getProblemList(String uri);
+
+    APIResponse getTags(String uri);
 }
