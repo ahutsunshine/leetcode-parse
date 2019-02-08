@@ -2,6 +2,7 @@ package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.leetcode.cache.CacheEvictJob;
 import com.leetcode.model.problem.detail.Problem;
 import com.leetcode.model.problem.list.ProblemStatusList;
 import com.leetcode.model.problem.list.TopicTag;
@@ -13,6 +14,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,13 +31,16 @@ import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.*;
 
 @Service
+@CacheConfig(cacheNames = "problem", keyGenerator = "cacheKeyGenerator")
 public class ProblemServiceImpl implements ProblemService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProblemServiceImpl.class);
 
     private static final String TOP_100_LIKED_URI = "https://leetcode.com/api/problems/favorite_lists/top-100-liked-questions/";
     private static final String TOP_INTERVIEW_URI = "https://leetcode.com/api/problems/favorite_lists/top-interview-questions/";
-    public static final String FILTER_URI = "https://leetcode.com/problems/api/filter-questions/";
+    private static final String FILTER_URI = "https://leetcode.com/problems/api/filter-questions/";
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getProblem(String uri) {
         CookieStore cookieStore = getCookies(uri);
         String titleSlug = getTitleSlug(uri);
@@ -45,6 +55,7 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getProblemList(String uri) {
         String res = get(uri);
         ProblemStatusList statusList = JSON.parseObject(res, ProblemStatusList.class);
@@ -53,16 +64,19 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getTopLikedProblems() {
         return getProblemList(TOP_100_LIKED_URI);
     }
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getInterviewProblems() {
         return getProblemList(TOP_INTERVIEW_URI);
     }
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getTags(String uri) {
         String html = getHtmlContent(uri);
         if (html == null) return new APIResponse(500, "Request failed. Please try again.");
@@ -78,6 +92,7 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse filterProblems(String key) {
         String res = get(FILTER_URI + key);
         if (res.startsWith("[")) { // that's array

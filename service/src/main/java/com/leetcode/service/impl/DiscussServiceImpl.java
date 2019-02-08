@@ -8,6 +8,8 @@ import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
 import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import static com.leetcode.util.HttpUtil.*;
@@ -16,8 +18,10 @@ import static com.leetcode.util.RequestParamUtil.buildDiscussReqBody;
 import static com.leetcode.util.RequestParamUtil.buildDiscussTopicsReqBody;
 
 @Service
+@CacheConfig(cacheNames = "discuss", keyGenerator = "cacheKeyGenerator")
 public class DiscussServiceImpl implements DiscussService {
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getDiscussions(String uri, int page, String orderBy,
                                       String query, int pageSize, int questionId) {
         if (page < 0) return new APIResponse(400, "Negative page index is not supported.");
@@ -37,6 +41,7 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
+    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId) {
         CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);

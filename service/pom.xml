@@ -17,7 +17,7 @@
         <java.version>1.8</java.version>
         <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
         <spring-boot-maven-plugin.version>2.1.0.RELEASE</spring-boot-maven-plugin.version>
-        <httpclient.version> 4.5.3 </httpclient.version>
+        <httpclient.version>4.5.3</httpclient.version>
         <jsoup.version>1.11.3</jsoup.version>
         <fastjson.version>1.2.47</fastjson.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -84,6 +84,12 @@
             <version>1.11.3</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -110,6 +116,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
+                    <debug>false</debug>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
