@@ -1,7 +1,7 @@
 package com.leetcode.model.response;
 
 public class APIResponse {
-    private Integer code;//自定义返回状态，2XX：成功，400：客户端请求的参数错误，500：服务器内部错误
+    private Integer code;//custom response status,2XX:success,400:request params error,500:server internal error
     private String message;
     private Object data;
 

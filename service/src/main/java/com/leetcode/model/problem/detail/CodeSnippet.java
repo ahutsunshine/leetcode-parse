@@ -1,7 +1,7 @@
 package com.leetcode.model.problem.detail;
 
 /**
- * 不同语言对应的模板方法
+ * Algorithmic template method corresponding to different coding languages
  */
 public class CodeSnippet {
     private String lang;

@@ -84,7 +84,7 @@ public class HttpUtil {
             return JSON.toJSONString(response);
         }
         int statusCode = res.getStatusLine().getStatusCode();
-        //返回200仍可能是错误信息,需要处理
+        //Return 200 may still be an error message that needs to be processed
         if (statusCode == 200) {
             return EntityUtils.toString(res.getEntity(), "UTF-8");
         }
@@ -98,7 +98,8 @@ public class HttpUtil {
     }
 
     /**
-     * 判断返回数据是否为空，空则表示有出错信息
+     * Determine whether returned data is null or not,
+     * and null indicates that there is an error message
      * @param res get or post result string
      * @return LeetcodeErrorMessage error message
      */
@@ -170,7 +171,7 @@ public class HttpUtil {
                 .replace("discuss","");
     }
 
-    public static StringEntity buildRequestBody(String operationName, String variables, String query) {
+    static StringEntity buildRequestBody(String operationName, String variables, String query) {
         JSONObject json = new JSONObject();
         json.put("operationName", operationName);
         json.put("variables", variables);

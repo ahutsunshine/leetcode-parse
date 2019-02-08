@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 问题详情，json数据可参考resources/problem/problem_detail.json
+ * problem detail, JSON data can be referred to resources/problem/problem_detail.json
  */
 public class Problem {
     private String questionId;
@@ -14,23 +14,23 @@ public class Problem {
     private String questionFrontendId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String boundTopicId;
-    private String title; //标题，如Two-Sum
-    private String titleSlug;//标题段，如two-sum，
-    private String content;//问题内容
-    private String difficulty;//难以程度
+    private String title; //such as Two-Sum
+    private String titleSlug;//such as two-sum，
+    private String content;//problem description, null may mean user needs to subscribe
+    private String difficulty;//such as 'Easy','Medium' or 'Difficulty'
     private Integer likes;
     private Integer dislikes;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isLiked;
-    private String similarQuestions;//相似的题目
+    private String similarQuestions;
     private List<Contributor> contributors;
-    private List<TopicTag> topicTags;//相关话题
-    private List<CodeSnippet> codeSnippets;//语言方法模板
+    private List<TopicTag> topicTags;//related topics
+    private List<CodeSnippet> codeSnippets;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String stats; //提交状态
+    private String stats;
     private List<String> hints;
     private Map<String, Object> solution;
-    private String metaData;//方法签名
+    private String metaData;//method signature
 
     public String getQuestionId() {
         return questionId;
