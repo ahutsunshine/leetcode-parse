@@ -1,7 +1,7 @@
 package com.leetcode.model.response;
 
 public class APIResponse {
-    private Integer code;//custom response status,2XX:success,400:request params error,500:server internal error
+    private Integer code;//http status code, such as 2XX:success
     private String message;
     private Object data;
 
