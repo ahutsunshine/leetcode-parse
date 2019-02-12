@@ -16,9 +16,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.leetcode.util.HttpUtil.getCookies;
@@ -38,7 +41,7 @@ public class LoginUtil {
                 .setHeader("x-requested-with", "XMLHttpRequest")
                 .setEntity(params)
                 .build();
-        System.out.println("Executing request " + req.getRequestLine());
+        LOGGER.info("Executing request {}", req.getRequestLine());
         return req;
     }
 
@@ -85,8 +88,11 @@ public class LoginUtil {
         APIResponse response;
         try {
             LoginResponse loginRes = JSON.parseObject(content, LoginResponse.class);
-            response = new APIResponse(statusCode, loginRes.getForm().getErrors().get(0));
+            List<String> formErrors = loginRes.getForm().getErrors();
+            String error = !CollectionUtils.isEmpty(formErrors) ? formErrors.get(0) : "Username or password is incorrect.";
+            response = new APIResponse(statusCode, error);
         } catch (Exception e) { // in case of non-conformity result
+            LOGGER.error("Exception happens. {}", e);
             response = new APIResponse(statusCode, "Request failed.");
         }
         return response;
@@ -105,7 +111,7 @@ public class LoginUtil {
         } else {
             Map<String, Object> sessionMap = new HashMap<>();
             sessionMap.put("session", session);
-            response = new APIResponse(sessionMap);
+            response = new APIResponse(cookieStore.getCookies());
         }
         return response;
     }
