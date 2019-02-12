@@ -76,30 +76,29 @@ public class HttpUtil {
         }
     }
 
-    private static String processResponse(CloseableHttpResponse res) throws IOException {
+    public static String processResponse(CloseableHttpResponse res) throws IOException {
         APIResponse response;
         if (res == null) {
             LOGGER.error("HttpResponse is null, please check cookie, header and params!");
-            response = new APIResponse(400, "Please check request params");
+            response = new APIResponse(400, "Please check request params.");
             return JSON.toJSONString(response);
         }
         int statusCode = res.getStatusLine().getStatusCode();
+        String content = EntityUtils.toString(res.getEntity(), "UTF-8");
         //Return 200 may still be an error message that needs to be processed
         if (statusCode == 200) {
-            return EntityUtils.toString(res.getEntity(), "UTF-8");
+            return content;
         }
-        LOGGER.error("status:{},message:{}", res.getEntity().getContent());
-        if (String.valueOf(statusCode).startsWith("4")) {
-            response = new APIResponse(403, "Forbidden 403. CSRF verification failed.");
-        } else {
-            response = new APIResponse(400, "Request failed.");
-        }
+        LOGGER.info("Response content : {}", content);
+        LOGGER.error("status:{},message:{}", statusCode, res.getStatusLine().getReasonPhrase());
+        response = new APIResponse(statusCode, "Request failed.");
         return JSON.toJSONString(response);
     }
 
     /**
      * Determine whether returned data is null or not,
      * and null indicates that there is an error message
+     *
      * @param res get or post result string
      * @return LeetcodeErrorMessage error message
      */
@@ -150,7 +149,7 @@ public class HttpUtil {
                 .build();
     }
 
-    private static String getCsrfToken(CookieStore cookieStore) {
+    public static String getCsrfToken(CookieStore cookieStore) {
         if (cookieStore == null) return null;
         String token = null;
         for (Cookie cookie : cookieStore.getCookies()) {
@@ -162,13 +161,13 @@ public class HttpUtil {
     }
 
     public static String getTitleSlug(String uri) {
-        if(StringUtils.isEmpty(uri)) return null;
-        return uri.replace("leetcode.com","")
-                .replace("problems","")
-                .replace("https:","")
-                .replace("http:","")
-                .replace("/","")
-                .replace("discuss","");
+        if (StringUtils.isEmpty(uri)) return null;
+        return uri.replace("leetcode.com", "")
+                .replace("problems", "")
+                .replace("https:", "")
+                .replace("http:", "")
+                .replace("/", "")
+                .replace("discuss", "");
     }
 
     static StringEntity buildRequestBody(String operationName, String variables, String query) {
