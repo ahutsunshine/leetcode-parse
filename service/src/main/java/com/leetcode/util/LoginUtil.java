@@ -17,12 +17,11 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
+import java.util.TimeZone;
 
 import static com.leetcode.util.HttpUtil.getCookies;
 import static com.leetcode.util.HttpUtil.getCsrfToken;
@@ -74,8 +73,8 @@ public class LoginUtil {
         APIResponse response;
         int statusCode = res.getStatusLine().getStatusCode();
         String content = EntityUtils.toString(res.getEntity(), "UTF-8");
-        LOGGER.info("Response content : {}", content);
-        LOGGER.error("status:{},message:{}", statusCode, res.getStatusLine().getReasonPhrase());
+        LOGGER.info("Response content: {}", content);
+        LOGGER.info("Login status:{}, message:{}", statusCode, res.getStatusLine().getReasonPhrase());
         if (statusCode != 200) {
             response = getErrorIfLoginFailed(statusCode, content);
         } else {
@@ -102,16 +101,18 @@ public class LoginUtil {
         APIResponse response;
         String session = null;
         for (Cookie cookie : cookieStore.getCookies()) {
-            if (cookie.getName().equalsIgnoreCase("LEETCODE_SESSION")) {
+            if (cookie.getName().equals("LEETCODE_SESSION")) {
                 session = cookie.getValue();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                df.setTimeZone(TimeZone.getDefault());
+                LOGGER.info("Session expired time : {}", df.format(cookie.getExpiryDate()));
             }
+
         }
         if (session == null) {
             response = new APIResponse(400, "Login failed. Please try again.");
         } else {
-            Map<String, Object> sessionMap = new HashMap<>();
-            sessionMap.put("session", session);
-            response = new APIResponse(cookieStore.getCookies());
+            response = new APIResponse(cookieStore);
         }
         return response;
     }
