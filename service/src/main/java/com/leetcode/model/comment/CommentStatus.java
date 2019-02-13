@@ -7,6 +7,7 @@ public class CommentStatus {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer commentId;
     private String error;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Comment comment;
 
     public Boolean getOk() {

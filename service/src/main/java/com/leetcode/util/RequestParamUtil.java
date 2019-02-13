@@ -203,4 +203,21 @@ public class RequestParamUtil {
                 "}";
         return buildRequestBody(operationName, variables.toString(), q);
     }
+
+    public static StringEntity buildCommentReqBody(Integer commentId) {
+        String operationName = "deleteComment";
+        JSONObject variables = new JSONObject();
+        variables.put("commentId", commentId);
+        String q = "mutation deleteComment($commentId: Int!) {\n" +
+                "deleteComment(id: $commentId) {\n" +
+                "ok\n" +
+                "error\n" +
+                "post {\n" +
+                "id\n" +
+                "status\n" +
+                "}\n" +
+                "}\n" +
+                "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
 }

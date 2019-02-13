@@ -28,4 +28,9 @@ public class CommentController {
     public APIResponse updateComment(@RequestBody CommentBody request) {
         return service.updateComment(request);
     }
+
+    @RequestMapping(path = "/comments", method = RequestMethod.DELETE)
+    public APIResponse deleteComment(@RequestBody CommentBody request) {
+        return service.deleteComment(request);
+    }
 }

@@ -7,4 +7,6 @@ public interface CommentService {
     APIResponse createComment(CommentBody request);
 
     APIResponse updateComment(CommentBody request);
+
+    APIResponse deleteComment(CommentBody request);
 }

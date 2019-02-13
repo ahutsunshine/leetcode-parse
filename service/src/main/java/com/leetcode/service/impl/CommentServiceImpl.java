@@ -26,13 +26,14 @@ public class CommentServiceImpl implements CommentService {
 
     private static final String CREATE_COMMENT_OPERATION = "createComment";
     private static final String UPDATE_COMMENT_OPERATION = "updateComment";
+    private static final String DELETE_COMMENT_OPERATION = "deleteComment";
 
     @Override
     public APIResponse createComment(CommentBody req) {
         APIResponse error = checkParams(req, CREATE_COMMENT_OPERATION);
         if (error != null) return error;
         StringEntity requestBody = buildCommentReqBody(req.getTopicId(), req.getParentCommentId(), req.getContent());
-        return createOrUpdateComment(req, requestBody, CREATE_COMMENT_OPERATION);
+        return comment(req, requestBody, CREATE_COMMENT_OPERATION);
     }
 
     @Override
@@ -40,10 +41,18 @@ public class CommentServiceImpl implements CommentService {
         APIResponse error = checkParams(req, UPDATE_COMMENT_OPERATION);
         if (error != null) return error;
         StringEntity requestBody = buildCommentReqBody(req.getCommentId(), req.getContent());
-        return createOrUpdateComment(req, requestBody, UPDATE_COMMENT_OPERATION);
+        return comment(req, requestBody, UPDATE_COMMENT_OPERATION);
     }
 
-    private APIResponse createOrUpdateComment(CommentBody req, HttpEntity entity, String operationName) {
+    @Override
+    public APIResponse deleteComment(CommentBody req) {
+        APIResponse error = checkParams(req, DELETE_COMMENT_OPERATION);
+        if (error != null) return error;
+        StringEntity requestBody = buildCommentReqBody(req.getCommentId());
+        return comment(req, requestBody, DELETE_COMMENT_OPERATION);
+    }
+
+    private APIResponse comment(CommentBody req, HttpEntity entity, String operationName) {
         CookieStore cookieStore = req.getCookieStore();
         String res = post(req.getUri(), cookieStore, entity);
         APIResponse e = getErrorIfFailed(res);
@@ -60,8 +69,13 @@ public class CommentServiceImpl implements CommentService {
         if (CREATE_COMMENT_OPERATION.equals(operationName) && req.getTopicId() == null) {
             return new APIResponse(400, "Topic id is required.");
         }
-        if (UPDATE_COMMENT_OPERATION.equals(operationName) && req.getCommentId() == null) {
+        if ((UPDATE_COMMENT_OPERATION.equals(operationName)
+                || DELETE_COMMENT_OPERATION.equals(operationName))
+                && req.getCommentId() == null) {
             return new APIResponse(400, "Comment id is required.");
+        }
+        if (StringUtils.isEmpty(req.getContent()) && !DELETE_COMMENT_OPERATION.equals(operationName)) {
+            return new APIResponse(400, "Comment content is required.");
         }
         return null;
     }
@@ -72,9 +86,6 @@ public class CommentServiceImpl implements CommentService {
         }
         if (req.getOperationName() == null || !req.getOperationName().equals(operationName)) {
             return new APIResponse(400, "Operation name is incorrect.");
-        }
-        if (StringUtils.isEmpty(req.getContent())) {
-            return new APIResponse(400, "Comment content is required.");
         }
         if (CollectionUtils.isEmpty(req.getCookies())) {
             return new APIResponse(400, "User cookie is required.");
