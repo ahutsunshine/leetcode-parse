@@ -28,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
     private static final String UPDATE_COMMENT_OPERATION = "updateComment";
 
     @Override
-    public APIResponse addComment(CommentBody req) {
+    public APIResponse createComment(CommentBody req) {
         APIResponse error = checkParams(req, CREATE_COMMENT_OPERATION);
         if (error != null) return error;
         StringEntity requestBody = buildCommentReqBody(req.getTopicId(), req.getParentCommentId(), req.getContent());

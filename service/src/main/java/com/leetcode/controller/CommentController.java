@@ -20,8 +20,8 @@ public class CommentController {
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.POST)
-    public APIResponse addComment(@RequestBody CommentBody request) {
-        return service.addComment(request);
+    public APIResponse createComment(@RequestBody CommentBody request) {
+        return service.createComment(request);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.PUT)
