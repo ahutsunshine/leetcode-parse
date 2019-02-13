@@ -185,15 +185,9 @@ public class RequestParamUtil {
     public static StringEntity buildCommentReqBody(Integer commentId, String content) {
         String operationName = "updateComment";
         JSONObject variables = new JSONObject();
-        variables.put("topicId", commentId);
+        variables.put("commentId", commentId);
         variables.put("content", content);
-        String q = "{\n" +
-                "    \"operationName\":\"updateComment\",\n" +
-                "    \"variables\":{\n" +
-                "        \"commentId\":235005,\n" +
-                "        \"content\":\"That's cool.\"\n" +
-                "    },\n" +
-                "    \"query\":\"mutation updateComment($commentId: Int!, $content: String!) {\n" +
+        String q = "mutation updateComment($commentId: Int!, $content: String!) {\n" +
                 "updateComment(id: $commentId, content: $content) {\n" +
                 "ok\n" +
                 "error\n" +
@@ -206,8 +200,6 @@ public class RequestParamUtil {
                 "}\n" +
                 "}\n" +
                 "}\n" +
-                "}\n" +
-                "\"\n" +
                 "}";
         return buildRequestBody(operationName, variables.toString(), q);
     }
