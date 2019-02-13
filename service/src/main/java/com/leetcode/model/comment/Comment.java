@@ -1,10 +1,12 @@
 package com.leetcode.model.comment;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.leetcode.model.discuss.TopicDetail;
 
 public class Comment {
     private Integer id;
     private TopicDetail post;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer numChildren;
 
     public Integer getId() {

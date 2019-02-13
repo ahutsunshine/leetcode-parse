@@ -138,4 +138,47 @@ public class RequestParamUtil {
                 "}\n";
         return buildRequestBody(operationName, variables.toString(), q);
     }
+
+    public static StringEntity buildCommentReqBody(int topicId, Integer parentCommentId, String content) {
+        String operationName = "createComment";
+        JSONObject variables = new JSONObject();
+        variables.put("topicId", topicId);
+        variables.put("parentCommentId", parentCommentId);
+        variables.put("content", content);
+        String q = "mutation createComment($topicId: Int!, $parentCommentId: Int!, $content: String!) {\n" +
+                "createComment(topicId: $topicId, parentCommentId: $parentCommentId, content: $content) {\n" +
+                "ok\n" +
+                "commentId\n" +
+                "error\n" +
+                "comment {\n" +
+                "id\n" +
+                "post {\n" +
+                "...DiscussPost\n" +
+                "}\n" +
+                "}\n" +
+                "}\n" +
+                "}\n" +
+                "\n" +
+                "fragment DiscussPost on PostNode {\n" +
+                "id\n" +
+                "voteCount\n" +
+                "voteStatus\n" +
+                "content\n" +
+                "updationDate\n" +
+                "creationDate\n" +
+                "status\n" +
+                "author {\n" +
+                "isDiscussAdmin\n" +
+                "isDiscussStaff\n" +
+                "username\n" +
+                "profile {\n" +
+                "userAvatar\n" +
+                "reputation\n" +
+                "userSlug\n" +
+                "}\n" +
+                "}\n" +
+                "isOwnPost\n" +
+                "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
 }
