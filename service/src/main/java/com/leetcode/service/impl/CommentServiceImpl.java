@@ -6,6 +6,7 @@ import com.leetcode.model.comment.CommentBody;
 import com.leetcode.model.comment.CommentStatus;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
@@ -23,17 +24,32 @@ import static com.leetcode.util.RequestParamUtil.buildCommentReqBody;
 public class CommentServiceImpl implements CommentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentServiceImpl.class);
 
+    private static final String CREATE_COMMENT_OPERATION = "createComment";
+    private static final String UPDATE_COMMENT_OPERATION = "updateComment";
+
     @Override
     public APIResponse addComment(CommentBody req) {
-        APIResponse error = checkParams(req, "createComment");
+        APIResponse error = checkParams(req, CREATE_COMMENT_OPERATION);
         if (error != null) return error;
-        CookieStore cookieStore = req.getCookieStore();
         StringEntity requestBody = buildCommentReqBody(req.getTopicId(), req.getParentCommentId(), req.getContent());
-        String res = post(req.getUri(), cookieStore, requestBody);
+        return createOrUpdateComment(req, requestBody, CREATE_COMMENT_OPERATION);
+    }
+
+    @Override
+    public APIResponse updateComment(CommentBody req) {
+        APIResponse error = checkParams(req, UPDATE_COMMENT_OPERATION);
+        if (error != null) return error;
+        StringEntity requestBody = buildCommentReqBody(req.getCommentId(), req.getContent());
+        return createOrUpdateComment(req, requestBody, UPDATE_COMMENT_OPERATION);
+    }
+
+    private APIResponse createOrUpdateComment(CommentBody req, HttpEntity entity, String operationName) {
+        CookieStore cookieStore = req.getCookieStore();
+        String res = post(req.getUri(), cookieStore, entity);
         APIResponse e = getErrorIfFailed(res);
         if (e != null) return e;
         JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
-        data = data.getJSONObject("createComment");
+        data = data.getJSONObject(operationName);
         CommentStatus status = JSON.parseObject(data.toString(), CommentStatus.class);
         return new APIResponse(status);
     }
@@ -41,10 +57,10 @@ public class CommentServiceImpl implements CommentService {
     private APIResponse checkParams(CommentBody req, String operationName) {
         APIResponse error = checkBasicParams(req, operationName);
         if (error != null) return error;
-        if ("createComment".equals(operationName) && req.getTopicId() == null) {
+        if (CREATE_COMMENT_OPERATION.equals(operationName) && req.getTopicId() == null) {
             return new APIResponse(400, "Topic id is required.");
         }
-        if ("updateComment".equals(operationName) && req.getCommentId() == null) {
+        if (UPDATE_COMMENT_OPERATION.equals(operationName) && req.getCommentId() == null) {
             return new APIResponse(400, "Comment id is required.");
         }
         return null;

@@ -139,7 +139,7 @@ public class RequestParamUtil {
         return buildRequestBody(operationName, variables.toString(), q);
     }
 
-    public static StringEntity buildCommentReqBody(int topicId, Integer parentCommentId, String content) {
+    public static StringEntity buildCommentReqBody(Integer topicId, Integer parentCommentId, String content) {
         String operationName = "createComment";
         JSONObject variables = new JSONObject();
         variables.put("topicId", topicId);
@@ -178,6 +178,36 @@ public class RequestParamUtil {
                 "}\n" +
                 "}\n" +
                 "isOwnPost\n" +
+                "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
+
+    public static StringEntity buildCommentReqBody(Integer commentId, String content) {
+        String operationName = "updateComment";
+        JSONObject variables = new JSONObject();
+        variables.put("topicId", commentId);
+        variables.put("content", content);
+        String q = "{\n" +
+                "    \"operationName\":\"updateComment\",\n" +
+                "    \"variables\":{\n" +
+                "        \"commentId\":235005,\n" +
+                "        \"content\":\"That's cool.\"\n" +
+                "    },\n" +
+                "    \"query\":\"mutation updateComment($commentId: Int!, $content: String!) {\n" +
+                "updateComment(id: $commentId, content: $content) {\n" +
+                "ok\n" +
+                "error\n" +
+                "comment {\n" +
+                "id\n" +
+                "post {\n" +
+                "id\n" +
+                "content\n" +
+                "updationDate\n" +
+                "}\n" +
+                "}\n" +
+                "}\n" +
+                "}\n" +
+                "\"\n" +
                 "}";
         return buildRequestBody(operationName, variables.toString(), q);
     }
