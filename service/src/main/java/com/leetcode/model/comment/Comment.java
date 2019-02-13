@@ -5,6 +5,7 @@ import com.leetcode.model.discuss.TopicDetail;
 
 public class Comment {
     private Integer id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private TopicDetail post;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer numChildren;
