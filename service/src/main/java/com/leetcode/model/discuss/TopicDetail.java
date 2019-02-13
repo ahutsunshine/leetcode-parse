@@ -6,6 +6,7 @@ import com.leetcode.model.user.User;
 
 public class TopicDetail {
     private Integer id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer voteCount;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer voteStatus;
@@ -15,6 +16,7 @@ public class TopicDetail {
     private Long creationDate;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String status;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private User author;
     private Boolean isOwnPost;
 

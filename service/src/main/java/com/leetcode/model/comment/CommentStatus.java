@@ -1,7 +1,10 @@
 package com.leetcode.model.comment;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class CommentStatus {
     private Boolean ok;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer commentId;
     private String error;
     private Comment comment;
