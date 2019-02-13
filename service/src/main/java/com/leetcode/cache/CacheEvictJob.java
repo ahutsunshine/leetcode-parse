@@ -15,7 +15,7 @@ public class CacheEvictJob {
             cacheNames = {"discuss", "problem"},
             allEntries = true,
             beforeInvocation = true)
-    public void evictHiveCache() {
+    public void evictCache() {
         LOGGER.info("Clear discuss and problem cache");
     }
 }
