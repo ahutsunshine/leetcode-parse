@@ -19,6 +19,7 @@ public class CommentBody implements Serializable {
     private String uri;
     private String operationName;
     private Integer topicId;
+    private Integer commentId;
     private Integer parentCommentId = 0;
     private String content;
     private List<LeetcodeCookie> cookies;
@@ -47,6 +48,14 @@ public class CommentBody implements Serializable {
 
     public void setTopicId(Integer topicId) {
         this.topicId = topicId;
+    }
+
+    public Integer getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
     public Integer getParentCommentId() {

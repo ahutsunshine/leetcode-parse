@@ -38,26 +38,24 @@ public class CommentServiceImpl implements CommentService {
         return new APIResponse(status);
     }
 
-//    private CookieStore getCookies(CommentBody req) {
-//        BasicCookieStore cookieStore = new BasicCookieStore();
-//        List<BasicClientCookie> cookieList = req.getCookies();
-//        Cookie[] cookies = new Cookie[cookieList.size()];
-//        for (int i = 0; i < cookies.length; i++) {
-//            cookies[i] = cookieList.get(i);
-//        }
-//        cookieStore.addCookies(cookies);
-//        return cookieStore;
-//    }
-
     private APIResponse checkParams(CommentBody req, String operationName) {
+        APIResponse error = checkBasicParams(req, operationName);
+        if (error != null) return error;
+        if ("createComment".equals(operationName) && req.getTopicId() == null) {
+            return new APIResponse(400, "Topic id is required.");
+        }
+        if ("updateComment".equals(operationName) && req.getCommentId() == null) {
+            return new APIResponse(400, "Comment id is required.");
+        }
+        return null;
+    }
+
+    private APIResponse checkBasicParams(CommentBody req, String operationName) {
         if (StringUtils.isEmpty(req.getUri())) {
             return new APIResponse(400, "Refer uri is required.");
         }
         if (req.getOperationName() == null || !req.getOperationName().equals(operationName)) {
             return new APIResponse(400, "Operation name is incorrect.");
-        }
-        if (req.getTopicId() == null) {
-            return new APIResponse(400, "Topic id is required.");
         }
         if (StringUtils.isEmpty(req.getContent())) {
             return new APIResponse(400, "Comment content is required.");
