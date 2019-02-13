@@ -11,7 +11,6 @@ public class TopicDetail {
     private Integer voteStatus;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String content;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long updationDate;
     private Long creationDate;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -35,11 +34,12 @@ public class TopicDetail {
         this.voteCount = voteCount;
     }
 
-    public long getCreationDate() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(long creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -75,6 +75,7 @@ public class TopicDetail {
         this.content = content;
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Long getUpdationDate() {
         return updationDate;
     }
