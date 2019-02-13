@@ -1,0 +1,32 @@
+{
+  "data":{
+    "createComment":{
+      "ok":true,
+      "commentId":235005,
+      "error":"",
+      "comment":{
+        "id":235005,
+        "post":{
+          "id":471468,
+          "voteCount":0,
+          "voteStatus":0,
+          "content":"That's cool.",
+          "updationDate":1550063732,
+          "creationDate":1550063732,
+          "status":"Open",
+          "author":{
+            "isDiscussAdmin":false,
+            "isDiscussStaff":false,
+            "username":"ahutsunshine",
+            "profile":{
+              "userAvatar":"https://www.gravatar.com/avatar/de75f154fccce1106e1d575fb8d59f2e.png?s=200",
+              "reputation":0,
+              "userSlug":"ahutsunshine"
+            }
+          },
+          "isOwnPost":true
+        }
+      }
+    }
+  }
+}

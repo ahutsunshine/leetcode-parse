@@ -1,0 +1,10 @@
+{
+  "data":{
+    "createComment":{
+      "ok":false,
+      "commentId":-1,
+      "error":"Please sign in first.",
+      "comment":null
+    }
+  }
+}
