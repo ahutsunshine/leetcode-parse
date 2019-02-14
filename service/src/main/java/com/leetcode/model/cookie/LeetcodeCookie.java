@@ -1,4 +1,4 @@
-package com.leetcode.cookie;
+package com.leetcode.model.cookie;
 
 import java.util.Date;
 
