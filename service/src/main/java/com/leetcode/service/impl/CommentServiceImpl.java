@@ -2,7 +2,7 @@ package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.leetcode.model.comment.CommentBody;
+import com.leetcode.model.comment.CommentReqBody;
 import com.leetcode.model.comment.CommentStatus;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
     private static final String DELETE_COMMENT_OPERATION = "deleteComment";
 
     @Override
-    public APIResponse createComment(CommentBody req) {
+    public APIResponse createComment(CommentReqBody req) {
         APIResponse error = checkParams(req, CREATE_COMMENT_OPERATION);
         if (error != null) return error;
         StringEntity requestBody = buildCommentReqBody(req.getTopicId(), req.getParentCommentId(), req.getContent());
@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public APIResponse updateComment(CommentBody req) {
+    public APIResponse updateComment(CommentReqBody req) {
         APIResponse error = checkParams(req, UPDATE_COMMENT_OPERATION);
         if (error != null) return error;
         StringEntity requestBody = buildCommentReqBody(req.getCommentId(), req.getContent());
@@ -45,14 +45,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public APIResponse deleteComment(CommentBody req) {
+    public APIResponse deleteComment(CommentReqBody req) {
         APIResponse error = checkParams(req, DELETE_COMMENT_OPERATION);
         if (error != null) return error;
         StringEntity requestBody = buildCommentReqBody(req.getCommentId());
         return comment(req, requestBody, DELETE_COMMENT_OPERATION);
     }
 
-    private APIResponse comment(CommentBody req, HttpEntity entity, String operationName) {
+    private APIResponse comment(CommentReqBody req, HttpEntity entity, String operationName) {
         CookieStore cookieStore = req.getCookieStore();
         String res = post(req.getUri(), cookieStore, entity);
         APIResponse e = getErrorIfFailed(res);
@@ -63,7 +63,7 @@ public class CommentServiceImpl implements CommentService {
         return new APIResponse(status);
     }
 
-    private APIResponse checkParams(CommentBody req, String operationName) {
+    private APIResponse checkParams(CommentReqBody req, String operationName) {
         APIResponse error = checkBasicParams(req, operationName);
         if (error != null) return error;
         if (CREATE_COMMENT_OPERATION.equals(operationName) && req.getTopicId() == null) {
@@ -80,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
         return null;
     }
 
-    private APIResponse checkBasicParams(CommentBody req, String operationName) {
+    private APIResponse checkBasicParams(CommentReqBody req, String operationName) {
         if (StringUtils.isEmpty(req.getUri())) {
             return new APIResponse(400, "Refer uri is required.");
         }

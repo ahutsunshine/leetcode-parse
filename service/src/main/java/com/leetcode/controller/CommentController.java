@@ -1,6 +1,6 @@
 package com.leetcode.controller;
 
-import com.leetcode.model.comment.CommentBody;
+import com.leetcode.model.comment.CommentReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +20,17 @@ public class CommentController {
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.POST)
-    public APIResponse createComment(@RequestBody CommentBody request) {
+    public APIResponse createComment(@RequestBody CommentReqBody request) {
         return service.createComment(request);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.PUT)
-    public APIResponse updateComment(@RequestBody CommentBody request) {
+    public APIResponse updateComment(@RequestBody CommentReqBody request) {
         return service.updateComment(request);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.DELETE)
-    public APIResponse deleteComment(@RequestBody CommentBody request) {
+    public APIResponse deleteComment(@RequestBody CommentReqBody request) {
         return service.deleteComment(request);
     }
 }

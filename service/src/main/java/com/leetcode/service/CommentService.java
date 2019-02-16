@@ -1,12 +1,12 @@
 package com.leetcode.service;
 
-import com.leetcode.model.comment.CommentBody;
+import com.leetcode.model.comment.CommentReqBody;
 import com.leetcode.model.response.APIResponse;
 
 public interface CommentService {
-    APIResponse createComment(CommentBody request);
+    APIResponse createComment(CommentReqBody request);
 
-    APIResponse updateComment(CommentBody request);
+    APIResponse updateComment(CommentReqBody request);
 
-    APIResponse deleteComment(CommentBody request);
+    APIResponse deleteComment(CommentReqBody request);
 }

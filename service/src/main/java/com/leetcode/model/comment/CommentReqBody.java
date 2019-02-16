@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class CommentBody implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommentBody.class);
+public class CommentReqBody implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommentReqBody.class);
 
     private String uri;
     private String operationName;
