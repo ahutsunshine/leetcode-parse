@@ -1,6 +1,7 @@
 package com.leetcode.util;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leetcode.model.discuss.TopicReqBody;
 import org.apache.http.entity.StringEntity;
 
 import java.util.ArrayList;
@@ -216,6 +217,62 @@ public class RequestParamUtil {
                 "id\n" +
                 "status\n" +
                 "}\n" +
+                "}\n" +
+                "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
+
+    public static StringEntity buildUpdateTopicReqBody(TopicReqBody req) {
+        String operationName = "updateTopic";
+        JSONObject variables = new JSONObject();
+        variables.put("id", req.getId());
+        variables.put("title", req.getTitle());
+        variables.put("content", req.getContent());
+        variables.put("tags", req.getTags());
+        String q = "mutation updateTopic($title: String!, $content: String!, $id: Int!, $tags: [String]) {\n" +
+                "updateTopic(title: $title, content: $content, id: $id, tags: $tags) {\n" +
+                "ok\n" +
+                "error\n" +
+                "topic {\n" +
+                "id\n" +
+                "title\n" +
+                "tags\n" +
+                "post {\n" +
+                "id\n" +
+                "content\n" +
+                "}\n" +
+                "}\n" +
+                "}\n" +
+                "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
+
+    public static StringEntity buildCreateTopicReqBody(TopicReqBody req) {
+        String operationName = "postTopic";
+        JSONObject variables = new JSONObject();
+        variables.put("questionId", String.valueOf(req.getId()));
+        variables.put("title", req.getTitle());
+        variables.put("content", req.getContent());
+        variables.put("tags", req.getTags());
+        String q = "mutation postTopic($title: String!, $content: String!, $questionId: Int!, $tags: [String!]) {\n" +
+                "createTopicForQuestion(title: $title, content: $content, questionId: $questionId, tags: $tags) {\n" +
+                "error\n" +
+                "topic {\n" +
+                "id\n" +
+                "}\n" +
+                "}\n" +
+                "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
+
+    public static StringEntity buildDeleteTopicReqBody(TopicReqBody req) {
+        String operationName = "deleteTopic";
+        JSONObject variables = new JSONObject();
+        variables.put("topicId", req.getId());
+        String q = "mutation deleteTopic($topicId: Int!) {\n" +
+                "deleteTopic(id: $topicId) {\n" +
+                "ok\n" +
+                "error\n" +
                 "}\n" +
                 "}";
         return buildRequestBody(operationName, variables.toString(), q);

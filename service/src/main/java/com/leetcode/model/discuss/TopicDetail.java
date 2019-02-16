@@ -12,12 +12,15 @@ public class TopicDetail {
     private Integer voteStatus;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String content;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long updationDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long creationDate;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String status;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private User author;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isOwnPost;
 
     public Integer getId() {

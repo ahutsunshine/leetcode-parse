@@ -2,15 +2,23 @@ package com.leetcode.model.discuss;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+
 public class Topic {
     private String id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String title;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer commentCount;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer topLevelCommentCount;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean subscribed;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer viewCount;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<String> tags;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private TopicDetail post;
 
     public String getId() {
@@ -67,5 +75,13 @@ public class Topic {
 
     public void setSubscribed(Boolean subscribed) {
         this.subscribed = subscribed;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }
