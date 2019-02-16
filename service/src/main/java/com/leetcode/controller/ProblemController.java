@@ -16,7 +16,7 @@ public class ProblemController {
         this.problemService = problemService;
     }
 
-    @RequestMapping(path = "/problems", method = RequestMethod.POST)
+    @RequestMapping(path = "/problems/detail", method = RequestMethod.GET)
     public APIResponse getProblem(String uri) {
         return problemService.getProblem(uri);
     }
