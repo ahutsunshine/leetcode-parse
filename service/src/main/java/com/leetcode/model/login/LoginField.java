@@ -1,11 +1,23 @@
 package com.leetcode.model.login;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 import java.util.Map;
 
 public class LoginField {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Label login;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Label password;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Label email;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Label username;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Label password2;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Label password1;
 
     public Label getLogin() {
         return login;
@@ -23,51 +35,35 @@ public class LoginField {
         this.password = password;
     }
 
-    static class Label{
-        private String label;
-        private String value;
-        private String help_text;
-        private List<String> errors;
-        private Map<String, Object> widget;
+    public Label getEmail() {
+        return email;
+    }
 
-        public String getLabel() {
-            return label;
-        }
+    public void setEmail(Label email) {
+        this.email = email;
+    }
 
-        public void setLabel(String label) {
-            this.label = label;
-        }
+    public Label getUsername() {
+        return username;
+    }
 
-        public String getValue() {
-            return value;
-        }
+    public void setUsername(Label username) {
+        this.username = username;
+    }
 
-        public void setValue(String value) {
-            this.value = value;
-        }
+    public Label getPassword2() {
+        return password2;
+    }
 
-        public String getHelp_text() {
-            return help_text;
-        }
+    public void setPassword2(Label password2) {
+        this.password2 = password2;
+    }
 
-        public void setHelp_text(String help_text) {
-            this.help_text = help_text;
-        }
+    public Label getPassword1() {
+        return password1;
+    }
 
-        public List<String> getErrors() {
-            return errors;
-        }
-
-        public void setErrors(List<String> errors) {
-            this.errors = errors;
-        }
-
-        public Map<String, Object> getWidget() {
-            return widget;
-        }
-
-        public void setWidget(Map<String, Object> widget) {
-            this.widget = widget;
-        }
+    public void setPassword1(Label password1) {
+        this.password1 = password1;
     }
 }
