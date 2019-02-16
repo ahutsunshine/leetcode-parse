@@ -30,8 +30,8 @@ public class LoginUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginUtil.class);
     private static final String LOGIN_URL = "https://leetcode.com/accounts/login/";
 
-    private static HttpUriRequest buildLoginRequest(String token, HttpEntity params) {
-        HttpUriRequest req = RequestBuilder.post(LOGIN_URL)
+    static HttpUriRequest buildLoginRequest(String uri, String token, HttpEntity params) {
+        HttpUriRequest req = RequestBuilder.post(uri)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 .setHeader(HttpHeaders.CONTENT_TYPE, "multipart/form-data;boundary=----WbKitFormBoundarysfevHGSzVFcFIb9e")
@@ -58,7 +58,7 @@ public class LoginUtil {
         CookieStore cookieStore = getCookies(LOGIN_URL);
         String token = getCsrfToken(cookieStore);
         HttpEntity formData = buildMultiFormData(token, user, pwd);
-        HttpUriRequest request = buildLoginRequest(token, formData);
+        HttpUriRequest request = buildLoginRequest(LOGIN_URL, token, formData);
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setDefaultCookieStore(cookieStore).build();
              CloseableHttpResponse res = httpClient.execute(request)) {
@@ -97,7 +97,7 @@ public class LoginUtil {
         return response;
     }
 
-    private static APIResponse getSession(CookieStore cookieStore) {
+    static APIResponse getSession(CookieStore cookieStore) {
         APIResponse response;
         String session = null;
         for (Cookie cookie : cookieStore.getCookies()) {
