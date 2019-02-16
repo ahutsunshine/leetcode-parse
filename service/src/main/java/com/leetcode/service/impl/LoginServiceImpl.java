@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginServiceImpl implements LoginService {
     @Override
-    public APIResponse login(String user, String pwd) {
-        return LoginUtil.login(user, pwd);
+    public APIResponse login(String username, String pwd) {
+        return LoginUtil.login(username, pwd);
     }
 }

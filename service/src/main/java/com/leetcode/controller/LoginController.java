@@ -2,7 +2,6 @@ package com.leetcode.controller;
 
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.LoginService;
-import com.leetcode.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +17,8 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public APIResponse getProblem(String user, String pwd) {
-        return loginService.login(user, pwd);
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public APIResponse getProblem(String username, String pwd) {
+        return loginService.login(username, pwd);
     }
 }
