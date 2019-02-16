@@ -1,0 +1,12 @@
+{
+  "operationName": "postTopic",
+  "variables": {
+    "title": "test",
+    "content": "test test test",
+    "tags": [
+      "array-sort"
+    ],
+    "questionId": "742"
+  },
+  "query": "mutation postTopic($title: String!, $content: String!, $questionId: Int!, $tags: [String!]) {\ncreateTopicForQuestion(title: $title, content: $content, questionId: $questionId, tags: $tags) {\nerror\ntopic {\nid\n__typename\n}\n__typename\n}\n}"
+}

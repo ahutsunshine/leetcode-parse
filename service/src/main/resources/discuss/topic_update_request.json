@@ -1,0 +1,12 @@
+{
+  "operationName":"updateTopic",
+  "variables":{
+    "id":236752,
+    "title":"Java",
+    "content":"I am assuming the whole point is to avoid String#toLowerCase() and Character#toLowerCase() methods.\n```\npublic String toLowerCase(String str) {\n char[] a = str.toCharArray();\n for (int i = 0; i < a.length; i++)\n if (\\'A\\' <= a[i] && a[i] <= \\'Z\\')\n a[i] = (char) (a[i] - \\'A\\' + \\'a\\');\n return new String(a);\n }\n```\n\n[Looks cool.](http://www.baidu.com)\n![image](https://assets.leetcode.com/users/ahutsunshine/image_1550287076.png)\n",
+    "tags":[
+      "array"
+    ]
+  },
+  "query":"mutation updateTopic($title: String!, $content: String!, $id: Int!, $tags: [String]) {\\n  updateTopic(title: $title, content: $content, id: $id, tags: $tags) {\\n    ok\\n    error\\n    topic {\\n      id\\n      title\\n      tags\\n      post {\\n        id\\n        content\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}

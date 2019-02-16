@@ -1,0 +1,19 @@
+{
+  "data":{
+    "updateTopic":{
+      "ok":true,
+      "error":"",
+      "topic":{
+        "id":236752,
+        "title":"Java",
+        "tags":[
+          "array"
+        ],
+        "post":{
+          "id":472026,
+          "content":"I am assuming the whole point is to avoid String#toLowerCase() and Character#toLowerCase() methods.\n```\npublic String toLowerCase(String str) {\n char[] a = str.toCharArray();\n for (int i = 0; i < a.length; i++)\n if (\'A\' <= a[i] && a[i] <= \'Z\')\n a[i] = (char) (a[i] - \'A\' + \'a\');\n return new String(a);\n }\n```\n\n[Looks cool.](http://www.baidu.com)\n![image](https://assets.leetcode.com/users/ahutsunshine/image_1550287076.png)\n"
+        }
+      }
+    }
+  }
+}

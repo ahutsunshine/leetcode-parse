@@ -1,0 +1,7 @@
+{
+  "operationName":"deleteTopic",
+  "variables":{
+    "topicId":237986
+  },
+  "query":"mutation deleteTopic($topicId: Int!) {\\n  deleteTopic(id: $topicId) {\\n    ok\\n    error\\n    __typename\\n  }\\n}\\n"
+}
