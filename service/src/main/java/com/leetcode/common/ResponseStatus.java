@@ -1,14 +1,19 @@
-package com.leetcode.model.comment;
+package com.leetcode.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.leetcode.model.comment.Comment;
+import com.leetcode.model.discuss.Topic;
 
-public class CommentStatus {
+public class ResponseStatus {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean ok;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer commentId;
     private String error;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Comment comment;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Topic topic;
 
     public Boolean getOk() {
         return ok;
@@ -40,5 +45,13 @@ public class CommentStatus {
 
     public void setComment(Comment comment) {
         this.comment = comment;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }

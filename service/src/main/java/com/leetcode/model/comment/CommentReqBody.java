@@ -17,7 +17,6 @@ public class CommentReqBody implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentReqBody.class);
 
     private String uri;
-    private String operationName;
     private Integer topicId;
     private Integer commentId;
     private Integer parentCommentId = 0;
@@ -32,14 +31,6 @@ public class CommentReqBody implements Serializable {
 
     public void setUri(String uri) {
         this.uri = uri;
-    }
-
-    public String getOperationName() {
-        return operationName;
-    }
-
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
     }
 
     public Integer getTopicId() {
@@ -79,24 +70,24 @@ public class CommentReqBody implements Serializable {
     }
 
     public void setCookies(List<LeetcodeCookie> cookies) {
-        if (cookies == null) return;
-        this.cookies = cookies;
-        for (LeetcodeCookie c : cookies) {
-            BasicClientCookie cookie = new BasicClientCookie(c.getName(), c.getValue());
-            cookie.setCreationDate(c.getCreationDate());
-            cookie.setPath(c.getPath());
-            cookie.setVersion(c.getVersion());
-            cookie.setComment(c.getComment());
-            cookie.setDomain(c.getDomain());
-            Date expire = c.getExpiryDate();
-            cookie.setExpiryDate(expire);
-            cookie.setSecure(c.getSecure());
-            cookieStore.addCookie(cookie);
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            df.setTimeZone(TimeZone.getDefault());
-            LOGGER.info("{}:{}\n expired time:{}", c.getName(), c.getValue(),
-                    expire != null ? df.format(expire) : "null");
-        }
+            if (cookies == null) return;
+            this.cookies = cookies;
+            for (LeetcodeCookie c : cookies) {
+                BasicClientCookie cookie = new BasicClientCookie(c.getName(), c.getValue());
+                cookie.setCreationDate(c.getCreationDate());
+                cookie.setPath(c.getPath());
+                cookie.setVersion(c.getVersion());
+                cookie.setComment(c.getComment());
+                cookie.setDomain(c.getDomain());
+                Date expire = c.getExpiryDate();
+                cookie.setExpiryDate(expire);
+                cookie.setSecure(c.getSecure());
+                cookieStore.addCookie(cookie);
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                df.setTimeZone(TimeZone.getDefault());
+                LOGGER.info("{}:{}\n expired time:{}", c.getName(), c.getValue(),
+                        expire != null ? df.format(expire) : "null");
+            }
     }
 
     public BasicCookieStore getCookieStore() {
