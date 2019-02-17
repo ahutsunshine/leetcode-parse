@@ -17,4 +17,9 @@ public class LoginServiceImpl implements LoginService {
     public APIResponse signUp(String username, String email, String password1, String password2) {
         return SignUpUtil.signUp(username, email, password1, password2);
     }
+
+    @Override
+    public APIResponse resetPassword(String email) {
+        return SignUpUtil.resetPassword(email);
+    }
 }

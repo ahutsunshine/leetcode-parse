@@ -26,4 +26,9 @@ public class LoginController {
     public APIResponse signUp(String username, String email, String password1, String password2) {
         return loginService.signUp(username, email, password1, password2);
     }
+
+    @RequestMapping(path = "/password/reset", method = RequestMethod.POST)
+    public APIResponse resetPassword(String email) {
+        return loginService.resetPassword(email);
+    }
 }

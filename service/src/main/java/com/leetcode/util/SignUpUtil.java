@@ -22,12 +22,14 @@ import java.util.List;
 
 import static com.leetcode.util.HttpUtil.getCookies;
 import static com.leetcode.util.HttpUtil.getCsrfToken;
-import static com.leetcode.util.LoginUtil.buildLoginRequest;
-import static com.leetcode.util.LoginUtil.getSession;
+import static com.leetcode.util.LoginUtil.*;
 
 public class SignUpUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(SignUpUtil.class);
     private static final String SIGN_UP_URL = "https://leetcode.com/accounts/signup/";
+    private static final String RESET_PASSWORD_URL = "https://leetcode.com/accounts/password/reset/";
+    public static final String RESET_PASSWORD_TYPE = "resetPassword";
+    public static final String SIGN_UP_TYPE = "SignUp";
 
     private static HttpEntity buildMultiFormData(String token, String username, String email,
                                                  String password1, String password2) {
@@ -42,23 +44,48 @@ public class SignUpUtil {
                 .build();
     }
 
+    private static HttpEntity resetPasswordFormData(String token, String email) {
+        return MultipartEntityBuilder.create()
+                //boundary is necessary
+                .setBoundary("----WbKitFormBoundarysfevHGSzVFcFIb9e")
+                .addTextBody("csrfmiddlewaretoken", token)
+                .addTextBody("next", "undefined")
+                .addTextBody("phone_email_select", "email")
+                .addTextBody("email", email)
+                .build();
+    }
+
+    public static APIResponse resetPassword(String email) {
+        CookieStore cookieStore = getCookies(RESET_PASSWORD_URL);
+        String token = getCsrfToken(cookieStore);
+        HttpEntity formData = resetPasswordFormData(token, email);
+        HttpUriRequest request = buildLoginRequest(RESET_PASSWORD_URL, RESET_PASSWORD_URL, token, formData);
+        return getResponseStatus(cookieStore, request, RESET_PASSWORD_TYPE);
+    }
+
     public static APIResponse signUp(String username, String email, String password1,
                                      String password2) {
         CookieStore cookieStore = getCookies(SIGN_UP_URL);
         String token = getCsrfToken(cookieStore);
         HttpEntity formData = buildMultiFormData(token, username, email, password1, password2);
-        HttpUriRequest request = buildLoginRequest(SIGN_UP_URL, token, formData);
+        HttpUriRequest request = buildLoginRequest(SIGN_UP_URL, LOGIN_URL, token, formData);
+        return getResponseStatus(cookieStore, request, SIGN_UP_TYPE);
+    }
+
+    private static APIResponse getResponseStatus(CookieStore cookieStore, HttpUriRequest request, String type) {
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setDefaultCookieStore(cookieStore).build();
              CloseableHttpResponse res = httpClient.execute(request)) {
-            return processSignUp(cookieStore, res);
+            return getSessionIfSuccess(cookieStore, res, type);
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
         }
         return new APIResponse(500, "Exception occurs. Please try again.");
     }
 
-    private static APIResponse processSignUp(CookieStore cookieStore, CloseableHttpResponse res) throws IOException {
+    private static APIResponse getSessionIfSuccess(CookieStore cookieStore,
+                                                   CloseableHttpResponse res,
+                                                   String type) throws IOException {
         APIResponse response;
         int statusCode = res.getStatusLine().getStatusCode();
         String content = EntityUtils.toString(res.getEntity(), "UTF-8");
@@ -66,6 +93,9 @@ public class SignUpUtil {
         LOGGER.info("Response content: {}", content);
         if (statusCode != 200) {
             response = getErrorIfFailed(statusCode, content);
+        } else if (type.equals(RESET_PASSWORD_TYPE)) {
+            return new APIResponse("We have sent you an e-mail. " +
+                    "Please contact us if you do not receive it within a few minutes.");
         } else {
             response = getSession(cookieStore);
         }
