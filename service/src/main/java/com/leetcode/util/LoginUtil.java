@@ -28,15 +28,15 @@ import static com.leetcode.util.HttpUtil.getCsrfToken;
 
 public class LoginUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginUtil.class);
-    private static final String LOGIN_URL = "https://leetcode.com/accounts/login/";
+    static final String LOGIN_URL = "https://leetcode.com/accounts/login/";
 
-    static HttpUriRequest buildLoginRequest(String uri, String token, HttpEntity params) {
+    static HttpUriRequest buildLoginRequest(String uri, String refer, String token, HttpEntity params) {
         HttpUriRequest req = RequestBuilder.post(uri)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 //boundary is necessary
                 .setHeader(HttpHeaders.CONTENT_TYPE, "multipart/form-data;boundary=----WbKitFormBoundarysfevHGSzVFcFIb9e")
-                .setHeader(HttpHeaders.REFERER, LOGIN_URL)
+                .setHeader(HttpHeaders.REFERER, refer)
                 .setHeader("x-csrftoken", token)
                 .setHeader("x-requested-with", "XMLHttpRequest")
                 .setEntity(params)
@@ -59,7 +59,7 @@ public class LoginUtil {
         CookieStore cookieStore = getCookies(LOGIN_URL);
         String token = getCsrfToken(cookieStore);
         HttpEntity formData = buildMultiFormData(token, user, pwd);
-        HttpUriRequest request = buildLoginRequest(LOGIN_URL, token, formData);
+        HttpUriRequest request = buildLoginRequest(LOGIN_URL, LOGIN_URL, token, formData);
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setDefaultCookieStore(cookieStore).build();
              CloseableHttpResponse res = httpClient.execute(request)) {
