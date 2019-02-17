@@ -34,6 +34,7 @@ public class LoginUtil {
         HttpUriRequest req = RequestBuilder.post(uri)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                //boundary is necessary
                 .setHeader(HttpHeaders.CONTENT_TYPE, "multipart/form-data;boundary=----WbKitFormBoundarysfevHGSzVFcFIb9e")
                 .setHeader(HttpHeaders.REFERER, LOGIN_URL)
                 .setHeader("x-csrftoken", token)
@@ -46,7 +47,7 @@ public class LoginUtil {
 
     private static HttpEntity buildMultiFormData(String token, String user, String pwd) {
         return MultipartEntityBuilder.create()
-                .setBoundary("----WbKitFormBoundarysfevHGSzVFcFIb9e")
+                .setBoundary("----WbKitFormBoundarysfevHGSzVFcFIb9e") //boundary is necessary
                 .addTextBody("csrfmiddlewaretoken", token)
                 .addTextBody("login", user)
                 .addTextBody("password", pwd)
