@@ -28,8 +28,8 @@ public class SignUpUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(SignUpUtil.class);
     private static final String SIGN_UP_URL = "https://leetcode.com/accounts/signup/";
     private static final String RESET_PASSWORD_URL = "https://leetcode.com/accounts/password/reset/";
-    public static final String RESET_PASSWORD_TYPE = "resetPassword";
-    public static final String SIGN_UP_TYPE = "SignUp";
+    private static final String RESET_PASSWORD_TYPE = "resetPassword";
+    private static final String SIGN_UP_TYPE = "SignUp";
 
     private static HttpEntity buildMultiFormData(String token, String username, String email,
                                                  String password1, String password2) {
@@ -59,7 +59,7 @@ public class SignUpUtil {
         CookieStore cookieStore = getCookies(RESET_PASSWORD_URL);
         String token = getCsrfToken(cookieStore);
         HttpEntity formData = resetPasswordFormData(token, email);
-        HttpUriRequest request = buildLoginRequest(RESET_PASSWORD_URL, RESET_PASSWORD_URL, token, formData);
+        HttpUriRequest request = buildLoginRequest(RESET_PASSWORD_URL, RESET_PASSWORD_URL, formData);
         return getResponseStatus(cookieStore, request, RESET_PASSWORD_TYPE);
     }
 
@@ -68,7 +68,7 @@ public class SignUpUtil {
         CookieStore cookieStore = getCookies(SIGN_UP_URL);
         String token = getCsrfToken(cookieStore);
         HttpEntity formData = buildMultiFormData(token, username, email, password1, password2);
-        HttpUriRequest request = buildLoginRequest(SIGN_UP_URL, LOGIN_URL, token, formData);
+        HttpUriRequest request = buildLoginRequest(SIGN_UP_URL, LOGIN_URL, formData);
         return getResponseStatus(cookieStore, request, SIGN_UP_TYPE);
     }
 
@@ -94,8 +94,7 @@ public class SignUpUtil {
         if (statusCode != 200) {
             response = getErrorIfFailed(statusCode, content);
         } else if (type.equals(RESET_PASSWORD_TYPE)) {
-            return new APIResponse("We have sent you an e-mail. " +
-                    "Please contact us if you do not receive it within a few minutes.");
+            return new APIResponse("We have sent you an e-mail successfully.");
         } else {
             response = getSession(cookieStore);
         }

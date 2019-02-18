@@ -7,7 +7,9 @@ import com.leetcode.model.response.LeetcodeErrorMessage;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -64,8 +66,7 @@ public class HttpUtil {
     }
 
     public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
-        String token = getCsrfToken(cookieStore);
-        HttpUriRequest request = buildPostRequest(uri, token, params);
+        HttpUriRequest request = buildPostRequest(uri, params);
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setDefaultCookieStore(cookieStore).build();
              CloseableHttpResponse res = httpClient.execute(request)) {
@@ -76,7 +77,7 @@ public class HttpUtil {
         }
     }
 
-    public static String processResponse(CloseableHttpResponse res) throws IOException {
+    private static String processResponse(CloseableHttpResponse res) throws IOException {
         APIResponse response;
         if (res == null) {
             LOGGER.error("HttpResponse is null, please check cookie, header and params!");
@@ -135,7 +136,7 @@ public class HttpUtil {
                 .build();
     }
 
-    private static HttpUriRequest buildPostRequest(String uri, String token, HttpEntity params) {
+    private static HttpUriRequest buildPostRequest(String uri, HttpEntity params) {
         return RequestBuilder.post(GRAPHQL_URL)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
@@ -144,12 +145,11 @@ public class HttpUtil {
                 .setHeader(":authority", "leetcode.com")
                 .setHeader(":method", "POST")
                 .setHeader(":scheme", "https")
-                .setHeader("x-csrftoken", token)
                 .setEntity(params)
                 .build();
     }
 
-    public static String getCsrfToken(CookieStore cookieStore) {
+    static String getCsrfToken(CookieStore cookieStore) {
         if (cookieStore == null) return null;
         String token = null;
         for (Cookie cookie : cookieStore.getCookies()) {
