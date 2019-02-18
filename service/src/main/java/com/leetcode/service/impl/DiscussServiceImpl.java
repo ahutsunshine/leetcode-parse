@@ -109,8 +109,7 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     private APIResponse topicPost(TopicReqBody req, StringEntity entity, String operation) {
-        CookieStore cookieStore = req.getCookieStore();
-        String res = post(req.getUri(), cookieStore, entity);
+        String res = post(req.getUri(), req.getCookies(), entity);
         APIResponse e;
         if ((e = getErrorIfFailed(res)) != null) return e;
         JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
@@ -120,11 +119,8 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     private APIResponse checkParams(TopicReqBody req, String operation) {
-        if (StringUtils.isEmpty(req.getUri())) {
-            return new APIResponse(400, "Refer uri is required.");
-        }
-        if (CollectionUtils.isEmpty(req.getCookies())) {
-            return new APIResponse(400, "User cookie is required.");
+        if (!isCookieValid(req.getCookies())) {
+            return new APIResponse(400, "User cookie is invalid.");
         }
         if (req.getId() == null) {
             return new APIResponse(400, "Id is required.");
