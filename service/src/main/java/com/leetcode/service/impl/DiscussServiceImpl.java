@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URLDecoder;
 
+import static com.leetcode.util.CommonUtil.isCookieValid;
 import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.*;
 
@@ -97,25 +98,14 @@ public class DiscussServiceImpl implements DiscussService {
         try {
             if (cookie == null) return new APIResponse(400, "Cookie cannot be empty.");
             cookie = URLDecoder.decode(cookie, "UTF-8");
-            String token = getToken(cookie);
-            if (token == null) return new APIResponse(400, "Cookie is invalid.");
-            return ImageUtil.upload(uri, refer, token, cookie, file);
+            if (!isCookieValid(cookie)) {
+                return new APIResponse(400, "User cookie is invalid.");
+            }
+            return ImageUtil.upload(uri, refer, cookie, file);
         } catch (Exception e) {
             LOGGER.error("Exception occurs. ", e);
         }
         return new APIResponse(500, "Upload failure. Please try again.");
-    }
-
-    private String getToken(String cookie) {
-        if (cookie == null) return null;
-        String[] values = cookie.split(";");
-        for (String val : values) {
-            String[] data = val.split("=");
-            if (data.length != 2) return null; // incorrect cookie
-            //remove blank space
-            if (data[0].replace(" ","").equals("csrftoken")) return data[1];
-        }
-        return null;
     }
 
     private APIResponse topicPost(TopicReqBody req, StringEntity entity, String operation) {
