@@ -1,0 +1,39 @@
+{
+  "location": "/",
+  "form": {
+    "fields": {
+      "login": {
+        "label": "Login",
+        "value": "ahutsunshine@163.com",
+        "help_text": "",
+        "errors": [
+        ],
+        "widget": {
+          "attrs": {
+            "placeholder": "Username or e-mail",
+            "autofocus": "autofocus"
+          }
+        }
+      },
+      "password": {
+        "label": "Password",
+        "value": "password",
+        "help_text": "",
+        "errors": [
+        ],
+        "widget": {
+          "attrs": {
+            "placeholder": "Password"
+          }
+        }
+      }
+    },
+    "field_order": [
+      "login",
+      "password"
+    ],
+    "errors": [
+    ]
+  },
+  "html": ""
+}
