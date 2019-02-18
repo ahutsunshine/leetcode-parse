@@ -5,6 +5,9 @@ import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -43,5 +46,11 @@ public class DiscussController {
     @RequestMapping(path = "/topics", method = RequestMethod.DELETE)
     public APIResponse deleteTopic(@RequestBody TopicReqBody req) {
         return service.deleteTopic(req);
+    }
+
+    @RequestMapping(path = "/image", method = RequestMethod.POST)
+    public APIResponse uploadImage(String uri, String refer, String cookie,
+                                   MultipartFile file) {
+        return service.uploadImage(uri, refer, cookie, file);
     }
 }

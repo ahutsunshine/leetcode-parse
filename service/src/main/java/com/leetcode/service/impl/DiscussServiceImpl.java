@@ -8,13 +8,19 @@ import com.leetcode.model.discuss.Topic;
 import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
+import com.leetcode.util.ImageUtil;
 import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.net.URLDecoder;
 
 import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.*;
@@ -23,6 +29,7 @@ import static com.leetcode.util.RequestParamUtil.*;
 @CacheConfig(cacheNames = "discuss", keyGenerator = "cacheKeyGenerator")
 public class DiscussServiceImpl implements DiscussService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DiscussServiceImpl.class);
     private static final String UPDATE_TOPIC_OPERATION = "updateTopic";
     private static final String CREATE_TOPIC_OPERATION = "createTopicForQuestion";
     private static final String DELETE_TOPIC_OPERATION = "deleteTopic";
@@ -85,6 +92,32 @@ public class DiscussServiceImpl implements DiscussService {
         return topicPost(req, requestBody, DELETE_TOPIC_OPERATION);
     }
 
+    @Override
+    public APIResponse uploadImage(String uri, String refer, String cookie, MultipartFile file) {
+        try {
+            if (cookie == null) return new APIResponse(400, "Cookie cannot be empty.");
+            cookie = URLDecoder.decode(cookie, "UTF-8");
+            String token = getToken(cookie);
+            if (token == null) return new APIResponse(400, "Cookie is invalid.");
+            return ImageUtil.upload(uri, refer, token, cookie, file);
+        } catch (Exception e) {
+            LOGGER.error("Exception occurs. ", e);
+        }
+        return new APIResponse(500, "Upload failure. Please try again.");
+    }
+
+    private String getToken(String cookie) {
+        if (cookie == null) return null;
+        String[] values = cookie.split(";");
+        for (String val : values) {
+            String[] data = val.split("=");
+            if (data.length != 2) return null; // incorrect cookie
+            //remove blank space
+            if (data[0].replace(" ","").equals("csrftoken")) return data[1];
+        }
+        return null;
+    }
+
     private APIResponse topicPost(TopicReqBody req, StringEntity entity, String operation) {
         CookieStore cookieStore = req.getCookieStore();
         String res = post(req.getUri(), cookieStore, entity);
@@ -97,9 +130,9 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     private APIResponse checkParams(TopicReqBody req, String operation) {
-//        if (StringUtils.isEmpty(req.getUri())) {
-//            return new APIResponse(400, "Refer uri is required.");
-//        }
+        if (StringUtils.isEmpty(req.getUri())) {
+            return new APIResponse(400, "Refer uri is required.");
+        }
         if (CollectionUtils.isEmpty(req.getCookies())) {
             return new APIResponse(400, "User cookie is required.");
         }
