@@ -7,14 +7,13 @@ import com.leetcode.common.ResponseStatus;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import static com.leetcode.util.CommonUtil.isCookieValid;
 import static com.leetcode.util.HttpUtil.getErrorIfFailed;
 import static com.leetcode.util.HttpUtil.post;
 import static com.leetcode.util.RequestParamUtil.buildCommentReqBody;
@@ -53,8 +52,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private APIResponse commentPost(CommentReqBody req, HttpEntity entity, String operationName) {
-        CookieStore cookieStore = req.getCookieStore();
-        String res = post(req.getUri(), cookieStore, entity);
+        String cookies = req.getCookies();
+        String res = post(req.getUri(), cookies, entity);
         APIResponse e = getErrorIfFailed(res);
         if (e != null) return e;
         JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
@@ -64,8 +63,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private APIResponse checkParams(CommentReqBody req, String operation) {
-        if (CollectionUtils.isEmpty(req.getCookies())) {
-            return new APIResponse(400, "User cookie is required.");
+        if (!isCookieValid(req.getCookies())) {
+            return new APIResponse(400, "User cookie is invalid.");
         }
         if (StringUtils.isEmpty(req.getUri())) {
             return new APIResponse(400, "Refer uri is required.");

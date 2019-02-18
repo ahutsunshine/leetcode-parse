@@ -43,13 +43,7 @@ public class HttpUtil {
 
     public static String get(String uri) {
         HttpUriRequest request = buildGetRequest(uri);
-        try (CloseableHttpClient httpClient = HttpClients.custom().build();
-             CloseableHttpResponse res = httpClient.execute(request)) {
-            return processResponse(res);
-        } catch (Exception e) {
-            LOGGER.error("Exception occurs.", e);
-            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
-        }
+        return getResponseStatus(request, null);
     }
 
     public static String getHtmlContent(String uri) {
@@ -67,6 +61,16 @@ public class HttpUtil {
 
     public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
         HttpUriRequest request = buildPostRequest(uri, params);
+        return getResponseStatus(request, cookieStore);
+
+    }
+
+    public static String post(String uri, String cookie, HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(uri, cookie, params);
+        return getResponseStatus(request, null);
+    }
+
+    private static String getResponseStatus(HttpUriRequest request, CookieStore cookieStore) {
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setDefaultCookieStore(cookieStore).build();
              CloseableHttpResponse res = httpClient.execute(request)) {
@@ -75,6 +79,18 @@ public class HttpUtil {
             LOGGER.error("Exception occurs.", e);
             return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
         }
+    }
+
+    static String getToken(String cookie) {
+        if (cookie == null) return null;
+        String[] values = cookie.split(";");
+        for (String val : values) {
+            String[] data = val.split("=");
+            if (data.length != 2) return null; // incorrect cookie
+            //remove blank space
+            if (data[0].replace(" ", "").equals("csrftoken")) return data[1];
+        }
+        return null;
     }
 
     private static String processResponse(CloseableHttpResponse res) throws IOException {
@@ -142,6 +158,21 @@ public class HttpUtil {
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .setHeader(HttpHeaders.REFERER, uri)
+                .setHeader(":authority", "leetcode.com")
+                .setHeader(":method", "POST")
+                .setHeader(":scheme", "https")
+                .setEntity(params)
+                .build();
+    }
+
+    private static HttpUriRequest buildPostRequest(String uri, String cookie, HttpEntity params) {
+        return RequestBuilder.post(GRAPHQL_URL)
+                .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.REFERER, uri)
+                .setHeader("Cookie", cookie)
+                .setHeader("x-csrftoken", getToken(cookie))
                 .setHeader(":authority", "leetcode.com")
                 .setHeader(":method", "POST")
                 .setHeader(":scheme", "https")
