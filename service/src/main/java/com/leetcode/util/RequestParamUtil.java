@@ -1,6 +1,7 @@
 package com.leetcode.util;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leetcode.model.discuss.DiscussPageReqBody;
 import com.leetcode.model.discuss.TopicReqBody;
 import org.apache.http.entity.StringEntity;
 
@@ -55,16 +56,16 @@ public class RequestParamUtil {
         return buildRequestBody(operationName, variables.toString(), query);
     }
 
-    public static StringEntity buildDiscussReqBody(String orderBy, String query, Integer skip,
-                                                   String pageSize, Integer questionId) {
+    public static StringEntity buildDiscussReqBody(DiscussPageReqBody req) {
         String operationName = "questionTopicsList";
+        Integer skip = req.getPage() == 0 ? 0 : (req.getPage() - 1) * req.getPageSize();
         JSONObject variables = new JSONObject();
-        variables.put("orderBy", orderBy);
-        variables.put("query", query);
+        variables.put("orderBy", req.getOrderBy());
+        variables.put("query", req.getQuery());
         variables.put("skip", skip);
-        variables.put("first", pageSize);
+        variables.put("first", req.getPageSize());
         variables.put("tags", new ArrayList<>());
-        variables.put("questionId", String.valueOf(questionId));
+        variables.put("questionId", String.valueOf(req.getQuestionId()));
         String q = "query questionTopicsList($questionId: String!, $orderBy: TopicSortingOption, $skip: Int, $query: String, $first: Int!, $tags: [String!]) {\n" +
                 "questionTopicsList(questionId: $questionId, orderBy: $orderBy, skip: $skip, query: $query, first: $first, tags: $tags) {\n" +
                 "...TopicsList\n" +

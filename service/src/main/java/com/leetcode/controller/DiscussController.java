@@ -1,5 +1,6 @@
 package com.leetcode.controller;
 
+import com.leetcode.model.discuss.DiscussPageReqBody;
 import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
@@ -17,13 +18,9 @@ public class DiscussController {
         this.service = service;
     }
 
-    @RequestMapping(path = "/discussions", method = RequestMethod.GET)
-    public APIResponse getDiscussions(String uri, int page,
-                                      @RequestParam(defaultValue = "most_votes") String orderBy,
-                                      @RequestParam(defaultValue = "") String query,
-                                      @RequestParam(defaultValue = "15") int pageSize,
-                                      int questionId) {
-        return service.getDiscussions(uri, page, orderBy, query, pageSize, questionId);
+    @RequestMapping(path = "/discussions", method = RequestMethod.POST)
+    public APIResponse getDiscussions(@RequestBody DiscussPageReqBody req) {
+        return service.getDiscussions(req);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)

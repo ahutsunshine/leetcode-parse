@@ -3,6 +3,7 @@ package com.leetcode.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.leetcode.common.ResponseStatus;
+import com.leetcode.model.discuss.DiscussPageReqBody;
 import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.discuss.Topic;
 import com.leetcode.model.discuss.TopicReqBody;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,15 +37,12 @@ public class DiscussServiceImpl implements DiscussService {
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
-    public APIResponse getDiscussions(String uri, int page, String orderBy,
-                                      String query, int pageSize, int questionId) {
-        if (page < 0) return new APIResponse(400, "Negative page index is not supported.");
-        if (pageSize <= 0 || pageSize > 512) pageSize = 15;
-        int skip = 0;
-        CookieStore cookieStore = getCookies(uri.replace("discuss", ""));
-        uri = buildDiscussUri(uri, page, orderBy, query);
-        StringEntity requestBody = buildDiscussReqBody(orderBy, query, skip,
-                String.valueOf(pageSize), questionId);
+    public APIResponse getDiscussions(DiscussPageReqBody req) {
+        APIResponse errorStatus = checkPageParam(req);
+        if (errorStatus != null) return errorStatus;
+        CookieStore cookieStore = getCookies(req.getUri().replace("discuss", ""));
+        String uri = buildDiscussUri(req);
+        StringEntity requestBody = buildDiscussReqBody(req);
         String res = post(uri, cookieStore, requestBody);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
@@ -53,6 +50,14 @@ public class DiscussServiceImpl implements DiscussService {
         j = j.getJSONObject("questionTopicsList");
         DiscussTopics topicsList = JSON.parseObject(j.toString(), DiscussTopics.class);
         return new APIResponse(topicsList);
+    }
+
+    private APIResponse checkPageParam(DiscussPageReqBody req) {
+        if (StringUtils.isEmpty(req.getUri())) return new APIResponse(400, "Uri is required.");
+        if (req.getQuestionId() == null) return new APIResponse(400, "Question id is required.");
+        if (req.getPage() < 0) return new APIResponse(400, "Negative page index is not supported.");
+        if (req.getPageSize() <= 0 || req.getPageSize() > 512) req.setPageSize(15);
+        return null;
     }
 
     @Override
@@ -134,9 +139,9 @@ public class DiscussServiceImpl implements DiscussService {
         return null;
     }
 
-    private String buildDiscussUri(String uri, int page, String orderBy, String query) {
-        return uri + "?currentPage=" + page + "&" +
-                "orderBy=" + orderBy + "&" +
-                "query=" + query;
+    private String buildDiscussUri(DiscussPageReqBody req) {
+        return req.getUri() + "?currentPage=" + req.getPage() + "&" +
+                "orderBy=" + req.getOrderBy() + "&" +
+                "query=" + req.getQuery();
     }
 }

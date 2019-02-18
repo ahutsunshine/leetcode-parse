@@ -1,12 +1,12 @@
 package com.leetcode.service;
 
+import com.leetcode.model.discuss.DiscussPageReqBody;
 import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface DiscussService {
-    APIResponse getDiscussions(String uri, int page, String orderBy,
-                               String query, int pageSize, int questionId);
+    APIResponse getDiscussions(DiscussPageReqBody req);
 
     APIResponse getTopic(String problemUri, String topicUri, int topicId);
 
