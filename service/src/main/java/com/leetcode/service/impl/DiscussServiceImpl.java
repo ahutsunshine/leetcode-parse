@@ -57,10 +57,10 @@ public class DiscussServiceImpl implements DiscussService {
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
-    public APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId) {
+    public APIResponse getTopic(String problemUri, String topicUri, int topicId) {
         CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);
-        String res = post(discussUri, cookieStore, body);
+        String res = post(topicUri, cookieStore, body);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res);

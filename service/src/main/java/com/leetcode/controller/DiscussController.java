@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-
 @RestController
 @RequestMapping("/api/v1")
 public class DiscussController {
@@ -29,8 +27,8 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)
-    public APIResponse getDiscussTopic(String problemUri, String discussUri, int topicId) {
-        return service.getDiscussTopic(problemUri, discussUri, topicId);
+    public APIResponse getTopic(String problemUri, String topicUri, int topicId) {
+        return service.getTopic(problemUri, topicUri, topicId);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.POST)
