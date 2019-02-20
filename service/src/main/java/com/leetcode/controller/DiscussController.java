@@ -29,8 +29,8 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)
-    public ResponseEntity<APIResponse> getTopic(String problemUri, String topicUri, int topicId) {
-        APIResponse res = service.getTopic(problemUri, topicUri, topicId);
+    public ResponseEntity<APIResponse> getTopic(String problemUri, int topicId) {
+        APIResponse res = service.getTopic(problemUri, topicId);
         return ResponseEntity.status(res.getCode()).body(res);
     }
 
