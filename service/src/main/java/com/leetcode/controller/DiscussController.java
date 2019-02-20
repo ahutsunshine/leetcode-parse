@@ -5,7 +5,11 @@ import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -19,33 +23,39 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/discussions", method = RequestMethod.POST)
-    public APIResponse getDiscussions(@RequestBody DiscussPageReqBody req) {
-        return service.getDiscussions(req);
+    public ResponseEntity<APIResponse> getDiscussions(@RequestBody DiscussPageReqBody req) {
+        APIResponse res = service.getDiscussions(req);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)
-    public APIResponse getTopic(String problemUri, String topicUri, int topicId) {
-        return service.getTopic(problemUri, topicUri, topicId);
+    public ResponseEntity<APIResponse> getTopic(String problemUri, String topicUri, int topicId) {
+        APIResponse res = service.getTopic(problemUri, topicUri, topicId);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.POST)
-    public APIResponse createTopic(@RequestBody TopicReqBody req) {
-        return service.createTopic(req);
+    public ResponseEntity<APIResponse> createTopic(@RequestBody TopicReqBody req) {
+        APIResponse res = service.createTopic(req);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.PUT)
-    public APIResponse updateTopic(@RequestBody TopicReqBody req) {
-        return service.updateTopic(req);
+    public ResponseEntity<APIResponse> updateTopic(@RequestBody TopicReqBody req) {
+        APIResponse res = service.updateTopic(req);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.DELETE)
-    public APIResponse deleteTopic(@RequestBody TopicReqBody req) {
-        return service.deleteTopic(req);
+    public ResponseEntity<APIResponse> deleteTopic(@RequestBody TopicReqBody req) {
+        APIResponse res = service.deleteTopic(req);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/image", method = RequestMethod.POST)
-    public APIResponse uploadImage(String uri, String refer, String cookie,
-                                   MultipartFile file) {
-        return service.uploadImage(uri, refer, cookie, file);
+    public ResponseEntity<APIResponse> uploadImage(String uri, String refer, String cookie,
+                                                   MultipartFile file) {
+        APIResponse res = service.uploadImage(uri, refer, cookie, file);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 }

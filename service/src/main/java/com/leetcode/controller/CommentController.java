@@ -4,6 +4,7 @@ import com.leetcode.model.comment.CommentReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,17 +21,20 @@ public class CommentController {
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.POST)
-    public APIResponse createComment(@RequestBody CommentReqBody request) {
-        return service.createComment(request);
+    public ResponseEntity<APIResponse> createComment(@RequestBody CommentReqBody request) {
+        APIResponse res = service.createComment(request);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.PUT)
-    public APIResponse updateComment(@RequestBody CommentReqBody request) {
-        return service.updateComment(request);
+    public ResponseEntity<APIResponse> updateComment(@RequestBody CommentReqBody request) {
+        APIResponse res = service.updateComment(request);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.DELETE)
-    public APIResponse deleteComment(@RequestBody CommentReqBody request) {
-        return service.deleteComment(request);
+    public ResponseEntity<APIResponse> deleteComment(@RequestBody CommentReqBody request) {
+        APIResponse res = service.deleteComment(request);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 }

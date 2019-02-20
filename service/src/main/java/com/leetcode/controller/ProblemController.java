@@ -3,7 +3,11 @@ package com.leetcode.controller;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -17,33 +21,39 @@ public class ProblemController {
     }
 
     @RequestMapping(path = "/problems/detail", method = RequestMethod.GET)
-    public APIResponse getProblem(String uri) {
-        return problemService.getProblem(uri);
+    public ResponseEntity<APIResponse> getProblem(String uri) {
+        APIResponse res = problemService.getProblem(uri);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/problems", method = RequestMethod.GET)
-    public APIResponse getProblemList(String uri) {
-        return problemService.getProblemList(uri);
+    public ResponseEntity<APIResponse> getProblemList(String uri) {
+        APIResponse res = problemService.getProblemList(uri);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/problems/top100", method = RequestMethod.GET)
-    public APIResponse getTopLikedProblems() {
-        return problemService.getTopLikedProblems();
+    public ResponseEntity<APIResponse> getTopLikedProblems() {
+        APIResponse res = problemService.getTopLikedProblems();
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/problems/interview", method = RequestMethod.GET)
-    public APIResponse getInterviewProblems() {
-        return problemService.getInterviewProblems();
+    public ResponseEntity<APIResponse> getInterviewProblems() {
+        APIResponse res = problemService.getInterviewProblems();
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/tags", method = RequestMethod.POST)
-    public APIResponse getTags(String uri) {
-        return problemService.getTags(uri);
+    public ResponseEntity<APIResponse> getTags(String uri) {
+        APIResponse res = problemService.getTags(uri);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(value = "/problems/filtration/{key}", method = RequestMethod.GET)
-    public APIResponse filterProblems(@PathVariable("key") String key) {
-        return problemService.filterProblems(key);
+    public ResponseEntity<APIResponse> filterProblems(@PathVariable("key") String key) {
+        APIResponse res = problemService.filterProblems(key);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
 }

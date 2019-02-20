@@ -3,6 +3,7 @@ package com.leetcode.controller;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,17 +19,20 @@ public class LoginController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public APIResponse getProblem(String username, String pwd) {
-        return loginService.login(username, pwd);
+    public ResponseEntity<APIResponse> getProblem(String username, String pwd) {
+        APIResponse res = loginService.login(username, pwd);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/signup", method = RequestMethod.POST)
-    public APIResponse signUp(String username, String email, String password1, String password2) {
-        return loginService.signUp(username, email, password1, password2);
+    public ResponseEntity<APIResponse> signUp(String username, String email, String password1, String password2) {
+        APIResponse res = loginService.signUp(username, email, password1, password2);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/password/reset", method = RequestMethod.POST)
-    public APIResponse resetPassword(String email) {
-        return loginService.resetPassword(email);
+    public ResponseEntity<APIResponse> resetPassword(String email) {
+        APIResponse res = loginService.resetPassword(email);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 }
