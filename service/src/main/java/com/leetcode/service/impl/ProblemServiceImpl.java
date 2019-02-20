@@ -59,7 +59,10 @@ public class ProblemServiceImpl implements ProblemService {
     public APIResponse getProblemList(String uri) {
         String res = get(uri);
         ProblemStatusList statusList = JSON.parseObject(res, ProblemStatusList.class);
-        if (statusList == null) return JSON.parseObject(res, APIResponse.class);
+        // determine whether response is normal
+        if (statusList == null || statusList.getNumTotal() == null) {
+            return JSON.parseObject(res, APIResponse.class);
+        }
         return new APIResponse(statusList);
     }
 
