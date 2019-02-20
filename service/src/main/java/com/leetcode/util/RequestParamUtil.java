@@ -1,7 +1,7 @@
 package com.leetcode.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.leetcode.model.discuss.DiscussPageReqBody;
+import com.leetcode.common.PageReqBody;
 import com.leetcode.model.discuss.TopicReqBody;
 import org.apache.http.entity.StringEntity;
 
@@ -56,7 +56,7 @@ public class RequestParamUtil {
         return buildRequestBody(operationName, variables.toString(), query);
     }
 
-    public static StringEntity buildDiscussReqBody(DiscussPageReqBody req) {
+    public static StringEntity buildDiscussReqBody(PageReqBody req) {
         String operationName = "questionTopicsList";
         Integer skip = req.getPage() == 0 ? 0 : (req.getPage() - 1) * req.getPageSize();
         JSONObject variables = new JSONObject();
@@ -65,7 +65,7 @@ public class RequestParamUtil {
         variables.put("skip", skip);
         variables.put("first", req.getPageSize());
         variables.put("tags", new ArrayList<>());
-        variables.put("questionId", String.valueOf(req.getQuestionId()));
+        variables.put("questionId", String.valueOf(req.getId()));
         String q = "query questionTopicsList($questionId: String!, $orderBy: TopicSortingOption, $skip: Int, $query: String, $first: Int!, $tags: [String!]) {\n" +
                 "questionTopicsList(questionId: $questionId, orderBy: $orderBy, skip: $skip, query: $query, first: $first, tags: $tags) {\n" +
                 "...TopicsList\n" +

@@ -1,12 +1,12 @@
-package com.leetcode.model.discuss;
+package com.leetcode.common;
 
-public class DiscussPageReqBody {
+public class PageReqBody {
     private String uri;
     private Integer page = 1;
     private String orderBy = "most_votes";
     private String query = "";
     private Integer pageSize = 15;
-    private Integer questionId;
+    private Integer id;
 
     public String getUri() {
         return uri;
@@ -48,11 +48,11 @@ public class DiscussPageReqBody {
         this.pageSize = pageSize;
     }
 
-    public Integer getQuestionId() {
-        return questionId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

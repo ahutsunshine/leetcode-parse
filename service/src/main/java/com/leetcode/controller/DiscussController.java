@@ -1,6 +1,6 @@
 package com.leetcode.controller;
 
-import com.leetcode.model.discuss.DiscussPageReqBody;
+import com.leetcode.common.PageReqBody;
 import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
@@ -24,7 +24,7 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/discussions", method = RequestMethod.POST)
-    public ResponseEntity<APIResponse> getDiscussions(@RequestBody DiscussPageReqBody req) {
+    public ResponseEntity<APIResponse> getDiscussions(@RequestBody PageReqBody req) {
         APIResponse res = service.getDiscussions(req);
         return ResponseEntity.status(res.getCode()).body(res);
     }

@@ -3,7 +3,7 @@ package com.leetcode.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.leetcode.common.ResponseStatus;
-import com.leetcode.model.discuss.DiscussPageReqBody;
+import com.leetcode.common.PageReqBody;
 import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.discuss.Topic;
 import com.leetcode.model.discuss.TopicReqBody;
@@ -37,7 +37,7 @@ public class DiscussServiceImpl implements DiscussService {
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
-    public APIResponse getDiscussions(DiscussPageReqBody req) {
+    public APIResponse getDiscussions(PageReqBody req) {
         APIResponse errorStatus = checkPageParam(req);
         if (errorStatus != null) return errorStatus;
         CookieStore cookieStore = getCookies(req.getUri().replace("discuss", ""));
@@ -52,9 +52,9 @@ public class DiscussServiceImpl implements DiscussService {
         return new APIResponse(topicsList);
     }
 
-    private APIResponse checkPageParam(DiscussPageReqBody req) {
+    private APIResponse checkPageParam(PageReqBody req) {
         if (StringUtils.isEmpty(req.getUri())) return new APIResponse(400, "Uri is required.");
-        if (req.getQuestionId() == null) return new APIResponse(400, "Question id is required.");
+        if (req.getId() == null) return new APIResponse(400, "Question id is required.");
         if (req.getPage() < 0) return new APIResponse(400, "Negative page index is not supported.");
         if (req.getPageSize() <= 0 || req.getPageSize() > 512) req.setPageSize(15);
         return null;
@@ -139,7 +139,7 @@ public class DiscussServiceImpl implements DiscussService {
         return null;
     }
 
-    private String buildDiscussUri(DiscussPageReqBody req) {
+    private String buildDiscussUri(PageReqBody req) {
         return req.getUri() + "?currentPage=" + req.getPage() + "&" +
                 "orderBy=" + req.getOrderBy() + "&" +
                 "query=" + req.getQuery();
