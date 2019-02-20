@@ -82,21 +82,21 @@ public class CommentServiceImpl implements CommentService {
 
     private APIResponse checkParams(CommentReqBody req, String operation) {
         if (!isCookieValid(req.getCookies())) {
-            return new APIResponse(400, "User cookie is invalid.");
+            return new APIResponse(400, "User cookie is invalid");
         }
         if (StringUtils.isEmpty(req.getUri())) {
-            return new APIResponse(400, "Refer uri is required.");
+            return new APIResponse(400, "Refer uri is required");
         }
         if (CREATE_COMMENT_OPERATION.equals(operation) && req.getTopicId() == null) {
-            return new APIResponse(400, "Topic id is required.");
+            return new APIResponse(400, "Topic id is required");
         }
         if ((UPDATE_COMMENT_OPERATION.equals(operation)
                 || DELETE_COMMENT_OPERATION.equals(operation))
                 && req.getCommentId() == null) {
-            return new APIResponse(400, "Comment id is required.");
+            return new APIResponse(400, "Comment id is required");
         }
         if (StringUtils.isEmpty(req.getContent()) && !DELETE_COMMENT_OPERATION.equals(operation)) {
-            return new APIResponse(400, "Comment content is required.");
+            return new APIResponse(400, "Comment content is required");
         }
         return null;
     }

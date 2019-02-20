@@ -91,16 +91,16 @@ public class DiscussServiceImpl implements DiscussService {
     @Override
     public APIResponse uploadImage(String uri, String refer, String cookie, MultipartFile file) {
         try {
-            if (cookie == null) return new APIResponse(400, "Cookie cannot be empty.");
+            if (cookie == null) return new APIResponse(400, "Cookie cannot be empty");
             cookie = URLDecoder.decode(cookie, "UTF-8");
             if (!isCookieValid(cookie)) {
-                return new APIResponse(400, "User cookie is invalid.");
+                return new APIResponse(400, "User cookie is invalid");
             }
             return ImageUtil.upload(uri, refer, cookie, file);
         } catch (Exception e) {
             LOGGER.error("Exception occurs. ", e);
         }
-        return new APIResponse(500, "Upload failure. Please try again.");
+        return new APIResponse(500, "Upload failure. Please try again");
     }
 
     private APIResponse topicPost(TopicReqBody req, StringEntity entity, String operation) {
@@ -112,16 +112,16 @@ public class DiscussServiceImpl implements DiscussService {
 
     private APIResponse checkParams(TopicReqBody req, String operation) {
         if (!isCookieValid(req.getCookies())) {
-            return new APIResponse(400, "User cookie is invalid.");
+            return new APIResponse(400, "User cookie is invalid");
         }
         if (req.getId() == null) {
-            return new APIResponse(400, "Id is required.");
+            return new APIResponse(400, "Id is required");
         }
         if (StringUtils.isEmpty(req.getTitle()) && !operation.equals(DELETE_TOPIC_OPERATION)) {
-            return new APIResponse(400, "Title is required.");
+            return new APIResponse(400, "Title is required");
         }
         if (StringUtils.isEmpty(req.getContent()) && !operation.equals(DELETE_TOPIC_OPERATION)) {
-            return new APIResponse(400, "Content is required.");
+            return new APIResponse(400, "Content is required");
         }
         return null;
     }

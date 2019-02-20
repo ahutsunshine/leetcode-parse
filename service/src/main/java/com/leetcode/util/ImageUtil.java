@@ -63,11 +63,11 @@ public class ImageUtil {
                 return new APIResponse(status.get("url"));
             }
             Object error = status.get("detail");
-            return new APIResponse(400, error != null ? error.toString() : "Upload failure.");
+            return new APIResponse(400, error != null ? error.toString() : "Upload failure");
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
         }
-        return new APIResponse(500, "Upload failure.  Please try again.");
+        return new APIResponse(500, "Upload failure.  Please try again");
     }
 
 }

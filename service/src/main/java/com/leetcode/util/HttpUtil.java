@@ -77,7 +77,7 @@ public class HttpUtil {
             return processResponse(res);
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
-            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
+            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again"));
         }
     }
 
@@ -97,7 +97,7 @@ public class HttpUtil {
         APIResponse response;
         if (res == null) {
             LOGGER.error("HttpResponse is null, please check cookie, header and params!");
-            response = new APIResponse(400, "Please check request params.");
+            response = new APIResponse(400, "Please check request params");
             return JSON.toJSONString(response);
         }
         int statusCode = res.getStatusLine().getStatusCode();
@@ -109,7 +109,7 @@ public class HttpUtil {
         String error = res.getStatusLine().getReasonPhrase();
         LOGGER.info("Response content : {}", content);
         LOGGER.error("status:{},message:{}", statusCode, error);
-        error = StringUtils.isEmpty(error) ? "Request failed." : error;
+        error = StringUtils.isEmpty(error) ? "Request failed" : error;
         response = new APIResponse(statusCode, error);
         return JSON.toJSONString(response);
     }
@@ -128,7 +128,7 @@ public class HttpUtil {
         }
         if (isErrorMessage(msg)) {
             String info = msg.getErrors().size() > 0 ?
-                    msg.getErrors().get(0).getMessage() : "Request failed.";
+                    msg.getErrors().get(0).getMessage() : "Request failed";
             return new APIResponse(400, info);
         }
         return null;
