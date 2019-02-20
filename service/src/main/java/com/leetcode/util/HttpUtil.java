@@ -106,9 +106,11 @@ public class HttpUtil {
         if (statusCode == 200) {
             return content;
         }
+        String error = res.getStatusLine().getReasonPhrase();
         LOGGER.info("Response content : {}", content);
-        LOGGER.error("status:{},message:{}", statusCode, res.getStatusLine().getReasonPhrase());
-        response = new APIResponse(statusCode, "Request failed.");
+        LOGGER.error("status:{},message:{}", statusCode, error);
+        error = StringUtils.isEmpty(error) ? "Request failed." : error;
+        response = new APIResponse(statusCode, error);
         return JSON.toJSONString(response);
     }
 
