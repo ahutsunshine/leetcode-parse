@@ -58,11 +58,10 @@ public class RequestParamUtil {
 
     public static StringEntity buildDiscussReqBody(PageReqBody req) {
         String operationName = "questionTopicsList";
-        Integer skip = req.getPage() == 0 ? 0 : (req.getPage() - 1) * req.getPageSize();
         JSONObject variables = new JSONObject();
         variables.put("orderBy", req.getOrderBy());
         variables.put("query", req.getQuery());
-        variables.put("skip", skip);
+        variables.put("skip", (req.getPage() - 1) * req.getPageSize());
         variables.put("first", req.getPageSize());
         variables.put("tags", new ArrayList<>());
         variables.put("questionId", String.valueOf(req.getId()));
@@ -220,6 +219,48 @@ public class RequestParamUtil {
                 "}\n" +
                 "}\n" +
                 "}";
+        return buildRequestBody(operationName, variables.toString(), q);
+    }
+
+    public static StringEntity buildCommentReqBody(PageReqBody req) {
+        String operationName = "discussComments";
+        JSONObject variables = new JSONObject();
+        variables.put("topicId", req.getId());
+        variables.put("orderBy", req.getOrderBy());
+        variables.put("numPerPage", req.getPageSize());
+        variables.put("pageNo", req.getPage());
+        String q = "query discussComments($topicId: Int!, $orderBy: String = \"newest_to_oldest\", $pageNo: Int = 1, $numPerPage: Int = 10) {\n" +
+                "topicComments(topicId: $topicId, orderBy: $orderBy, pageNo: $pageNo, numPerPage: $numPerPage) {\n" +
+                "data {\n" +
+                "id\n" +
+                "post {\n" +
+                "...DiscussPost\n" +
+                "}\n" +
+                "numChildren\n" +
+                "}\n" +
+                "}\n" +
+                "}\n" +
+                "fragment DiscussPost on PostNode {\n" +
+                "id\n" +
+                "voteCount\n" +
+                "voteStatus\n" +
+                "content\n" +
+                "updationDate\n" +
+                "creationDate\n" +
+                "status\n" +
+                "author {\n" +
+                "isDiscussAdmin\n" +
+                "isDiscussStaff\n" +
+                "username\n" +
+                "profile {\n" +
+                "userAvatar\n" +
+                "reputation\n" +
+                "userSlug\n" +
+                "}\n" +
+                "}\n" +
+                "authorIsModerator\n" +
+                "isOwnPost\n" +
+                "}\n";
         return buildRequestBody(operationName, variables.toString(), q);
     }
 

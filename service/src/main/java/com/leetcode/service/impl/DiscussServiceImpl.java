@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URLDecoder;
 
+import static com.leetcode.util.CommonUtil.checkPageParam;
 import static com.leetcode.util.CommonUtil.isCookieValid;
 import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.*;
@@ -50,14 +51,6 @@ public class DiscussServiceImpl implements DiscussService {
         j = j.getJSONObject("questionTopicsList");
         DiscussTopics topicsList = JSON.parseObject(j.toString(), DiscussTopics.class);
         return new APIResponse(topicsList);
-    }
-
-    private APIResponse checkPageParam(PageReqBody req) {
-        if (StringUtils.isEmpty(req.getUri())) return new APIResponse(400, "Uri is required.");
-        if (req.getId() == null) return new APIResponse(400, "Question id is required.");
-        if (req.getPage() < 0) return new APIResponse(400, "Negative page index is not supported.");
-        if (req.getPageSize() <= 0 || req.getPageSize() > 512) req.setPageSize(15);
-        return null;
     }
 
     @Override

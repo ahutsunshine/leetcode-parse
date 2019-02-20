@@ -1,5 +1,6 @@
 package com.leetcode.controller;
 
+import com.leetcode.common.PageReqBody;
 import com.leetcode.model.comment.CommentReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
@@ -19,6 +20,12 @@ public class CommentController {
     @Autowired
     public CommentController(CommentService service) {
         this.service = service;
+    }
+
+    @RequestMapping(path = "/topics/comments", method = RequestMethod.POST)
+    public ResponseEntity<APIResponse> getComments(@RequestBody PageReqBody req) {
+        APIResponse res = service.getComments(req);
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.POST)

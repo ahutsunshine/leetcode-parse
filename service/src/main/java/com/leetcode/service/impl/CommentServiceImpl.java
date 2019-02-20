@@ -1,22 +1,32 @@
 package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.leetcode.common.PageReqBody;
+import com.leetcode.model.comment.Comment;
 import com.leetcode.model.comment.CommentReqBody;
 import com.leetcode.common.ResponseStatus;
+import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static com.leetcode.util.CommonUtil.checkPageParam;
 import static com.leetcode.util.CommonUtil.isCookieValid;
-import static com.leetcode.util.HttpUtil.getErrorIfFailed;
-import static com.leetcode.util.HttpUtil.post;
+import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.buildCommentReqBody;
+import static com.leetcode.util.RequestParamUtil.buildDiscussReqBody;
 
 
 @Service
@@ -26,6 +36,22 @@ public class CommentServiceImpl implements CommentService {
     private static final String CREATE_COMMENT_OPERATION = "createComment";
     private static final String UPDATE_COMMENT_OPERATION = "updateComment";
     private static final String DELETE_COMMENT_OPERATION = "deleteComment";
+
+    @Override
+    public APIResponse getComments(PageReqBody req) {
+        APIResponse errorStatus = checkPageParam(req);
+        if (errorStatus != null) return errorStatus;
+        CookieStore cookieStore = getCookies(req.getUri());
+        StringEntity requestBody = buildCommentReqBody(req);
+        String res = post(req.getUri(), cookieStore, requestBody);
+        APIResponse error = getErrorIfFailed(res);
+        if (error != null) return error;
+        JSONArray j = JSONObject.parseObject(res).getJSONObject("data")
+                .getJSONObject("topicComments").getJSONArray("data");
+        if (j == null || j.size() == 0) return new APIResponse(new ArrayList<>());
+        List<Comment> comments = JSON.parseArray(j.toString(), Comment.class);
+        return new APIResponse(comments);
+    }
 
     @Override
     public APIResponse createComment(CommentReqBody req) {
