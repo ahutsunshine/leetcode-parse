@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/v1")
 public class DiscussController {
+    private static final int CREATED = 201;
     private final DiscussService service;
 
     @Autowired
@@ -37,7 +38,7 @@ public class DiscussController {
     @RequestMapping(path = "/topics", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> createTopic(@RequestBody TopicReqBody req) {
         APIResponse res = service.createTopic(req);
-        return ResponseEntity.status(res.getCode()).body(res);
+        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.PUT)
@@ -56,6 +57,6 @@ public class DiscussController {
     public ResponseEntity<APIResponse> uploadImage(String uri, String refer, String cookie,
                                                    MultipartFile file) {
         APIResponse res = service.uploadImage(uri, refer, cookie, file);
-        return ResponseEntity.status(res.getCode()).body(res);
+        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/accounts")
 public class LoginController {
+    private static final int CREATED = 201;
     private final LoginService loginService;
 
     @Autowired
@@ -27,10 +28,10 @@ public class LoginController {
     @RequestMapping(path = "/signup", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> signUp(String username, String email, String password1, String password2) {
         APIResponse res = loginService.signUp(username, email, password1, password2);
-        return ResponseEntity.status(res.getCode()).body(res);
+        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
     }
 
-    @RequestMapping(path = "/password/reset", method = RequestMethod.POST)
+    @RequestMapping(path = "/password/reset", method = RequestMethod.GET)
     public ResponseEntity<APIResponse> resetPassword(String email) {
         APIResponse res = loginService.resetPassword(email);
         return ResponseEntity.status(res.getCode()).body(res);

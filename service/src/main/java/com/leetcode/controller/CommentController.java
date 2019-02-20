@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class CommentController {
+    private static final int CREATED = 201;
     private final CommentService service;
 
     @Autowired
@@ -23,7 +24,7 @@ public class CommentController {
     @RequestMapping(path = "/comments", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> createComment(@RequestBody CommentReqBody request) {
         APIResponse res = service.createComment(request);
-        return ResponseEntity.status(res.getCode()).body(res);
+        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.PUT)
