@@ -39,10 +39,9 @@ public class DiscussServiceImpl implements DiscussService {
     public APIResponse getDiscussions(PageReqBody req) {
         APIResponse errorStatus = checkPageParam(req);
         if (errorStatus != null) return errorStatus;
-        CookieStore cookieStore = getCookies(req.getUri().replace("discuss", ""));
-        String uri = buildDiscussUri(req);
         StringEntity requestBody = buildDiscussReqBody(req);
-        String res = post(uri, cookieStore, requestBody);
+        CookieStore cookieStore = getCookies(req.getUri());
+        String res = post(req.getUri(), cookieStore, requestBody);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res).getJSONObject("data");
@@ -125,11 +124,5 @@ public class DiscussServiceImpl implements DiscussService {
             return new APIResponse(400, "Content is required.");
         }
         return null;
-    }
-
-    private String buildDiscussUri(PageReqBody req) {
-        return req.getUri() + "?currentPage=" + req.getPage() + "&" +
-                "orderBy=" + req.getOrderBy() + "&" +
-                "query=" + req.getQuery();
     }
 }
