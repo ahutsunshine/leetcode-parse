@@ -6,8 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.leetcode.common.PageReqBody;
 import com.leetcode.model.comment.Comment;
 import com.leetcode.model.comment.CommentReqBody;
-import com.leetcode.common.ResponseStatus;
-import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
 import org.apache.http.HttpEntity;
@@ -19,14 +17,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import static com.leetcode.util.CommonUtil.checkPageParam;
-import static com.leetcode.util.CommonUtil.isCookieValid;
+import static com.leetcode.util.CommonUtil.*;
 import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.buildCommentReqBody;
-import static com.leetcode.util.RequestParamUtil.buildDiscussReqBody;
 
 
 @Service
@@ -82,10 +77,7 @@ public class CommentServiceImpl implements CommentService {
         String res = post(req.getUri(), cookies, entity);
         APIResponse e = getErrorIfFailed(res);
         if (e != null) return e;
-        JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
-        data = data.getJSONObject(operationName);
-        ResponseStatus status = JSON.parseObject(data.toString(), ResponseStatus.class);
-        return new APIResponse(status);
+        return getResponseStatus(operationName, res);
     }
 
     private APIResponse checkParams(CommentReqBody req, String operation) {

@@ -1,6 +1,9 @@
 package com.leetcode.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.leetcode.common.PageReqBody;
+import com.leetcode.common.ResponseStatus;
 import com.leetcode.model.response.APIResponse;
 import org.springframework.util.StringUtils;
 
@@ -29,5 +32,12 @@ public class CommonUtil {
         if (req.getPage() == 0) req.setPage(1);
         if (req.getPageSize() <= 0 || req.getPageSize() > 512) req.setPageSize(15);
         return null;
+    }
+
+    public static APIResponse getResponseStatus(String operationName, String res) {
+        JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
+        data = data.getJSONObject(operationName);
+        ResponseStatus status = JSON.parseObject(data.toString(), ResponseStatus.class);
+        return new APIResponse(status);
     }
 }

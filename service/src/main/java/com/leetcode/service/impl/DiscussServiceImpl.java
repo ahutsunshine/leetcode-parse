@@ -2,7 +2,6 @@ package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.leetcode.common.ResponseStatus;
 import com.leetcode.common.PageReqBody;
 import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.discuss.Topic;
@@ -22,8 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URLDecoder;
 
-import static com.leetcode.util.CommonUtil.checkPageParam;
-import static com.leetcode.util.CommonUtil.isCookieValid;
+import static com.leetcode.util.CommonUtil.*;
 import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.*;
 
@@ -110,10 +108,7 @@ public class DiscussServiceImpl implements DiscussService {
         String res = post(req.getUri(), req.getCookies(), entity);
         APIResponse e;
         if ((e = getErrorIfFailed(res)) != null) return e;
-        JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
-        data = data.getJSONObject(operation);
-        ResponseStatus status = JSON.parseObject(data.toString(), ResponseStatus.class);
-        return new APIResponse(status);
+        return getResponseStatus(operation, res);
     }
 
     private APIResponse checkParams(TopicReqBody req, String operation) {
