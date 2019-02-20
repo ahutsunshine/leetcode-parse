@@ -8,9 +8,9 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>android</artifactId>
+    <artifactId>ios</artifactId>
 
-    <name>Leetcode-parse :: android</name>
+    <name>Leetcode-parse :: ios</name>
 
     <properties>
         <java.version>1.8</java.version>
