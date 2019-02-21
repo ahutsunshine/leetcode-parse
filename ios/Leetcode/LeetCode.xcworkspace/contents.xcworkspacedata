@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Source/LeetCode/LeetCode.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Source/LeetCodeUI/LeetCodeUI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Source/LeetCodeService/LeetCodeService.xcodeproj">
+   </FileRef>
+</Workspace>
