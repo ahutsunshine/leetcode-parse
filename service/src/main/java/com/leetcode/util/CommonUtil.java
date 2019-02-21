@@ -26,7 +26,6 @@ public class CommonUtil {
     }
 
     public static APIResponse checkPageParam(PageReqBody req) {
-        if (StringUtils.isEmpty(req.getUri())) return new APIResponse(400, "Uri is required");
         if (req.getId() == null) return new APIResponse(400, "Question id is required");
         if (req.getPage() < 0) return new APIResponse(400, "Negative page index is not supported");
         if (req.getPage() == 0) req.setPage(1);

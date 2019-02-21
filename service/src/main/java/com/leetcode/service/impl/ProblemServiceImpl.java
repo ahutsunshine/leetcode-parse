@@ -42,10 +42,10 @@ public class ProblemServiceImpl implements ProblemService {
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getProblem(String uri) {
-        CookieStore cookieStore = getCookies(uri);
+//        CookieStore cookieStore = getCookies(uri);
         String titleSlug = getTitleSlug(uri);
         StringEntity requestBody = buildProblemReqBody(titleSlug);
-        String res = post(uri, cookieStore, requestBody);
+        String res = post(uri, requestBody);
         APIResponse error;
         if ((error = getErrorIfFailed(res)) != null) return error;
         JSONObject j = JSONObject.parseObject(res).getJSONObject("data");

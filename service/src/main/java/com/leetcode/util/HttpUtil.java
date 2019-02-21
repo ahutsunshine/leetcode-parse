@@ -62,7 +62,11 @@ public class HttpUtil {
     public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
         HttpUriRequest request = buildPostRequest(uri, params);
         return getResponseStatus(request, cookieStore);
+    }
 
+    public static String post(String uri, HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(uri, params);
+        return getResponseStatus(request, null);
     }
 
     public static String post(String uri, String cookie, HttpEntity params) {
