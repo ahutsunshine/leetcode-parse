@@ -15,6 +15,8 @@ public class CommonUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
 
     public static Boolean isCookieValid(String cookies) {
+        cookies = decode(cookies);
+        if (cookies == null) return false;
         boolean containToken = false, containSession = false;
         String[] values = cookies.split(";");
         for (String val : values) {
@@ -33,13 +35,8 @@ public class CommonUtil {
 
     public static APIResponse checkCookie(String cookies) {
         if (cookies == null) return new APIResponse(400, "Cookie cannot be empty");
-        try {
-            cookies = URLDecoder.decode(cookies, "UTF-8");
-            if (!isCookieValid(cookies)) {
-                return new APIResponse(400, "User cookie is invalid");
-            }
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.error("UnsupportedEncodingException ", e);
+        if (!isCookieValid(cookies)) {
+            return new APIResponse(400, "User cookie is invalid");
         }
         return null;
     }
