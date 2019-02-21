@@ -21,65 +21,8 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 7 files.
+  /// This `R.file` struct is generated, and contains static references to 0 files.
   struct file {
-    /// Resource file `appstore-release.rb`.
-    static let appstoreReleaseRb = Rswift.FileResource(bundle: R.hostingBundle, name: "appstore-release", pathExtension: "rb")
-    /// Resource file `build-dependency.sh`.
-    static let buildDependencySh = Rswift.FileResource(bundle: R.hostingBundle, name: "build-dependency", pathExtension: "sh")
-    /// Resource file `build.log`.
-    static let buildLog = Rswift.FileResource(bundle: R.hostingBundle, name: "build", pathExtension: "log")
-    /// Resource file `build2.log`.
-    static let build2Log = Rswift.FileResource(bundle: R.hostingBundle, name: "build2", pathExtension: "log")
-    /// Resource file `rswift`.
-    static let rswift = Rswift.FileResource(bundle: R.hostingBundle, name: "rswift", pathExtension: "")
-    /// Resource file `run-swiftlint.sh`.
-    static let runSwiftlintSh = Rswift.FileResource(bundle: R.hostingBundle, name: "run-swiftlint", pathExtension: "sh")
-    /// Resource file `update-plist.sh`.
-    static let updatePlistSh = Rswift.FileResource(bundle: R.hostingBundle, name: "update-plist", pathExtension: "sh")
-    
-    /// `bundle.url(forResource: "appstore-release", withExtension: "rb")`
-    static func appstoreReleaseRb(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.appstoreReleaseRb
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "build", withExtension: "log")`
-    static func buildLog(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.buildLog
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "build-dependency", withExtension: "sh")`
-    static func buildDependencySh(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.buildDependencySh
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "build2", withExtension: "log")`
-    static func build2Log(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.build2Log
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "rswift", withExtension: "")`
-    static func rswift(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.rswift
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "run-swiftlint", withExtension: "sh")`
-    static func runSwiftlintSh(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.runSwiftlintSh
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "update-plist", withExtension: "sh")`
-    static func updatePlistSh(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.updatePlistSh
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
     fileprivate init() {}
   }
   

@@ -1,4 +1,5 @@
 git "git@git.llsapp.com:client-infra/Quicksilver.git" "2.1"
+git "git@git.llsapp.com:client-infra/Rainbow.git" "1.1.2"
 github "CocoaLumberjack/CocoaLumberjack" "3.5.1"
 github "PureLayout/PureLayout" "v3.1.4"
 github "ReactiveX/RxSwift" "4.4.1"
