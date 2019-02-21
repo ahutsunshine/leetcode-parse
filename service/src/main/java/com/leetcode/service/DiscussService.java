@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface DiscussService {
     APIResponse getDiscussions(PageReqBody req);
 
-    APIResponse getTopic(String problemUri, int topicId);
+    APIResponse getTopic(int topicId);
 
     APIResponse createTopic(TopicReqBody req);
 

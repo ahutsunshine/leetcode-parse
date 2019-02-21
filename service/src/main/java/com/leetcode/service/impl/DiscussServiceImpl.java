@@ -37,7 +37,7 @@ public class DiscussServiceImpl implements DiscussService {
         if (errorStatus != null) return errorStatus;
         StringEntity requestBody = buildDiscussReqBody(req);
 //        CookieStore cookieStore = getCookies(req.getUri());
-        String res = post(req.getUri(), requestBody);
+        String res = post(requestBody);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res).getJSONObject("data");
@@ -47,10 +47,10 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public APIResponse getTopic(String problemUri, int topicId) {
+    public APIResponse getTopic(int topicId) {
 //        CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);
-        String res = post(problemUri, body);
+        String res = post(body);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res);

@@ -8,6 +8,10 @@ public class PageReqBody {
     private Integer pageSize = 15;
     private Integer id;
 
+    public PageReqBody() {
+        uri = "https://leetcode.com/problems";
+    }
+
     public String getUri() {
         return uri;
     }

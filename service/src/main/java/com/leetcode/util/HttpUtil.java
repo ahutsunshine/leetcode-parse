@@ -69,6 +69,11 @@ public class HttpUtil {
         return getResponseStatus(request, null);
     }
 
+    public static String post(HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(params);
+        return getResponseStatus(request, null);
+    }
+
     public static String post(String uri, String cookie, HttpEntity params) {
         HttpUriRequest request = buildPostRequest(uri, cookie, params);
         return getResponseStatus(request, null);
@@ -164,6 +169,18 @@ public class HttpUtil {
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .setHeader(HttpHeaders.REFERER, uri)
+                .setHeader(":authority", "leetcode.com")
+                .setHeader(":method", "POST")
+                .setHeader(":scheme", "https")
+                .setEntity(params)
+                .build();
+    }
+
+    private static HttpUriRequest buildPostRequest(HttpEntity params) {
+        return RequestBuilder.post(GRAPHQL_URL)
+                .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .setHeader(":authority", "leetcode.com")
                 .setHeader(":method", "POST")
                 .setHeader(":scheme", "https")

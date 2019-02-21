@@ -30,8 +30,8 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)
-    public ResponseEntity<APIResponse> getTopic(String problemUri, int topicId) {
-        APIResponse res = service.getTopic(problemUri, topicId);
+    public ResponseEntity<APIResponse> getTopic(int topicId) {
+        APIResponse res = service.getTopic(topicId);
         return ResponseEntity.status(res.getCode()).body(res);
     }
 
@@ -52,7 +52,7 @@ public class DiscussController {
     @RequestMapping(path = "/topics", method = RequestMethod.DELETE)
     public ResponseEntity<APIResponse> deleteTopic(@RequestBody TopicReqBody req) {
         APIResponse res = service.deleteTopic(req);
-        if(res.getCode() == 200) return ResponseEntity.noContent().build();
+        if (res.getCode() == 200) return ResponseEntity.noContent().build();
         return ResponseEntity.status(res.getCode()).body(res);
     }
 
