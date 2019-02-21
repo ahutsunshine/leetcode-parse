@@ -13,8 +13,6 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +24,6 @@ import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.*;
 
 @Service
-@CacheConfig(cacheNames = "discuss", keyGenerator = "cacheKeyGenerator")
 public class DiscussServiceImpl implements DiscussService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscussServiceImpl.class);
@@ -35,7 +32,6 @@ public class DiscussServiceImpl implements DiscussService {
     private static final String DELETE_TOPIC_OPERATION = "deleteTopic";
 
     @Override
-    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getDiscussions(PageReqBody req) {
         APIResponse errorStatus = checkPageParam(req);
         if (errorStatus != null) return errorStatus;
@@ -51,7 +47,6 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getTopic(String problemUri, int topicId) {
         CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);
