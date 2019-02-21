@@ -21,7 +21,11 @@
 		23B9ECF1221E8D5C001D85E8 /* Rswift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ECDE221E8142001D85E8 /* Rswift.framework */; };
 		23B9ECF3221E8D7D001D85E8 /* Rainbow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ECE8221E88DB001D85E8 /* Rainbow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23B9ECF4221E8D7D001D85E8 /* Rswift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ECDE221E8142001D85E8 /* Rswift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		23B9ECF7221E8DED001D85E8 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9ECF6221E8DED001D85E8 /* R.generated.swift */; };
+		23B9ED6D221E966A001D85E8 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9ED6C221E9669001D85E8 /* R.generated.swift */; };
+		23B9ED72221EA686001D85E8 /* LeetCodeService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ED6E221E9A3B001D85E8 /* LeetCodeService.framework */; };
+		23B9ED73221EA690001D85E8 /* LeetCodeService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ED6E221E9A3B001D85E8 /* LeetCodeService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23B9ED74221EA7D8001D85E8 /* LeetCodeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ED70221E9A3C001D85E8 /* LeetCodeUI.framework */; };
+		23B9ED75221EA7D8001D85E8 /* LeetCodeUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ED70221E9A3C001D85E8 /* LeetCodeUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,10 +50,12 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 7;
+			dstSubfolderSpec = 10;
 			files = (
+				23B9ED73221EA690001D85E8 /* LeetCodeService.framework in Embed Frameworks */,
 				23B9ECF3221E8D7D001D85E8 /* Rainbow.framework in Embed Frameworks */,
 				23B9ECF4221E8D7D001D85E8 /* Rswift.framework in Embed Frameworks */,
+				23B9ED75221EA7D8001D85E8 /* LeetCodeUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,7 +85,9 @@
 		23B9ECDF221E8142001D85E8 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = ../../Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		23B9ECE0221E8142001D85E8 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		23B9ECE8221E88DB001D85E8 /* Rainbow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rainbow.framework; path = ../../Carthage/Build/iOS/Rainbow.framework; sourceTree = "<group>"; };
-		23B9ECF6221E8DED001D85E8 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		23B9ED6C221E9669001D85E8 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		23B9ED6E221E9A3B001D85E8 /* LeetCodeService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LeetCodeService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23B9ED70221E9A3C001D85E8 /* LeetCodeUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LeetCodeUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +95,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B9ED72221EA686001D85E8 /* LeetCodeService.framework in Frameworks */,
 				23B9ECF1221E8D5C001D85E8 /* Rswift.framework in Frameworks */,
 				23B9ECF0221E8CC6001D85E8 /* Rainbow.framework in Frameworks */,
+				23B9ED74221EA7D8001D85E8 /* LeetCodeUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +193,7 @@
 		23B9ECC7221E8063001D85E8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				23B9ECF6221E8DED001D85E8 /* R.generated.swift */,
+				23B9ED6C221E9669001D85E8 /* R.generated.swift */,
 				23B9ECC8221E8063001D85E8 /* Localizable.strings */,
 			);
 			path = Resource;
@@ -224,6 +234,8 @@
 		23B9ECDB221E8142001D85E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23B9ED6E221E9A3B001D85E8 /* LeetCodeService.framework */,
+				23B9ED70221E9A3C001D85E8 /* LeetCodeUI.framework */,
 				23B9ECE8221E88DB001D85E8 /* Rainbow.framework */,
 				23B9ECDF221E8142001D85E8 /* PureLayout.framework */,
 				23B9ECDC221E8142001D85E8 /* Quicksilver.framework */,
@@ -414,7 +426,7 @@
 				23B9ECD1221E8063001D85E8 /* BaseViewController.swift in Sources */,
 				23B9ECD2221E8063001D85E8 /* MainTabViewController.swift in Sources */,
 				23B9ECD8221E8063001D85E8 /* ProblemViewController.swift in Sources */,
-				23B9ECF7221E8DED001D85E8 /* R.generated.swift in Sources */,
+				23B9ED6D221E966A001D85E8 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +605,7 @@
 				DEVELOPMENT_TEAM = 8PJZBHFZQF;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../Carthage/Build/iOS/";
 				INFOPLIST_FILE = LeetCode/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -612,6 +625,7 @@
 				DEVELOPMENT_TEAM = 8PJZBHFZQF;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../Carthage/Build/iOS/";
 				INFOPLIST_FILE = LeetCode/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
