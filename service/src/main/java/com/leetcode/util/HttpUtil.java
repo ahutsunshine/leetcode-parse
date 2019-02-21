@@ -102,12 +102,12 @@ public class HttpUtil {
         }
         int statusCode = res.getStatusLine().getStatusCode();
         String content = EntityUtils.toString(res.getEntity(), "UTF-8");
+        LOGGER.info("Response content : {}", content);
         //Return 200 may still be an error message that needs to be processed
         if (statusCode == 200) {
             return content;
         }
         String error = res.getStatusLine().getReasonPhrase();
-        LOGGER.info("Response content : {}", content);
         LOGGER.error("status:{},message:{}", statusCode, error);
         error = StringUtils.isEmpty(error) ? "Request failed" : error;
         response = new APIResponse(statusCode, error);

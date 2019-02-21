@@ -38,6 +38,9 @@ public class CommonUtil {
         JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
         data = data.getJSONObject(operationName);
         ResponseStatus status = JSON.parseObject(data.toString(), ResponseStatus.class);
+        if (!status.getOk()) {
+            return new APIResponse(400, status.getError());
+        }
         return new APIResponse(status);
     }
 }
