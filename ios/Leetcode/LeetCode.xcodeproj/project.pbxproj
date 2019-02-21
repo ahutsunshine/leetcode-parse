@@ -25,6 +25,7 @@
 		23B9EB43221E5267001D85E8 /* build-dependency.sh in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EB3C221E5267001D85E8 /* build-dependency.sh */; };
 		23B9EB44221E5267001D85E8 /* build.log in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EB3D221E5267001D85E8 /* build.log */; };
 		23B9EB48221E5367001D85E8 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EB47221E5367001D85E8 /* R.generated.swift */; };
+		23B9EB4B221E55CF001D85E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EB4D221E55CF001D85E8 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		23B9EB3C221E5267001D85E8 /* build-dependency.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build-dependency.sh"; sourceTree = "<group>"; };
 		23B9EB3D221E5267001D85E8 /* build.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build.log; sourceTree = "<group>"; };
 		23B9EB47221E5367001D85E8 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		23B9EB4C221E55CF001D85E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				23B9EB47221E5367001D85E8 /* R.generated.swift */,
+				23B9EB4D221E55CF001D85E8 /* Localizable.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				23B9EB44221E5267001D85E8 /* build.log in Resources */,
 				23B9EB41221E5267001D85E8 /* run-swiftlint.sh in Resources */,
 				23B9EB42221E5267001D85E8 /* appstore-release.rb in Resources */,
+				23B9EB4B221E55CF001D85E8 /* Localizable.strings in Resources */,
 				23B9EAFB221E4A87001D85E8 /* LaunchScreen.storyboard in Resources */,
 				23B9EB40221E5267001D85E8 /* build2.log in Resources */,
 				23B9EAF8221E4A87001D85E8 /* Assets.xcassets in Resources */,
@@ -489,6 +493,15 @@
 				23B9EAFA221E4A87001D85E8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		23B9EB4D221E55CF001D85E8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				23B9EB4C221E55CF001D85E8 /* en */,
+			);
+			name = Localizable.strings;
+			path = ../../../LeetCode/LeetCode/Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

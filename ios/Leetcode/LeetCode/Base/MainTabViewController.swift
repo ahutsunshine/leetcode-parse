@@ -17,7 +17,7 @@ class MainTabViewController: UITabBarController {
     tabBar.tintColor = .black
     tabBar.isTranslucent = false
     
-    settingViewControllers()
+    makeViewControllers()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -27,17 +27,17 @@ class MainTabViewController: UITabBarController {
     onViewDidAppear = nil
   }
   
-  private func settingViewControllers() {
+  private func makeViewControllers() {
     let problemViewController = ProblemViewController()
     problemViewController.tabBarItem.selectedImage = R.image.list()?.withRenderingMode(.alwaysOriginal)
     problemViewController.tabBarItem.image = R.image.list()?.withRenderingMode(.alwaysTemplate)
-    problemViewController.tabBarItem.title = "Problems"
+    problemViewController.tabBarItem.title = R.string.localizable.problemsTitle()
     let problemNavigationController = UINavigationController.init(rootViewController: problemViewController)
     
     let settingViewController = SettingViewController()
     settingViewController.tabBarItem.selectedImage = R.image.settings()?.withRenderingMode(.alwaysOriginal)
     settingViewController.tabBarItem.image = R.image.settings()?.withRenderingMode(.alwaysTemplate)
-    settingViewController.tabBarItem.title = "Settings"
+    settingViewController.tabBarItem.title = R.string.localizable.settingsTitle()
     let settingNavigationController = UINavigationController.init(rootViewController: settingViewController)
     
     viewControllers = [problemNavigationController, settingNavigationController]

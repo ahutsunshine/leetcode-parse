@@ -13,6 +13,6 @@ class SettingViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = "Settings"
+    title = R.string.localizable.settingsTitle()
   }
 }

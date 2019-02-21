@@ -13,6 +13,6 @@ class ProblemViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = "Problems"
+    title = R.string.localizable.problemsTitle()
   }
 }
