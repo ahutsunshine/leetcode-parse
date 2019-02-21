@@ -10,6 +10,16 @@
 		23B9ED55221E94BC001D85E8 /* LeetCodeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ED4B221E94BC001D85E8 /* LeetCodeUI.framework */; };
 		23B9ED5A221E94BC001D85E8 /* LeetCodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9ED59221E94BC001D85E8 /* LeetCodeUITests.swift */; };
 		23B9ED5C221E94BC001D85E8 /* LeetCodeUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 23B9ED4E221E94BC001D85E8 /* LeetCodeUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23B9EE3A221EFCB9001D85E8 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE39221EFCB9001D85E8 /* ProgressHUD.swift */; };
+		23B9EE41221EFCE9001D85E8 /* Frameworks.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */; };
+		23B9EE42221EFCE9001D85E8 /* Modules.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE3D221EFCE9001D85E8 /* Modules.xcconfig */; };
+		23B9EE43221EFCE9001D85E8 /* Environment.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE3E221EFCE9001D85E8 /* Environment.xcconfig */; };
+		23B9EE44221EFCE9001D85E8 /* Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE3F221EFCE9001D85E8 /* Application.xcconfig */; };
+		23B9EE45221EFCE9001D85E8 /* Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE40221EFCE9001D85E8 /* Common.xcconfig */; };
+		23B9EE47221F0083001D85E8 /* UILabel+FontColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE46221F0083001D85E8 /* UILabel+FontColor.swift */; };
+		23B9EE49221F0099001D85E8 /* UILabel+Wrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE48221F0099001D85E8 /* UILabel+Wrapping.swift */; };
+		23B9EE4C221F00F7001D85E8 /* LeetCodeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE4B221F00F7001D85E8 /* LeetCodeStyle.swift */; };
+		23B9EE4E221F02F2001D85E8 /* LeetCodeUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE4D221F02F2001D85E8 /* LeetCodeUIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +39,16 @@
 		23B9ED54221E94BC001D85E8 /* LeetCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23B9ED59221E94BC001D85E8 /* LeetCodeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUITests.swift; sourceTree = "<group>"; };
 		23B9ED5B221E94BC001D85E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23B9EE39221EFCB9001D85E8 /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Frameworks.xcconfig; sourceTree = "<group>"; };
+		23B9EE3D221EFCE9001D85E8 /* Modules.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Modules.xcconfig; sourceTree = "<group>"; };
+		23B9EE3E221EFCE9001D85E8 /* Environment.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Environment.xcconfig; sourceTree = "<group>"; };
+		23B9EE3F221EFCE9001D85E8 /* Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		23B9EE40221EFCE9001D85E8 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		23B9EE46221F0083001D85E8 /* UILabel+FontColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FontColor.swift"; sourceTree = "<group>"; };
+		23B9EE48221F0099001D85E8 /* UILabel+Wrapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Wrapping.swift"; sourceTree = "<group>"; };
+		23B9EE4B221F00F7001D85E8 /* LeetCodeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeStyle.swift; sourceTree = "<group>"; };
+		23B9EE4D221F02F2001D85E8 /* LeetCodeUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +73,7 @@
 		23B9ED41221E94BC001D85E8 = {
 			isa = PBXGroup;
 			children = (
+				23B9EE3B221EFCE9001D85E8 /* xcconfig */,
 				23B9ED4D221E94BC001D85E8 /* LeetCodeUI */,
 				23B9ED58221E94BC001D85E8 /* LeetCodeUITests */,
 				23B9ED4C221E94BC001D85E8 /* Products */,
@@ -71,6 +92,10 @@
 		23B9ED4D221E94BC001D85E8 /* LeetCodeUI */ = {
 			isa = PBXGroup;
 			children = (
+				23B9EE4A221F00EC001D85E8 /* Style */,
+				23B9EE38221EFCA3001D85E8 /* Control */,
+				23B9EE36221EFCA3001D85E8 /* Extension */,
+				23B9EE37221EFCA3001D85E8 /* Resource */,
 				23B9ED4E221E94BC001D85E8 /* LeetCodeUI.h */,
 				23B9ED4F221E94BC001D85E8 /* Info.plist */,
 			);
@@ -84,6 +109,52 @@
 				23B9ED5B221E94BC001D85E8 /* Info.plist */,
 			);
 			path = LeetCodeUITests;
+			sourceTree = "<group>";
+		};
+		23B9EE36221EFCA3001D85E8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE46221F0083001D85E8 /* UILabel+FontColor.swift */,
+				23B9EE48221F0099001D85E8 /* UILabel+Wrapping.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		23B9EE37221EFCA3001D85E8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		23B9EE38221EFCA3001D85E8 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE39221EFCB9001D85E8 /* ProgressHUD.swift */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		23B9EE3B221EFCE9001D85E8 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */,
+				23B9EE3D221EFCE9001D85E8 /* Modules.xcconfig */,
+				23B9EE3E221EFCE9001D85E8 /* Environment.xcconfig */,
+				23B9EE3F221EFCE9001D85E8 /* Application.xcconfig */,
+				23B9EE40221EFCE9001D85E8 /* Common.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../Resources/xcconfig;
+			sourceTree = "<group>";
+		};
+		23B9EE4A221F00EC001D85E8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE4B221F00F7001D85E8 /* LeetCodeStyle.swift */,
+				23B9EE4D221F02F2001D85E8 /* LeetCodeUIHelper.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +219,7 @@
 				TargetAttributes = {
 					23B9ED4A221E94BC001D85E8 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					23B9ED53221E94BC001D85E8 = {
 						CreatedOnToolsVersion = 10.1;
@@ -177,6 +249,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B9EE45221EFCE9001D85E8 /* Common.xcconfig in Resources */,
+				23B9EE43221EFCE9001D85E8 /* Environment.xcconfig in Resources */,
+				23B9EE42221EFCE9001D85E8 /* Modules.xcconfig in Resources */,
+				23B9EE41221EFCE9001D85E8 /* Frameworks.xcconfig in Resources */,
+				23B9EE44221EFCE9001D85E8 /* Application.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B9EE4C221F00F7001D85E8 /* LeetCodeStyle.swift in Sources */,
+				23B9EE3A221EFCB9001D85E8 /* ProgressHUD.swift in Sources */,
+				23B9EE4E221F02F2001D85E8 /* LeetCodeUIHelper.swift in Sources */,
+				23B9EE49221F0099001D85E8 /* UILabel+Wrapping.swift in Sources */,
+				23B9EE47221F0083001D85E8 /* UILabel+FontColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +422,9 @@
 		};
 		23B9ED60221E94BC001D85E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -359,6 +443,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Ahut.LeetCodeUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,7 +451,9 @@
 		};
 		23B9ED61221E94BC001D85E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -392,7 +479,9 @@
 		};
 		23B9ED63221E94BC001D85E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9QAC9YPTV;
 				INFOPLIST_FILE = LeetCodeUITests/Info.plist;
@@ -410,7 +499,9 @@
 		};
 		23B9ED64221E94BC001D85E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE3C221EFCE9001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9QAC9YPTV;
 				INFOPLIST_FILE = LeetCodeUITests/Info.plist;

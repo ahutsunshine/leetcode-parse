@@ -9,6 +9,7 @@
 import UIKit
 import LeetCodeService
 import Rainbow
+import LeetCodeUI
 
 @UIApplicationMain
 class AppDelegate: RainbowAppDelegate {

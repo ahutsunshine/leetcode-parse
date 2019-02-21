@@ -59,6 +59,9 @@
 		23B9EE32221EFB33001D85E8 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9EE30221EFB0A001D85E8 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23B9EE34221EFB57001D85E8 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9EE33221EFB57001D85E8 /* SVProgressHUD.framework */; };
 		23B9EE35221EFB5E001D85E8 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9EE33221EFB57001D85E8 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23B9EE4F221F030D001D85E8 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ECDF221E8142001D85E8 /* PureLayout.framework */; };
+		23B9EE50221F0314001D85E8 /* PureLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ECDF221E8142001D85E8 /* PureLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23B9EE52221F039A001D85E8 /* LeetCodeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE51221F039A001D85E8 /* LeetCodeProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				23B9EE50221F0314001D85E8 /* PureLayout.framework in Embed Frameworks */,
 				23B9EE35221EFB5E001D85E8 /* SVProgressHUD.framework in Embed Frameworks */,
 				23B9EE32221EFB33001D85E8 /* CocoaLumberjack.framework in Embed Frameworks */,
 				23B9EE1A221EEB63001D85E8 /* RxCocoa.framework in Embed Frameworks */,
@@ -159,6 +163,7 @@
 		23B9EE24221EEE04001D85E8 /* Rainbow+LeetCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rainbow+LeetCode.swift"; sourceTree = "<group>"; };
 		23B9EE30221EFB0A001D85E8 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = ../../Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		23B9EE33221EFB57001D85E8 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = ../../Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		23B9EE51221F039A001D85E8 /* LeetCodeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B9EE4F221F030D001D85E8 /* PureLayout.framework in Frameworks */,
 				23B9EE34221EFB57001D85E8 /* SVProgressHUD.framework in Frameworks */,
 				23B9EE31221EFB0A001D85E8 /* CocoaLumberjack.framework in Frameworks */,
 				23B9EE1C221EEB88001D85E8 /* RxCocoa.framework in Frameworks */,
@@ -241,6 +247,7 @@
 				23B9EC24221E7E0E001D85E8 /* Assets.xcassets */,
 				23B9EC26221E7E0E001D85E8 /* LaunchScreen.storyboard */,
 				23B9EC29221E7E0E001D85E8 /* Info.plist */,
+				23B9EE51221F039A001D85E8 /* LeetCodeProvider.swift */,
 			);
 			path = LeetCode;
 			sourceTree = "<group>";
@@ -605,6 +612,7 @@
 				"$(SRCROOT)/../../Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/../../Carthage/Build/iOS/CocoaLumberjack.framework",
 				"$(SRCROOT)/../../Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/../../Carthage/Build/iOS/PureLayout.framework",
 			);
 			name = "Embed Carthage Frameworks";
 			outputFileListPaths = (
@@ -649,6 +657,7 @@
 				23B9ECD8221E8063001D85E8 /* ProblemViewController.swift in Sources */,
 				23B9ED6D221E966A001D85E8 /* R.generated.swift in Sources */,
 				23B9EE21221EEDE2001D85E8 /* Rainbow.swift in Sources */,
+				23B9EE52221F039A001D85E8 /* LeetCodeProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

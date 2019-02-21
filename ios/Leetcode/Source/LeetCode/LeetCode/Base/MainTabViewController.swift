@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Rainbow
+import LeetCodeUI
 
 class MainTabViewController: UITabBarController {
   var onViewDidAppear: (() -> Void)?

@@ -8,6 +8,7 @@
 
 import Foundation
 import SVProgressHUD
+import LeetCodeUI
 
 public class AppWindowConfiguration: AppConfigurationable {
   
@@ -30,7 +31,7 @@ public class AppWindowConfiguration: AppConfigurationable {
   
   public func setup(user: User?) {
     // setup ui
-    LingomeAppearance.config()
+    LeetCodeAppearance.config()
     
     if let window = window {
       if options == nil {
@@ -58,7 +59,7 @@ public class AppWindowConfiguration: AppConfigurationable {
 
 // MARK: - UI Theme
 
-class LingomeAppearance {
+class LeetCodeAppearance {
   static func config() {
     configUINavigationbarStyle()
     configUIBarButtonItemStyle()
@@ -66,9 +67,16 @@ class LingomeAppearance {
   }
   
   fileprivate static func configUINavigationbarStyle() {
+    UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.h3, .foregroundColor: UIColor.dft]
+    UINavigationBar.appearance().isTranslucent = false
+    
+    UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    UINavigationBar.appearance().shadowImage = UIImage()
   }
   
   fileprivate static func configUIBarButtonItemStyle() {
+    UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.body2, .foregroundColor: UIColor.dft], for: .normal)
+    UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -300, vertical: 0), for: UIBarMetrics.default)
   }
   
   fileprivate static func configSVProgressHUD() {
