@@ -30,8 +30,8 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)
-    public ResponseEntity<APIResponse> getTopic(int topicId, String cookie) {
-        APIResponse res = service.getTopic(topicId, cookie);
+    public ResponseEntity<APIResponse> getTopic(int topicId, String cookies) {
+        APIResponse res = service.getTopic(topicId, cookies);
         return ResponseEntity.status(res.getCode()).body(res);
     }
 
@@ -57,9 +57,9 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/image", method = RequestMethod.POST)
-    public ResponseEntity<APIResponse> uploadImage(String uri, String refer, String cookie,
+    public ResponseEntity<APIResponse> uploadImage(String uri, String refer, String cookies,
                                                    MultipartFile file) {
-        APIResponse res = service.uploadImage(uri, refer, cookie, file);
+        APIResponse res = service.uploadImage(uri, refer, cookies, file);
         int code = res.getCode() == 200 ? CREATED : res.getCode();
         res.setCode(code);
         return ResponseEntity.status(code).body(res);

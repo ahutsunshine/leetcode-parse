@@ -14,9 +14,9 @@ import java.net.URLDecoder;
 public class CommonUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
 
-    public static Boolean isCookieValid(String cookie) {
+    public static Boolean isCookieValid(String cookies) {
         boolean containToken = false, containSession = false;
-        String[] values = cookie.split(";");
+        String[] values = cookies.split(";");
         for (String val : values) {
             String[] data = val.split("=");
             if (data.length != 2) return false; // incorrect cookie
@@ -31,11 +31,11 @@ public class CommonUtil {
         return containToken && containSession;
     }
 
-    public static APIResponse checkCookie(String cookie) {
-        if (cookie == null) return new APIResponse(400, "Cookie cannot be empty");
+    public static APIResponse checkCookie(String cookies) {
+        if (cookies == null) return new APIResponse(400, "Cookie cannot be empty");
         try {
-            cookie = URLDecoder.decode(cookie, "UTF-8");
-            if (!isCookieValid(cookie)) {
+            cookies = URLDecoder.decode(cookies, "UTF-8");
+            if (!isCookieValid(cookies)) {
                 return new APIResponse(400, "User cookie is invalid");
             }
         } catch (UnsupportedEncodingException e) {
@@ -44,10 +44,10 @@ public class CommonUtil {
         return null;
     }
 
-    public static String decode(String cookie) {
-        if (cookie == null) return null;
+    public static String decode(String cookies) {
+        if (cookies == null) return null;
         try {
-            return URLDecoder.decode(cookie, "UTF-8");
+            return URLDecoder.decode(cookies, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             LOGGER.error("Decode failure. ", e);
         }

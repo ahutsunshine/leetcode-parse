@@ -9,7 +9,6 @@ import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
 import com.leetcode.util.ImageUtil;
-import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +17,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import static com.leetcode.util.CommonUtil.*;
-import static com.leetcode.util.HttpUtil.*;
+import static com.leetcode.util.HttpUtil.getErrorIfFailed;
+import static com.leetcode.util.HttpUtil.post;
 import static com.leetcode.util.RequestParamUtil.*;
 
 @Service
@@ -49,10 +47,10 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public APIResponse getTopic(int topicId, String cookie) {
+    public APIResponse getTopic(int topicId, String cookies) {
 //        CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);
-        String res = post(body, cookie);
+        String res = post(body, cookies);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res);
@@ -86,11 +84,11 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public APIResponse uploadImage(String uri, String refer, String cookie, MultipartFile file) {
-        APIResponse cookieStatus = checkCookie(cookie);
+    public APIResponse uploadImage(String uri, String refer, String cookies, MultipartFile file) {
+        APIResponse cookieStatus = checkCookie(cookies);
         if (cookieStatus != null) return cookieStatus;
         try {
-            return ImageUtil.upload(uri, refer, cookie, file);
+            return ImageUtil.upload(uri, refer, cookies, file);
         } catch (IOException e) {
             LOGGER.error("IOException ", e);
         }

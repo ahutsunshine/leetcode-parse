@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface DiscussService {
     APIResponse getDiscussions(PageReqBody req);
 
-    APIResponse getTopic(int topicId, String cookie);
+    APIResponse getTopic(int topicId, String cookies);
 
     APIResponse createTopic(TopicReqBody req);
 
@@ -16,5 +16,5 @@ public interface DiscussService {
 
     APIResponse deleteTopic(TopicReqBody req);
 
-    APIResponse uploadImage(String uri, String refer, String cookie, MultipartFile file);
+    APIResponse uploadImage(String uri, String refer, String cookies, MultipartFile file);
 }

@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
         if (errorStatus != null) return errorStatus;
 //        CookieStore cookieStore = getCookies(req.getUri());
         StringEntity requestBody = buildCommentReqBody(req);
-        String res = post(requestBody);
+        String res = post(requestBody, req.getCookies());
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONArray j = JSONObject.parseObject(res).getJSONObject("data")

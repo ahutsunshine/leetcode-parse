@@ -76,13 +76,13 @@ public class HttpUtil {
         return getResponseStatus(request, null);
     }
 
-    public static String post(String uri, String cookie, HttpEntity params) {
-        HttpUriRequest request = buildPostRequest(uri, cookie, params);
+    public static String post(String uri, String cookies, HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(uri, cookies, params);
         return getResponseStatus(request, null);
     }
 
-    public static String post(HttpEntity params, String cookie) {
-        HttpUriRequest request = buildPostRequest(null, cookie, params);
+    public static String post(HttpEntity params, String cookies) {
+        HttpUriRequest request = buildPostRequest(null, cookies, params);
         return getResponseStatus(request, null);
     }
 
@@ -97,13 +97,13 @@ public class HttpUtil {
         }
     }
 
-    static String getToken(String cookie) {
-        if (cookie == null) return null;
-        String[] values = cookie.split(";");
+    static String getToken(String cookies) {
+        if (cookies == null) return null;
+        String[] values = cookies.split(";");
         for (String val : values) {
             String[] data = val.split("=");
             if (data.length != 2) { // incorrect cookie}
-                LOGGER.error("Cookie:{} is invalid.", cookie);
+                LOGGER.error("Cookie:{} is invalid.", cookies);
                 return null;
             }
             //remove blank space
@@ -198,15 +198,15 @@ public class HttpUtil {
                 .build();
     }
 
-    private static HttpUriRequest buildPostRequest(String uri, String cookie, HttpEntity params) {
-        cookie = decode(cookie);
+    private static HttpUriRequest buildPostRequest(String uri, String cookies, HttpEntity params) {
+        cookies = decode(cookies);
         return RequestBuilder.post(GRAPHQL_URL)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .setHeader(HttpHeaders.REFERER, uri)
-                .setHeader("Cookie", cookie)
-                .setHeader("x-csrftoken", getToken(cookie))
+                .setHeader("Cookie", cookies)
+                .setHeader("x-csrftoken", getToken(cookies))
                 .setHeader(":authority", "leetcode.com")
                 .setHeader(":method", "POST")
                 .setHeader(":scheme", "https")
