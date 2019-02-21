@@ -31,7 +31,9 @@ public class CommentController {
     @RequestMapping(path = "/comments", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> createComment(@RequestBody CommentReqBody request) {
         APIResponse res = service.createComment(request);
-        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
+        int code = res.getCode() == 200 ? CREATED : res.getCode();
+        res.setCode(code);
+        return ResponseEntity.status(code).body(res);
     }
 
     @RequestMapping(path = "/comments", method = RequestMethod.PUT)

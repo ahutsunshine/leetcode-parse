@@ -23,7 +23,7 @@ public class DiscussController {
         this.service = service;
     }
 
-    @RequestMapping(path = "/discussions", method = RequestMethod.POST)
+    @RequestMapping(path = "/discussions/topics", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> getDiscussions(@RequestBody PageReqBody req) {
         APIResponse res = service.getDiscussions(req);
         return ResponseEntity.status(res.getCode()).body(res);
@@ -38,7 +38,9 @@ public class DiscussController {
     @RequestMapping(path = "/topics", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> createTopic(@RequestBody TopicReqBody req) {
         APIResponse res = service.createTopic(req);
-        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
+        int code = res.getCode() == 200 ? CREATED : res.getCode();
+        res.setCode(code);
+        return ResponseEntity.status(code).body(res);
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.PUT)
@@ -58,6 +60,8 @@ public class DiscussController {
     public ResponseEntity<APIResponse> uploadImage(String uri, String refer, String cookie,
                                                    MultipartFile file) {
         APIResponse res = service.uploadImage(uri, refer, cookie, file);
-        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
+        int code = res.getCode() == 200 ? CREATED : res.getCode();
+        res.setCode(code);
+        return ResponseEntity.status(code).body(res);
     }
 }
