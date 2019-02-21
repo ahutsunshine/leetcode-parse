@@ -23,6 +23,8 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.leetcode.util.CommonUtil.decode;
+
 
 public class HttpUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtil.class);
@@ -197,6 +199,7 @@ public class HttpUtil {
     }
 
     private static HttpUriRequest buildPostRequest(String uri, String cookie, HttpEntity params) {
+        cookie = decode(cookie);
         return RequestBuilder.post(GRAPHQL_URL)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")

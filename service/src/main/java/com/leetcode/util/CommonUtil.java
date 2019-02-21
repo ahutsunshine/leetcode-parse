@@ -44,6 +44,16 @@ public class CommonUtil {
         return null;
     }
 
+    public static String decode(String cookie) {
+        if (cookie == null) return null;
+        try {
+            return URLDecoder.decode(cookie, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error("Decode failure. ", e);
+        }
+        return null;
+    }
+
     public static APIResponse checkPageParam(PageReqBody req) {
         if (req.getId() == null) return new APIResponse(400, "Question id is required");
         if (req.getPage() < 0) return new APIResponse(400, "Negative page index is not supported");
