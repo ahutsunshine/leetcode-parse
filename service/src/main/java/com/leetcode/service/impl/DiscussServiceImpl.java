@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import static com.leetcode.util.CommonUtil.*;
@@ -47,10 +49,10 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public APIResponse getTopic(int topicId) {
+    public APIResponse getTopic(int topicId, String cookie) {
 //        CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);
-        String res = post(body);
+        String res = post(body, cookie);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res);
@@ -85,15 +87,12 @@ public class DiscussServiceImpl implements DiscussService {
 
     @Override
     public APIResponse uploadImage(String uri, String refer, String cookie, MultipartFile file) {
+        APIResponse cookieStatus = checkCookie(cookie);
+        if (cookieStatus != null) return cookieStatus;
         try {
-            if (cookie == null) return new APIResponse(400, "Cookie cannot be empty");
-            cookie = URLDecoder.decode(cookie, "UTF-8");
-            if (!isCookieValid(cookie)) {
-                return new APIResponse(400, "User cookie is invalid");
-            }
             return ImageUtil.upload(uri, refer, cookie, file);
-        } catch (Exception e) {
-            LOGGER.error("Exception occurs. ", e);
+        } catch (IOException e) {
+            LOGGER.error("IOException ", e);
         }
         return new APIResponse(500, "Upload failure. Please try again");
     }

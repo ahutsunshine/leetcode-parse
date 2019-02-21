@@ -79,6 +79,11 @@ public class HttpUtil {
         return getResponseStatus(request, null);
     }
 
+    public static String post(HttpEntity params, String cookie) {
+        HttpUriRequest request = buildPostRequest(null, cookie, params);
+        return getResponseStatus(request, null);
+    }
+
     private static String getResponseStatus(HttpUriRequest request, CookieStore cookieStore) {
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setDefaultCookieStore(cookieStore).build();
@@ -95,7 +100,10 @@ public class HttpUtil {
         String[] values = cookie.split(";");
         for (String val : values) {
             String[] data = val.split("=");
-            if (data.length != 2) return null; // incorrect cookie
+            if (data.length != 2) { // incorrect cookie}
+                LOGGER.error("Cookie:{} is invalid.", cookie);
+                return null;
+            }
             //remove blank space
             if (data[0].replace(" ", "").equals("csrftoken")) return data[1];
         }

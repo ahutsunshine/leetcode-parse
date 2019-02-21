@@ -30,8 +30,8 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/topics", method = RequestMethod.GET)
-    public ResponseEntity<APIResponse> getTopic(int topicId) {
-        APIResponse res = service.getTopic(topicId);
+    public ResponseEntity<APIResponse> getTopic(int topicId, String cookie) {
+        APIResponse res = service.getTopic(topicId, cookie);
         return ResponseEntity.status(res.getCode()).body(res);
     }
 

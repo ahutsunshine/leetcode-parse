@@ -5,9 +5,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.leetcode.common.PageReqBody;
 import com.leetcode.common.ResponseStatus;
 import com.leetcode.model.response.APIResponse;
-import org.springframework.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 public class CommonUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
+
     public static Boolean isCookieValid(String cookie) {
         boolean containToken = false, containSession = false;
         String[] values = cookie.split(";");
@@ -23,6 +29,19 @@ public class CommonUtil {
             }
         }
         return containToken && containSession;
+    }
+
+    public static APIResponse checkCookie(String cookie) {
+        if (cookie == null) return new APIResponse(400, "Cookie cannot be empty");
+        try {
+            cookie = URLDecoder.decode(cookie, "UTF-8");
+            if (!isCookieValid(cookie)) {
+                return new APIResponse(400, "User cookie is invalid");
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error("UnsupportedEncodingException ", e);
+        }
+        return null;
     }
 
     public static APIResponse checkPageParam(PageReqBody req) {
