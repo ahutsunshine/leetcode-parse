@@ -10,6 +10,23 @@
 		23B9ED31221E9490001D85E8 /* LeetCodeService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B9ED27221E9490001D85E8 /* LeetCodeService.framework */; };
 		23B9ED36221E9490001D85E8 /* LeetCodeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9ED35221E9490001D85E8 /* LeetCodeServiceTests.swift */; };
 		23B9ED38221E9490001D85E8 /* LeetCodeService.h in Headers */ = {isa = PBXBuildFile; fileRef = 23B9ED2A221E9490001D85E8 /* LeetCodeService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23B9EDF9221ED092001D85E8 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EDF8221ED092001D85E8 /* AppConfiguration.swift */; };
+		23B9EDFB221ED0B1001D85E8 /* AppConfigurationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EDFA221ED0B1001D85E8 /* AppConfigurationable.swift */; };
+		23B9EDFD221ED0ED001D85E8 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EDFC221ED0ED001D85E8 /* AppConstant.swift */; };
+		23B9EDFF221ED1A7001D85E8 /* NetworkServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EDFE221ED1A7001D85E8 /* NetworkServiceConfiguration.swift */; };
+		23B9EE08221EE1A1001D85E8 /* Frameworks.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */; };
+		23B9EE09221EE1A1001D85E8 /* Modules.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE04221EE1A1001D85E8 /* Modules.xcconfig */; };
+		23B9EE0A221EE1A1001D85E8 /* Environment.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE05221EE1A1001D85E8 /* Environment.xcconfig */; };
+		23B9EE0B221EE1A1001D85E8 /* Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE06221EE1A1001D85E8 /* Application.xcconfig */; };
+		23B9EE0C221EE1A1001D85E8 /* Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23B9EE07221EE1A1001D85E8 /* Common.xcconfig */; };
+		23B9EE0E221EE256001D85E8 /* LeetCodeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE0D221EE256001D85E8 /* LeetCodeServer.swift */; };
+		23B9EE11221EE4AA001D85E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE10221EE4AA001D85E8 /* User.swift */; };
+		23B9EE13221EE58E001D85E8 /* LeetCodeErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE12221EE58E001D85E8 /* LeetCodeErrorCode.swift */; };
+		23B9EE27221EEF23001D85E8 /* Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE26221EEF23001D85E8 /* Rainbow.swift */; };
+		23B9EE29221EEF6F001D85E8 /* LeetCodeServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE28221EEF6F001D85E8 /* LeetCodeServiceProvider.swift */; };
+		23B9EE2B221EEFA7001D85E8 /* RainbowServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE2A221EEFA7001D85E8 /* RainbowServiceConfiguration.swift */; };
+		23B9EE2D221EF163001D85E8 /* AppWindowConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE2C221EF163001D85E8 /* AppWindowConfiguration.swift */; };
+		23B9EE2F221EF80B001D85E8 /* LeetCodeServiceRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9EE2E221EF80B001D85E8 /* LeetCodeServiceRequirement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +46,23 @@
 		23B9ED30221E9490001D85E8 /* LeetCodeServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetCodeServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23B9ED35221E9490001D85E8 /* LeetCodeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeServiceTests.swift; sourceTree = "<group>"; };
 		23B9ED37221E9490001D85E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23B9EDF8221ED092001D85E8 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		23B9EDFA221ED0B1001D85E8 /* AppConfigurationable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationable.swift; sourceTree = "<group>"; };
+		23B9EDFC221ED0ED001D85E8 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		23B9EDFE221ED1A7001D85E8 /* NetworkServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceConfiguration.swift; sourceTree = "<group>"; };
+		23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Frameworks.xcconfig; sourceTree = "<group>"; };
+		23B9EE04221EE1A1001D85E8 /* Modules.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Modules.xcconfig; sourceTree = "<group>"; };
+		23B9EE05221EE1A1001D85E8 /* Environment.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Environment.xcconfig; sourceTree = "<group>"; };
+		23B9EE06221EE1A1001D85E8 /* Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		23B9EE07221EE1A1001D85E8 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		23B9EE0D221EE256001D85E8 /* LeetCodeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeServer.swift; sourceTree = "<group>"; };
+		23B9EE10221EE4AA001D85E8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		23B9EE12221EE58E001D85E8 /* LeetCodeErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeErrorCode.swift; sourceTree = "<group>"; };
+		23B9EE26221EEF23001D85E8 /* Rainbow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rainbow.swift; sourceTree = "<group>"; };
+		23B9EE28221EEF6F001D85E8 /* LeetCodeServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeServiceProvider.swift; sourceTree = "<group>"; };
+		23B9EE2A221EEFA7001D85E8 /* RainbowServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowServiceConfiguration.swift; sourceTree = "<group>"; };
+		23B9EE2C221EF163001D85E8 /* AppWindowConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWindowConfiguration.swift; sourceTree = "<group>"; };
+		23B9EE2E221EF80B001D85E8 /* LeetCodeServiceRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeServiceRequirement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +87,7 @@
 		23B9ED1D221E9490001D85E8 = {
 			isa = PBXGroup;
 			children = (
+				23B9EE02221EE1A1001D85E8 /* xcconfig */,
 				23B9ED29221E9490001D85E8 /* LeetCodeService */,
 				23B9ED34221E9490001D85E8 /* LeetCodeServiceTests */,
 				23B9ED28221E9490001D85E8 /* Products */,
@@ -71,6 +106,8 @@
 		23B9ED29221E9490001D85E8 /* LeetCodeService */ = {
 			isa = PBXGroup;
 			children = (
+				23B9EDEF221ED011001D85E8 /* Configuration */,
+				23B9EDF2221ED011001D85E8 /* Services */,
 				23B9ED2A221E9490001D85E8 /* LeetCodeService.h */,
 				23B9ED2B221E9490001D85E8 /* Info.plist */,
 			);
@@ -84,6 +121,109 @@
 				23B9ED37221E9490001D85E8 /* Info.plist */,
 			);
 			path = LeetCodeServiceTests;
+			sourceTree = "<group>";
+		};
+		23B9EDEF221ED011001D85E8 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EDF0221ED011001D85E8 /* ServiceConfiguration */,
+				23B9EDF1221ED011001D85E8 /* Rainbow */,
+				23B9EDF8221ED092001D85E8 /* AppConfiguration.swift */,
+				23B9EDFA221ED0B1001D85E8 /* AppConfigurationable.swift */,
+				23B9EDFC221ED0ED001D85E8 /* AppConstant.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		23B9EDF0221ED011001D85E8 /* ServiceConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EDFE221ED1A7001D85E8 /* NetworkServiceConfiguration.swift */,
+				23B9EE2C221EF163001D85E8 /* AppWindowConfiguration.swift */,
+			);
+			path = ServiceConfiguration;
+			sourceTree = "<group>";
+		};
+		23B9EDF1221ED011001D85E8 /* Rainbow */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE26221EEF23001D85E8 /* Rainbow.swift */,
+				23B9EE28221EEF6F001D85E8 /* LeetCodeServiceProvider.swift */,
+				23B9EE2A221EEFA7001D85E8 /* RainbowServiceConfiguration.swift */,
+				23B9EE2E221EF80B001D85E8 /* LeetCodeServiceRequirement.swift */,
+			);
+			path = Rainbow;
+			sourceTree = "<group>";
+		};
+		23B9EDF2221ED011001D85E8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE0F221EE4A2001D85E8 /* UserService */,
+				23B9EDF3221ED011001D85E8 /* DataService */,
+				23B9EDF4221ED011001D85E8 /* NetworkService */,
+				23B9EDF5221ED011001D85E8 /* WebService */,
+				23B9EDF6221ED011001D85E8 /* ThirdPartyService */,
+				23B9EDF7221ED011001D85E8 /* DebugService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		23B9EDF3221ED011001D85E8 /* DataService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataService;
+			sourceTree = "<group>";
+		};
+		23B9EDF4221ED011001D85E8 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE0D221EE256001D85E8 /* LeetCodeServer.swift */,
+				23B9EE12221EE58E001D85E8 /* LeetCodeErrorCode.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		23B9EDF5221ED011001D85E8 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WebService;
+			sourceTree = "<group>";
+		};
+		23B9EDF6221ED011001D85E8 /* ThirdPartyService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdPartyService;
+			sourceTree = "<group>";
+		};
+		23B9EDF7221ED011001D85E8 /* DebugService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DebugService;
+			sourceTree = "<group>";
+		};
+		23B9EE02221EE1A1001D85E8 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */,
+				23B9EE04221EE1A1001D85E8 /* Modules.xcconfig */,
+				23B9EE05221EE1A1001D85E8 /* Environment.xcconfig */,
+				23B9EE06221EE1A1001D85E8 /* Application.xcconfig */,
+				23B9EE07221EE1A1001D85E8 /* Common.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../Resources/xcconfig;
+			sourceTree = "<group>";
+		};
+		23B9EE0F221EE4A2001D85E8 /* UserService */ = {
+			isa = PBXGroup;
+			children = (
+				23B9EE10221EE4AA001D85E8 /* User.swift */,
+			);
+			path = UserService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +288,7 @@
 				TargetAttributes = {
 					23B9ED26221E9490001D85E8 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					23B9ED2F221E9490001D85E8 = {
 						CreatedOnToolsVersion = 10.1;
@@ -177,6 +318,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B9EE0C221EE1A1001D85E8 /* Common.xcconfig in Resources */,
+				23B9EE0A221EE1A1001D85E8 /* Environment.xcconfig in Resources */,
+				23B9EE09221EE1A1001D85E8 /* Modules.xcconfig in Resources */,
+				23B9EE08221EE1A1001D85E8 /* Frameworks.xcconfig in Resources */,
+				23B9EE0B221EE1A1001D85E8 /* Application.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +340,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B9EE13221EE58E001D85E8 /* LeetCodeErrorCode.swift in Sources */,
+				23B9EE2B221EEFA7001D85E8 /* RainbowServiceConfiguration.swift in Sources */,
+				23B9EDFD221ED0ED001D85E8 /* AppConstant.swift in Sources */,
+				23B9EE2D221EF163001D85E8 /* AppWindowConfiguration.swift in Sources */,
+				23B9EE27221EEF23001D85E8 /* Rainbow.swift in Sources */,
+				23B9EDFF221ED1A7001D85E8 /* NetworkServiceConfiguration.swift in Sources */,
+				23B9EE11221EE4AA001D85E8 /* User.swift in Sources */,
+				23B9EE29221EEF6F001D85E8 /* LeetCodeServiceProvider.swift in Sources */,
+				23B9EE2F221EF80B001D85E8 /* LeetCodeServiceRequirement.swift in Sources */,
+				23B9EDFB221ED0B1001D85E8 /* AppConfigurationable.swift in Sources */,
+				23B9EDF9221ED092001D85E8 /* AppConfiguration.swift in Sources */,
+				23B9EE0E221EE256001D85E8 /* LeetCodeServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +498,9 @@
 		};
 		23B9ED3C221E9490001D85E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -350,6 +510,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LeetCodeService/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,6 +519,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Ahut.LeetCodeService;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,7 +527,9 @@
 		};
 		23B9ED3D221E9490001D85E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -375,6 +539,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LeetCodeService/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -390,7 +555,9 @@
 		};
 		23B9ED3F221E9490001D85E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9QAC9YPTV;
 				INFOPLIST_FILE = LeetCodeServiceTests/Info.plist;
@@ -408,7 +575,9 @@
 		};
 		23B9ED40221E9490001D85E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9EE03221EE1A1001D85E8 /* Frameworks.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9QAC9YPTV;
 				INFOPLIST_FILE = LeetCodeServiceTests/Info.plist;

@@ -4,5 +4,6 @@ github "ReactiveX/RxSwift" ~> 4.0
 github "flipboard/FLEX" ~> 2.0
 github "mac-cain13/R.swift.Library"
 github "CocoaLumberjack/CocoaLumberjack"
+github "evgenyneu/keychain-swift" ~> 11.0
 git "git@git.llsapp.com:client-infra/Rainbow.git"
 git "git@git.llsapp.com:client-infra/Quicksilver.git"

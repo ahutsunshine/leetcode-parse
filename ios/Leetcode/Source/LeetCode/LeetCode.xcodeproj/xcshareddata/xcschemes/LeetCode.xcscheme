@@ -48,6 +48,16 @@
                ReferencedContainer = "container:LeetCode.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "23B9ED83221EAAD3001D85E8"
+               BuildableName = "LeetCodeInterfaceTests.xctest"
+               BlueprintName = "LeetCodeInterfaceTests"
+               ReferencedContainer = "container:LeetCode.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
