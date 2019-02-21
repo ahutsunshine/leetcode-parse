@@ -50,6 +50,7 @@ public class DiscussController {
     @RequestMapping(path = "/topics", method = RequestMethod.DELETE)
     public ResponseEntity<APIResponse> deleteTopic(@RequestBody TopicReqBody req) {
         APIResponse res = service.deleteTopic(req);
+        if(res.getCode() == 200) return ResponseEntity.noContent().build();
         return ResponseEntity.status(res.getCode()).body(res);
     }
 

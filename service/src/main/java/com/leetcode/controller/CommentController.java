@@ -43,6 +43,7 @@ public class CommentController {
     @RequestMapping(path = "/comments", method = RequestMethod.DELETE)
     public ResponseEntity<APIResponse> deleteComment(@RequestBody CommentReqBody request) {
         APIResponse res = service.deleteComment(request);
+        if(res.getCode() == 200) return ResponseEntity.noContent().build();
         return ResponseEntity.status(res.getCode()).body(res);
     }
 }
