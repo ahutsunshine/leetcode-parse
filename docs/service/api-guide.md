@@ -120,7 +120,8 @@ For example,
 <h2 id = "1.3"></h2>
 
 ## Postman Guide
-We use postman as http client. We can view request APIs by [postman guild](postman/postman-guide.md).
+We use postman as http client. We can view request APIs by [postman guild](postman/postman-guilde.md).
+
 
 <h2 id = "2"></h2>
 
@@ -367,24 +368,17 @@ curl -X DELETE http://localhost:8080/api/v1/topics \
 <div id = "4.6"></div>
 ### Upload Image
 `POST /api/v1/images`
-#### Request Body
-- title : `required string` topic title
-- content : `required int` topic content
-- id : `required int` discuss id
-- tags : `required list` topic tags
+#### Request Parameters
 - cookies : `required  string` cookies to authentication
+- file : `required  File` file to upload
 
-#### Request Sample
+#### Curl Example
 ```
-{
-    "title":"Java for test",
-    "content":"It looks pretty.",
-    "id":742,
-    "tags":[
-            "array"
-        ],
-    "cookies":"cookie value"
-}
+curl -X POST \
+  'http://localhost:8080/api/v1/images?cookies=cookies_value' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -F 'file=@/root/upload.jpg'
 ```
 
 <div id = "5"></div>
