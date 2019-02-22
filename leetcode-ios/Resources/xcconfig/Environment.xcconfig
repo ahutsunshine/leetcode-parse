@@ -1,0 +1,9 @@
+//
+//  Server.xcconfig
+//  LeetCode
+//
+//  Created by liangliang hu on 2019/2/21.
+//  Copyright © 2019 liangliang hu. All rights reserved.
+//
+
+BUILD_SWIFT_FLAGS = -DQA_BUILD
