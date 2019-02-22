@@ -1,0 +1,29 @@
+//
+//  Common.xcconfig
+//  LeetCode
+//
+//  Created by liangliang hu on 2019/2/21.
+//  Copyright © 2019 liangliang hu. All rights reserved.
+//
+
+#include "Environment.xcconfig"
+
+IPHONEOS_DEPLOYMENT_TARGET = 10.0
+CLANG_ENABLE_CODE_COVERAGE = NO
+ENABLE_BITCODE = NO
+
+FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/../../Resources/Frameworks $(SRCROOT)/../../Carthage/Build/iOS/
+LIBRARY_SEARCH_PATHS = $(SRCROOT)/../../Resources/Frameworks
+HEADER_SEARCH_PATHS = $(SRCROOT)/../../Resources/Frameworks
+SWIFT_INCLUDE_PATHS = $(SRCROOT)/../../Carthage/Checkouts/Quicksilver/** $(SRCROOT)/../../Carthage/Checkouts/Rainbow/
+
+CLANG_WARN_DOCUMENTATION_COMMENTS = NO
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Test][sdk=iphonesimulator*] = DEBUG TEST
+
+CLANG_WARN_UNREACHABLE_CODE[config=Test][sdk=iphonesimulator*] = NO
+
+OTHER_SWIFT_FLAGS = ${inherited} ${BUILD_SWIFT_FLAGS} -Xfrontend -debug-time-function-bodies
+
+SWIFT_WHOLE_MODULE_OPTIMIZATION[config=Debug][sdk=*] = YES
+SWIFT_WHOLE_MODULE_OPTIMIZATION[config=Test][sdk=*] = YES
