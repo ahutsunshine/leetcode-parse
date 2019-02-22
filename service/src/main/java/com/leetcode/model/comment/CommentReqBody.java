@@ -15,6 +15,10 @@ public class CommentReqBody implements Serializable {
     private String content;
     private String cookies;
 
+    public CommentReqBody() {
+        uri = "https://leetcode.com/problems";
+    }
+
     public String getUri() {
         return uri;
     }

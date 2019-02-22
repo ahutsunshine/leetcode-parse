@@ -18,6 +18,10 @@ public class TopicReqBody implements Serializable {
 
     private String cookies;
 
+    public TopicReqBody() {
+        uri = "https://leetcode.com/problems";
+    }
+
     public String getUri() {
         return uri;
     }
