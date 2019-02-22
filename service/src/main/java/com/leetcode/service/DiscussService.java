@@ -6,7 +6,7 @@ import com.leetcode.model.response.APIResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface DiscussService {
-    APIResponse getDiscussions(PageReqBody req);
+    APIResponse getTopics(PageReqBody req);
 
     APIResponse getTopic(int topicId, String cookies);
 

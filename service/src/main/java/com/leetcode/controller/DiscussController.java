@@ -24,8 +24,8 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/discussions/topics", method = RequestMethod.POST)
-    public ResponseEntity<APIResponse> getDiscussions(@RequestBody PageReqBody req) {
-        APIResponse res = service.getDiscussions(req);
+    public ResponseEntity<APIResponse> getTopics(@RequestBody PageReqBody req) {
+        APIResponse res = service.getTopics(req);
         return ResponseEntity.status(res.getCode()).body(res);
     }
 

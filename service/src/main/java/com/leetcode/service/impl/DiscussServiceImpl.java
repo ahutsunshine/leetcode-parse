@@ -32,7 +32,7 @@ public class DiscussServiceImpl implements DiscussService {
     private static final String DELETE_TOPIC_OPERATION = "deleteTopic";
 
     @Override
-    public APIResponse getDiscussions(PageReqBody req) {
+    public APIResponse getTopics(PageReqBody req) {
         APIResponse errorStatus = checkPageParam(req);
         if (errorStatus != null) return errorStatus;
         StringEntity requestBody = buildDiscussReqBody(req);
