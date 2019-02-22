@@ -120,7 +120,7 @@ For example,
 <h2 id = "1.3"></h2>
 
 ## Postman Guide
-We use postman as http client. We can view request APIs by [postman guild](postman/postman-guilde.md).
+- [View request APIs by Postman](postman/postman-guide.md).
 
 
 <h2 id = "2"></h2>
