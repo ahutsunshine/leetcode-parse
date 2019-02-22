@@ -35,6 +35,7 @@ public class ProblemServiceImpl implements ProblemService {
     private static final String TOP_INTERVIEW_URI = "https://leetcode.com/api/problems/favorite_lists/top-interview-questions/";
     private static final String FILTER_URI = "https://leetcode.com/problems/api/filter-questions/";
     private static final String ALL_PROBLEMS_URL = "https://leetcode.com/api/problems/all/";
+    private static final String TAGS_URL = "https://leetcode.com/problemset/all/";
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
@@ -71,9 +72,10 @@ public class ProblemServiceImpl implements ProblemService {
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
-    public APIResponse getTags(String uri) {
-        String html = getHtmlContent(uri);
+    public APIResponse getTags() {
+        String html = getHtmlContent(TAGS_URL);
         if (html == null) return new APIResponse(500, "Request failed. Please try again.");
+        LOGGER.info("Tags html : {}", html);
         Document doc = Jsoup.parse(html);
         Elements tagElements = doc.select("div[id=current-topic-tags]").select("a");
         List<TopicTag> topicTags = getTags(tagElements);

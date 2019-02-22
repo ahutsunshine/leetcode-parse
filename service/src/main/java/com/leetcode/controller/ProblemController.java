@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class ProblemController {
 
-    private static final int CREATED = 201;
     private final ProblemService problemService;
 
     @Autowired
@@ -45,10 +44,10 @@ public class ProblemController {
         return ResponseEntity.status(res.getCode()).body(res);
     }
 
-    @RequestMapping(path = "/tags", method = RequestMethod.POST)
-    public ResponseEntity<APIResponse> getTags(String uri) {
-        APIResponse res = problemService.getTags(uri);
-        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
+    @RequestMapping(path = "/tags", method = RequestMethod.GET)
+    public ResponseEntity<APIResponse> getTags() {
+        APIResponse res = problemService.getTags();
+        return ResponseEntity.status(res.getCode()).body(res);
     }
 
     @RequestMapping(value = "/problems/filtration/{key}", method = RequestMethod.GET)

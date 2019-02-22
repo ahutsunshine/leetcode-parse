@@ -11,7 +11,7 @@ public interface ProblemService {
 
     APIResponse getInterviewProblems();
 
-    APIResponse getTags(String uri);
+    APIResponse getTags();
 
     APIResponse filterProblems(String key);
 }
