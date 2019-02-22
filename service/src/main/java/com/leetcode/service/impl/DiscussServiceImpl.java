@@ -2,7 +2,6 @@ package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.leetcode.common.ResponseStatus;
 import com.leetcode.common.PageReqBody;
 import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.discuss.Topic;
@@ -10,25 +9,21 @@ import com.leetcode.model.discuss.TopicReqBody;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.DiscussService;
 import com.leetcode.util.ImageUtil;
-import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URLDecoder;
+import java.io.IOException;
 
-import static com.leetcode.util.CommonUtil.checkPageParam;
-import static com.leetcode.util.CommonUtil.isCookieValid;
-import static com.leetcode.util.HttpUtil.*;
+import static com.leetcode.util.CommonUtil.*;
+import static com.leetcode.util.HttpUtil.getErrorIfFailed;
+import static com.leetcode.util.HttpUtil.post;
 import static com.leetcode.util.RequestParamUtil.*;
 
 @Service
-@CacheConfig(cacheNames = "discuss", keyGenerator = "cacheKeyGenerator")
 public class DiscussServiceImpl implements DiscussService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscussServiceImpl.class);
@@ -37,14 +32,12 @@ public class DiscussServiceImpl implements DiscussService {
     private static final String DELETE_TOPIC_OPERATION = "deleteTopic";
 
     @Override
-    @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getDiscussions(PageReqBody req) {
         APIResponse errorStatus = checkPageParam(req);
         if (errorStatus != null) return errorStatus;
-        CookieStore cookieStore = getCookies(req.getUri().replace("discuss", ""));
-        String uri = buildDiscussUri(req);
         StringEntity requestBody = buildDiscussReqBody(req);
-        String res = post(uri, cookieStore, requestBody);
+//        CookieStore cookieStore = getCookies(req.getUri());
+        String res = post(requestBody);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res).getJSONObject("data");
@@ -54,11 +47,10 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    @Cacheable(unless = "#result.code == null || #result.code != 200")
-    public APIResponse getTopic(String problemUri, int topicId) {
-        CookieStore cookieStore = getCookies(problemUri);
+    public APIResponse getTopic(int topicId, String cookies) {
+//        CookieStore cookieStore = getCookies(problemUri);
         StringEntity body = buildDiscussTopicsReqBody(topicId);
-        String res = post(problemUri, cookieStore, body);
+        String res = post(body, cookies);
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONObject j = JSONObject.parseObject(res);
@@ -92,49 +84,37 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public APIResponse uploadImage(String uri, String refer, String cookie, MultipartFile file) {
+    public APIResponse uploadImage(String uri, String refer, String cookies, MultipartFile file) {
+        APIResponse cookieStatus = checkCookie(cookies);
+        if (cookieStatus != null) return cookieStatus;
         try {
-            if (cookie == null) return new APIResponse(400, "Cookie cannot be empty.");
-            cookie = URLDecoder.decode(cookie, "UTF-8");
-            if (!isCookieValid(cookie)) {
-                return new APIResponse(400, "User cookie is invalid.");
-            }
-            return ImageUtil.upload(uri, refer, cookie, file);
-        } catch (Exception e) {
-            LOGGER.error("Exception occurs. ", e);
+            return ImageUtil.upload(uri, refer, cookies, file);
+        } catch (IOException e) {
+            LOGGER.error("IOException ", e);
         }
-        return new APIResponse(500, "Upload failure. Please try again.");
+        return new APIResponse(500, "Upload failure. Please try again");
     }
 
     private APIResponse topicPost(TopicReqBody req, StringEntity entity, String operation) {
         String res = post(req.getUri(), req.getCookies(), entity);
         APIResponse e;
         if ((e = getErrorIfFailed(res)) != null) return e;
-        JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
-        data = data.getJSONObject(operation);
-        ResponseStatus status = JSON.parseObject(data.toString(), ResponseStatus.class);
-        return new APIResponse(status);
+        return getResponseStatus(operation, res);
     }
 
     private APIResponse checkParams(TopicReqBody req, String operation) {
         if (!isCookieValid(req.getCookies())) {
-            return new APIResponse(400, "User cookie is invalid.");
+            return new APIResponse(400, "User cookie is invalid");
         }
         if (req.getId() == null) {
-            return new APIResponse(400, "Id is required.");
+            return new APIResponse(400, "Id is required");
         }
         if (StringUtils.isEmpty(req.getTitle()) && !operation.equals(DELETE_TOPIC_OPERATION)) {
-            return new APIResponse(400, "Title is required.");
+            return new APIResponse(400, "Title is required");
         }
         if (StringUtils.isEmpty(req.getContent()) && !operation.equals(DELETE_TOPIC_OPERATION)) {
-            return new APIResponse(400, "Content is required.");
+            return new APIResponse(400, "Content is required");
         }
         return null;
-    }
-
-    private String buildDiscussUri(PageReqBody req) {
-        return req.getUri() + "?currentPage=" + req.getPage() + "&" +
-                "orderBy=" + req.getOrderBy() + "&" +
-                "query=" + req.getQuery();
     }
 }

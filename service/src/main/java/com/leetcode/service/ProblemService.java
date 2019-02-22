@@ -5,7 +5,7 @@ import com.leetcode.model.response.APIResponse;
 public interface ProblemService {
     APIResponse getProblem(String uri);
 
-    APIResponse getProblemList(String uri);
+    APIResponse getAllProblems();
 
     APIResponse getTopLikedProblems();
 

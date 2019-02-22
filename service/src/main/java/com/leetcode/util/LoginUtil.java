@@ -66,7 +66,7 @@ public class LoginUtil {
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
         }
-        return new APIResponse(500, "Exception occurs. Please try again.");
+        return new APIResponse(500, "Exception occurs. Please try again");
     }
 
     private static APIResponse processLogin(CookieStore cookieStore, CloseableHttpResponse res) throws IOException {
@@ -92,7 +92,7 @@ public class LoginUtil {
             response = new APIResponse(statusCode, error);
         } catch (Exception e) { // in case of non-conformity result
             LOGGER.error("Exception happens. {}", e);
-            response = new APIResponse(statusCode, "Request failed.");
+            response = new APIResponse(statusCode, "Request failed");
         }
         return response;
     }
@@ -110,7 +110,7 @@ public class LoginUtil {
 
         }
         if (session == null) {
-            response = new APIResponse(400, "Login failed. Please try again.");
+            response = new APIResponse(400, "Login failed. Please try again");
         } else {
             response = new APIResponse(cookieStore);
         }

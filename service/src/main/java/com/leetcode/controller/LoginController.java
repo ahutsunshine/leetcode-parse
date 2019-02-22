@@ -28,7 +28,9 @@ public class LoginController {
     @RequestMapping(path = "/signup", method = RequestMethod.POST)
     public ResponseEntity<APIResponse> signUp(String username, String email, String password1, String password2) {
         APIResponse res = loginService.signUp(username, email, password1, password2);
-        return ResponseEntity.status(res.getCode() == 200 ? CREATED : res.getCode()).body(res);
+        int code = res.getCode() == 200 ? CREATED : res.getCode();
+        res.setCode(code);
+        return ResponseEntity.status(code).body(res);
     }
 
     @RequestMapping(path = "/password/reset", method = RequestMethod.GET)

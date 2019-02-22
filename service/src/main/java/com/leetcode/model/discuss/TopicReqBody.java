@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +63,6 @@ public class TopicReqBody implements Serializable {
     }
 
     public void setCookies(String cookies) {
-        if (cookies != null) {
-            try {
-                this.cookies = URLDecoder.decode(cookies,"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                LOGGER.error("Decode exception.", e);
-            }
-        }
+        this.cookies = cookies;
     }
 }

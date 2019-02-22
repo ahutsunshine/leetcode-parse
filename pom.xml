@@ -68,9 +68,9 @@ under the License.
 
 
     <modules>
-        <module>android</module>
+        <module>leetcode-android</module>
+        <module>leetcode-ios</module>
         <module>service</module>
-        <module>ios</module>
     </modules>
 
 

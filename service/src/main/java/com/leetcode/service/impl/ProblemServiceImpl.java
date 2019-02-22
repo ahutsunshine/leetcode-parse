@@ -2,13 +2,11 @@ package com.leetcode.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.leetcode.cache.CacheEvictJob;
 import com.leetcode.model.problem.detail.Problem;
 import com.leetcode.model.problem.list.ProblemStatusList;
 import com.leetcode.model.problem.list.TopicTag;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
-import org.apache.http.client.CookieStore;
 import org.apache.http.entity.StringEntity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,9 +15,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.leetcode.util.HttpUtil.*;
-import static com.leetcode.util.RequestParamUtil.*;
+import static com.leetcode.util.RequestParamUtil.buildProblemReqBody;
 
 @Service
 @CacheConfig(cacheNames = "problem", keyGenerator = "cacheKeyGenerator")
@@ -38,14 +34,15 @@ public class ProblemServiceImpl implements ProblemService {
     private static final String TOP_100_LIKED_URI = "https://leetcode.com/api/problems/favorite_lists/top-100-liked-questions/";
     private static final String TOP_INTERVIEW_URI = "https://leetcode.com/api/problems/favorite_lists/top-interview-questions/";
     private static final String FILTER_URI = "https://leetcode.com/problems/api/filter-questions/";
+    private static final String ALL_PROBLEMS_URL = "https://leetcode.com/api/problems/all/";
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getProblem(String uri) {
-        CookieStore cookieStore = getCookies(uri);
+//        CookieStore cookieStore = getCookies(uri);
         String titleSlug = getTitleSlug(uri);
         StringEntity requestBody = buildProblemReqBody(titleSlug);
-        String res = post(uri, cookieStore, requestBody);
+        String res = post(uri, requestBody);
         APIResponse error;
         if ((error = getErrorIfFailed(res)) != null) return error;
         JSONObject j = JSONObject.parseObject(res).getJSONObject("data");
@@ -56,26 +53,20 @@ public class ProblemServiceImpl implements ProblemService {
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
-    public APIResponse getProblemList(String uri) {
-        String res = get(uri);
-        ProblemStatusList statusList = JSON.parseObject(res, ProblemStatusList.class);
-        // determine whether response is normal
-        if (statusList == null || statusList.getNumTotal() == null) {
-            return JSON.parseObject(res, APIResponse.class);
-        }
-        return new APIResponse(statusList);
+    public APIResponse getAllProblems() {
+        return getProblems(ALL_PROBLEMS_URL);
     }
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getTopLikedProblems() {
-        return getProblemList(TOP_100_LIKED_URI);
+        return getProblems(TOP_100_LIKED_URI);
     }
 
     @Override
     @Cacheable(unless = "#result.code == null || #result.code != 200")
     public APIResponse getInterviewProblems() {
-        return getProblemList(TOP_INTERVIEW_URI);
+        return getProblems(TOP_INTERVIEW_URI);
     }
 
     @Override
@@ -107,6 +98,16 @@ public class ProblemServiceImpl implements ProblemService {
             return new APIResponse(ids);
         }
         return JSON.parseObject(res, APIResponse.class);
+    }
+
+    private APIResponse getProblems(String uri) {
+        String res = get(uri);
+        ProblemStatusList statusList = JSON.parseObject(res, ProblemStatusList.class);
+        // determine whether response is normal
+        if (statusList == null || statusList.getNumTotal() == null) {
+            return JSON.parseObject(res, APIResponse.class);
+        }
+        return new APIResponse(statusList);
     }
 
     private List<TopicTag> getTags(Elements tagElements) {

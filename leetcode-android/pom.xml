@@ -8,7 +8,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>android</artifactId>
+    <artifactId>leetcode-android</artifactId>
 
     <name>Leetcode-parse :: android</name>
 

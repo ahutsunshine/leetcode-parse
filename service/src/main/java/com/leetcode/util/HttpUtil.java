@@ -23,6 +23,8 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.leetcode.util.CommonUtil.decode;
+
 
 public class HttpUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtil.class);
@@ -62,11 +64,25 @@ public class HttpUtil {
     public static String post(String uri, CookieStore cookieStore, HttpEntity params) {
         HttpUriRequest request = buildPostRequest(uri, params);
         return getResponseStatus(request, cookieStore);
-
     }
 
-    public static String post(String uri, String cookie, HttpEntity params) {
-        HttpUriRequest request = buildPostRequest(uri, cookie, params);
+    public static String post(String uri, HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(uri, params);
+        return getResponseStatus(request, null);
+    }
+
+    public static String post(HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(params);
+        return getResponseStatus(request, null);
+    }
+
+    public static String post(String uri, String cookies, HttpEntity params) {
+        HttpUriRequest request = buildPostRequest(uri, cookies, params);
+        return getResponseStatus(request, null);
+    }
+
+    public static String post(HttpEntity params, String cookies) {
+        HttpUriRequest request = buildPostRequest(null, cookies, params);
         return getResponseStatus(request, null);
     }
 
@@ -77,16 +93,19 @@ public class HttpUtil {
             return processResponse(res);
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
-            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again."));
+            return JSON.toJSONString(new APIResponse(500, "Exception occurs. Please try again"));
         }
     }
 
-    static String getToken(String cookie) {
-        if (cookie == null) return null;
-        String[] values = cookie.split(";");
+    static String getToken(String cookies) {
+        if (cookies == null) return null;
+        String[] values = cookies.split(";");
         for (String val : values) {
             String[] data = val.split("=");
-            if (data.length != 2) return null; // incorrect cookie
+            if (data.length != 2) { // incorrect cookie}
+                LOGGER.error("Cookie:{} is invalid.", cookies);
+                return null;
+            }
             //remove blank space
             if (data[0].replace(" ", "").equals("csrftoken")) return data[1];
         }
@@ -97,19 +116,19 @@ public class HttpUtil {
         APIResponse response;
         if (res == null) {
             LOGGER.error("HttpResponse is null, please check cookie, header and params!");
-            response = new APIResponse(400, "Please check request params.");
+            response = new APIResponse(400, "Please check request params");
             return JSON.toJSONString(response);
         }
         int statusCode = res.getStatusLine().getStatusCode();
         String content = EntityUtils.toString(res.getEntity(), "UTF-8");
+        LOGGER.info("Response content : {}", content);
         //Return 200 may still be an error message that needs to be processed
         if (statusCode == 200) {
             return content;
         }
         String error = res.getStatusLine().getReasonPhrase();
-        LOGGER.info("Response content : {}", content);
         LOGGER.error("status:{},message:{}", statusCode, error);
-        error = StringUtils.isEmpty(error) ? "Request failed." : error;
+        error = StringUtils.isEmpty(error) ? "Request failed" : error;
         response = new APIResponse(statusCode, error);
         return JSON.toJSONString(response);
     }
@@ -128,7 +147,7 @@ public class HttpUtil {
         }
         if (isErrorMessage(msg)) {
             String info = msg.getErrors().size() > 0 ?
-                    msg.getErrors().get(0).getMessage() : "Request failed.";
+                    msg.getErrors().get(0).getMessage() : "Request failed";
             return new APIResponse(400, info);
         }
         return null;
@@ -167,14 +186,27 @@ public class HttpUtil {
                 .build();
     }
 
-    private static HttpUriRequest buildPostRequest(String uri, String cookie, HttpEntity params) {
+    private static HttpUriRequest buildPostRequest(HttpEntity params) {
+        return RequestBuilder.post(GRAPHQL_URL)
+                .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(":authority", "leetcode.com")
+                .setHeader(":method", "POST")
+                .setHeader(":scheme", "https")
+                .setEntity(params)
+                .build();
+    }
+
+    private static HttpUriRequest buildPostRequest(String uri, String cookies, HttpEntity params) {
+        cookies = decode(cookies);
         return RequestBuilder.post(GRAPHQL_URL)
                 .setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .setHeader(HttpHeaders.REFERER, uri)
-                .setHeader("Cookie", cookie)
-                .setHeader("x-csrftoken", getToken(cookie))
+                .setHeader("Cookie", cookies)
+                .setHeader("x-csrftoken", getToken(cookies))
                 .setHeader(":authority", "leetcode.com")
                 .setHeader(":method", "POST")
                 .setHeader(":scheme", "https")

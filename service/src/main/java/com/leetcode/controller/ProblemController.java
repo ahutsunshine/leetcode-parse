@@ -28,8 +28,8 @@ public class ProblemController {
     }
 
     @RequestMapping(path = "/problems", method = RequestMethod.GET)
-    public ResponseEntity<APIResponse> getProblemList(String uri) {
-        APIResponse res = problemService.getProblemList(uri);
+    public ResponseEntity<APIResponse> getAllProblems() {
+        APIResponse res = problemService.getAllProblems();
         return ResponseEntity.status(res.getCode()).body(res);
     }
 

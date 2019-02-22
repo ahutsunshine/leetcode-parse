@@ -8,7 +8,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ios</artifactId>
+    <artifactId>leetcode-ios</artifactId>
 
     <name>Leetcode-parse :: ios</name>
 

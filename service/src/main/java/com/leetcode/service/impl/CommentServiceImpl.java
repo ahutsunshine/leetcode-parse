@@ -4,10 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.leetcode.common.PageReqBody;
+import com.leetcode.common.ResponseStatus;
 import com.leetcode.model.comment.Comment;
 import com.leetcode.model.comment.CommentReqBody;
-import com.leetcode.common.ResponseStatus;
-import com.leetcode.model.discuss.DiscussTopics;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.CommentService;
 import org.apache.http.HttpEntity;
@@ -21,12 +20,11 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.leetcode.util.CommonUtil.checkPageParam;
-import static com.leetcode.util.CommonUtil.isCookieValid;
+import static com.leetcode.util.CommonUtil.*;
 import static com.leetcode.util.HttpUtil.*;
 import static com.leetcode.util.RequestParamUtil.buildCommentReqBody;
-import static com.leetcode.util.RequestParamUtil.buildDiscussReqBody;
 
 
 @Service
@@ -41,9 +39,9 @@ public class CommentServiceImpl implements CommentService {
     public APIResponse getComments(PageReqBody req) {
         APIResponse errorStatus = checkPageParam(req);
         if (errorStatus != null) return errorStatus;
-        CookieStore cookieStore = getCookies(req.getUri());
+//        CookieStore cookieStore = getCookies(req.getUri());
         StringEntity requestBody = buildCommentReqBody(req);
-        String res = post(req.getUri(), cookieStore, requestBody);
+        String res = post(requestBody, req.getCookies());
         APIResponse error = getErrorIfFailed(res);
         if (error != null) return error;
         JSONArray j = JSONObject.parseObject(res).getJSONObject("data")
@@ -82,29 +80,26 @@ public class CommentServiceImpl implements CommentService {
         String res = post(req.getUri(), cookies, entity);
         APIResponse e = getErrorIfFailed(res);
         if (e != null) return e;
-        JSONObject data = JSONObject.parseObject(res).getJSONObject("data");
-        data = data.getJSONObject(operationName);
-        ResponseStatus status = JSON.parseObject(data.toString(), ResponseStatus.class);
-        return new APIResponse(status);
+        return getResponseStatus(operationName, res);
     }
 
     private APIResponse checkParams(CommentReqBody req, String operation) {
         if (!isCookieValid(req.getCookies())) {
-            return new APIResponse(400, "User cookie is invalid.");
+            return new APIResponse(400, "User cookie is invalid");
         }
         if (StringUtils.isEmpty(req.getUri())) {
-            return new APIResponse(400, "Refer uri is required.");
+            return new APIResponse(400, "Refer uri is required");
         }
         if (CREATE_COMMENT_OPERATION.equals(operation) && req.getTopicId() == null) {
-            return new APIResponse(400, "Topic id is required.");
+            return new APIResponse(400, "Topic id is required");
         }
         if ((UPDATE_COMMENT_OPERATION.equals(operation)
                 || DELETE_COMMENT_OPERATION.equals(operation))
                 && req.getCommentId() == null) {
-            return new APIResponse(400, "Comment id is required.");
+            return new APIResponse(400, "Comment id is required");
         }
         if (StringUtils.isEmpty(req.getContent()) && !DELETE_COMMENT_OPERATION.equals(operation)) {
-            return new APIResponse(400, "Comment content is required.");
+            return new APIResponse(400, "Comment content is required");
         }
         return null;
     }

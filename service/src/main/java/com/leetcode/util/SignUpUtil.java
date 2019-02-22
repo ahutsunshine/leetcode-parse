@@ -80,7 +80,7 @@ public class SignUpUtil {
         } catch (Exception e) {
             LOGGER.error("Exception occurs.", e);
         }
-        return new APIResponse(500, "Exception occurs. Please try again.");
+        return new APIResponse(500, "Exception occurs. Please try again");
     }
 
     private static APIResponse getSessionIfSuccess(CookieStore cookieStore,
@@ -94,7 +94,7 @@ public class SignUpUtil {
         if (statusCode != 200) {
             response = getErrorIfFailed(statusCode, content);
         } else if (type.equals(RESET_PASSWORD_TYPE)) {
-            return new APIResponse("We have sent you an e-mail successfully.");
+            return new APIResponse("We have sent you an e-mail successfully");
         } else {
             response = getSession(cookieStore);
         }
@@ -113,7 +113,7 @@ public class SignUpUtil {
         } catch (Exception e) { // in case of non-conformity result
             LOGGER.error("Exception happens.", e);
         }
-        return new APIResponse(statusCode, "Request failed.");
+        return new APIResponse(statusCode, "Request failed");
     }
 
     private static APIResponse getErrorIfFailed(int statusCode, LoginField fields) {

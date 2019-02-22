@@ -1,12 +1,22 @@
 package com.leetcode.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PageReqBody {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PageReqBody.class);
+
     private String uri;
     private Integer page = 1;
     private String orderBy = "most_votes";
     private String query = "";
     private Integer pageSize = 15;
     private Integer id;
+    private String cookies;
+
+    public PageReqBody() {
+        uri = "https://leetcode.com/problems";
+    }
 
     public String getUri() {
         return uri;
@@ -54,5 +64,13 @@ public class PageReqBody {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCookies() {
+        return cookies;
+    }
+
+    public void setCookies(String cookies) {
+        this.cookies = cookies;
     }
 }

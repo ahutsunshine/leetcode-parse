@@ -12,10 +12,10 @@ public class CacheEvictJob {
 
     @Scheduled(fixedRateString = "${cache.evict.milliseconds}")
     @CacheEvict(
-            cacheNames = {"discuss", "problem"},
+            cacheNames = {"problem"},
             allEntries = true,
             beforeInvocation = true)
     public void evictCache() {
-        LOGGER.info("Clear discuss and problem cache");
+        LOGGER.info("Clear problem cache");
     }
 }
