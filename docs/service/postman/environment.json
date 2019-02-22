@@ -1,15 +1,16 @@
 {
-	"id": "26c27ec6-1ecd-4670-ac84-7cca5c6fd519",
-	"name": "Griffin Environment",
+	"id": "3cfe48cb-68c2-4794-a48e-8030ded7104b",
+	"name": "Leetcode Environment",
 	"values": [
 		{
 			"key": "BASE_PATH",
 			"value": "http://localhost:8080",
 			"type": "text",
+			"description": "",
 			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2019-02-22T08:33:26.225Z",
+	"_postman_exported_at": "2019-02-22T11:37:30.393Z",
 	"_postman_exported_using": "Postman/6.7.3"
 }
