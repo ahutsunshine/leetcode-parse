@@ -16,5 +16,5 @@ public interface DiscussService {
 
     APIResponse deleteTopic(TopicReqBody req);
 
-    APIResponse uploadImage(String uri, String refer, String cookies, MultipartFile file);
+    APIResponse uploadImage(String cookies, MultipartFile file);
 }

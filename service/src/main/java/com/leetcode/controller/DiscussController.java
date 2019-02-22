@@ -57,9 +57,9 @@ public class DiscussController {
     }
 
     @RequestMapping(path = "/images", method = RequestMethod.POST)
-    public ResponseEntity<APIResponse> uploadImage(String uri, String refer, String cookies,
+    public ResponseEntity<APIResponse> uploadImage(String cookies,
                                                    MultipartFile file) {
-        APIResponse res = service.uploadImage(uri, refer, cookies, file);
+        APIResponse res = service.uploadImage(cookies, file);
         int code = res.getCode() == 200 ? CREATED : res.getCode();
         res.setCode(code);
         return ResponseEntity.status(code).body(res);

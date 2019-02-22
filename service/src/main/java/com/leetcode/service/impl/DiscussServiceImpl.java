@@ -30,6 +30,8 @@ public class DiscussServiceImpl implements DiscussService {
     private static final String UPDATE_TOPIC_OPERATION = "updateTopic";
     private static final String CREATE_TOPIC_OPERATION = "createTopicForQuestion";
     private static final String DELETE_TOPIC_OPERATION = "deleteTopic";
+    private static final String UPLOAD_IMAGE_URL = "https://leetcode.com/storage/upload/image";
+    private static final String PROBLEM_REFER = "https://leetcode.com/problems/";
 
     @Override
     public APIResponse getTopics(PageReqBody req) {
@@ -84,11 +86,11 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public APIResponse uploadImage(String uri, String refer, String cookies, MultipartFile file) {
+    public APIResponse uploadImage(String cookies, MultipartFile file) {
         APIResponse cookieStatus = checkCookie(cookies);
         if (cookieStatus != null) return cookieStatus;
         try {
-            return ImageUtil.upload(uri, refer, cookies, file);
+            return ImageUtil.upload(UPLOAD_IMAGE_URL, PROBLEM_REFER, cookies, file);
         } catch (IOException e) {
             LOGGER.error("IOException ", e);
         }
