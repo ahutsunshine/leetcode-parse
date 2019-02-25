@@ -229,16 +229,6 @@ public class HttpUtil {
         return token;
     }
 
-    public static String getTitleSlug(String uri) {
-        if (StringUtils.isEmpty(uri)) return null;
-        return uri.replace("leetcode.com", "")
-                .replace("problems", "")
-                .replace("https:", "")
-                .replace("http:", "")
-                .replace("/", "")
-                .replace("discuss", "");
-    }
-
     static StringEntity buildRequestBody(String operationName, String variables, String query) {
         JSONObject json = new JSONObject();
         json.put("operationName", operationName);

@@ -21,8 +21,8 @@ public class ProblemController {
     }
 
     @RequestMapping(path = "/problems/detail", method = RequestMethod.GET)
-    public ResponseEntity<APIResponse> getProblem(String uri) {
-        APIResponse res = problemService.getProblem(uri);
+    public ResponseEntity<APIResponse> getProblem(String titleSlug) {
+        APIResponse res = problemService.getProblem(titleSlug);
         return ResponseEntity.status(res.getCode()).body(res);
     }
 
