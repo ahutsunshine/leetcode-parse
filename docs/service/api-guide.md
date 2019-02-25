@@ -189,12 +189,12 @@ curl -X GET 'http://localhost:8080/api/v1/problems'
 ### Problem Detail
 `GET /api/v1/problems/detail`
 #### Request Parameters
-- uri : `required string` problem url
+- titleSlug : `required string` title slug, such as two-sum
 
 #### Curl Example
 ```bash
 curl -X GET \
-  'http://localhost:8080/api/v1/problems/detail?uri=https://leetcode.com/problems/two-sum' \
+  'http://localhost:8080/api/v1/problems/detail?titleSlug=two-sum' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' 
 ```

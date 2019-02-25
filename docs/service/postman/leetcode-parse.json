@@ -462,12 +462,13 @@
 								{
 									"key": "",
 									"value": "",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{BASE_PATH}}/api/v1/problems/detail?uri=https://leetcode.com/problems/output-contest-matches ",
+							"raw": "{{BASE_PATH}}/api/v1/problems/detail?titleSlug=two-sum",
 							"host": [
 								"{{BASE_PATH}}"
 							],
@@ -479,17 +480,17 @@
 							],
 							"query": [
 								{
-									"key": "uri",
-									"value": "https://leetcode.com/problems/output-contest-matches "
+									"key": "titleSlug",
+									"value": "two-sum"
 								}
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Problem detail",
+							"name": "Problem Detail",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -504,24 +505,26 @@
 										{
 											"key": "",
 											"value": "",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
 								"url": {
-									"raw": "{{BASE_PATH}}/api/v1/problems?uri=https://leetcode.com/problems/output-contest-matches ",
+									"raw": "{{BASE_PATH}}/api/v1/problems/detail?titleSlug=two-sum",
 									"host": [
 										"{{BASE_PATH}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"problems"
+										"problems",
+										"detail"
 									],
 									"query": [
 										{
-											"key": "uri",
-											"value": "https://leetcode.com/problems/output-contest-matches "
+											"key": "titleSlug",
+											"value": "two-sum"
 										}
 									]
 								}
@@ -540,11 +543,11 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 16 Feb 2019 09:24:23 GMT"
+									"value": "Mon, 25 Feb 2019 06:58:47 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"code\": 200,\n    \"message\": null,\n    \"data\": {\n        \"questionId\": \"544\",\n        \"questionFrontendId\": \"544\",\n        \"title\": \"Output Contest Matches\",\n        \"titleSlug\": \"output-contest-matches\",\n        \"content\": null,\n        \"difficulty\": \"Medium\",\n        \"likes\": 182,\n        \"dislikes\": 45,\n        \"similarQuestions\": \"[]\",\n        \"contributors\": [\n            {\n                \"username\": \"just_not_over_12\",\n                \"profileUrl\": \"/just_not_over_12/\",\n                \"avatarUrl\": \"https://www.gravatar.com/avatar/464d04f3923cca7da1660e31335cd246.png?s=200\"\n            }\n        ],\n        \"topicTags\": [\n            {\n                \"name\": \"String\",\n                \"slug\": \"string\"\n            },\n            {\n                \"name\": \"Recursion\",\n                \"slug\": \"recursion\"\n            }\n        ],\n        \"codeSnippets\": null,\n        \"stats\": \"{\\\"totalAccepted\\\": \\\"13.3K\\\", \\\"totalSubmission\\\": \\\"18.3K\\\", \\\"totalAcceptedRaw\\\": 13325, \\\"totalSubmissionRaw\\\": 18338, \\\"acRate\\\": \\\"72.7%\\\"}\",\n        \"hints\": [],\n        \"solution\": {\n            \"canSeeDetail\": true,\n            \"id\": \"332\"\n        },\n        \"metaData\": \"{\\r\\n  \\\"name\\\": \\\"findContestMatch\\\",\\r\\n  \\\"params\\\": [\\r\\n    {\\r\\n      \\\"name\\\": \\\"n\\\",\\r\\n      \\\"type\\\": \\\"integer\\\"\\r\\n    }\\r\\n  ],\\r\\n  \\\"return\\\": {\\r\\n    \\\"type\\\": \\\"string\\\"\\r\\n  }\\r\\n}\\r\\n\",\n        \"liked\": null\n    }\n}"
+							"body": "{\n    \"code\": 200,\n    \"message\": null,\n    \"data\": {\n        \"questionId\": \"1\",\n        \"questionFrontendId\": \"1\",\n        \"title\": \"Two Sum\",\n        \"titleSlug\": \"two-sum\",\n        \"content\": \"<p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>\\r\\n\\r\\n<p>You may assume that each input would have <strong><em>exactly</em></strong> one solution, and you may not use the <em>same</em> element twice.</p>\\r\\n\\r\\n<p><strong>Example:</strong></p>\\r\\n\\r\\n<pre>\\r\\nGiven nums = [2, 7, 11, 15], target = 9,\\r\\n\\r\\nBecause nums[<strong>0</strong>] + nums[<strong>1</strong>] = 2 + 7 = 9,\\r\\nreturn [<strong>0</strong>, <strong>1</strong>].\\r\\n</pre>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\",\n        \"difficulty\": \"Easy\",\n        \"likes\": 9850,\n        \"dislikes\": 320,\n        \"similarQuestions\": \"[{\\\"title\\\": \\\"3Sum\\\", \\\"titleSlug\\\": \\\"3sum\\\", \\\"difficulty\\\": \\\"Medium\\\", \\\"translatedTitle\\\": null}, {\\\"title\\\": \\\"4Sum\\\", \\\"titleSlug\\\": \\\"4sum\\\", \\\"difficulty\\\": \\\"Medium\\\", \\\"translatedTitle\\\": null}, {\\\"title\\\": \\\"Two Sum II - Input array is sorted\\\", \\\"titleSlug\\\": \\\"two-sum-ii-input-array-is-sorted\\\", \\\"difficulty\\\": \\\"Easy\\\", \\\"translatedTitle\\\": null}, {\\\"title\\\": \\\"Two Sum III - Data structure design\\\", \\\"titleSlug\\\": \\\"two-sum-iii-data-structure-design\\\", \\\"difficulty\\\": \\\"Easy\\\", \\\"translatedTitle\\\": null}, {\\\"title\\\": \\\"Subarray Sum Equals K\\\", \\\"titleSlug\\\": \\\"subarray-sum-equals-k\\\", \\\"difficulty\\\": \\\"Medium\\\", \\\"translatedTitle\\\": null}, {\\\"title\\\": \\\"Two Sum IV - Input is a BST\\\", \\\"titleSlug\\\": \\\"two-sum-iv-input-is-a-bst\\\", \\\"difficulty\\\": \\\"Easy\\\", \\\"translatedTitle\\\": null}]\",\n        \"contributors\": [],\n        \"topicTags\": [\n            {\n                \"name\": \"Array\",\n                \"slug\": \"array\"\n            },\n            {\n                \"name\": \"Hash Table\",\n                \"slug\": \"hash-table\"\n            }\n        ],\n        \"codeSnippets\": [\n            {\n                \"lang\": \"C++\",\n                \"langSlug\": \"cpp\",\n                \"code\": \"class Solution {\\r\\npublic:\\r\\n    vector<int> twoSum(vector<int>& nums, int target) {\\r\\n        \\r\\n    }\\r\\n};\"\n            },\n            {\n                \"lang\": \"Java\",\n                \"langSlug\": \"java\",\n                \"code\": \"class Solution {\\r\\n    public int[] twoSum(int[] nums, int target) {\\r\\n        \\r\\n    }\\r\\n}\"\n            },\n            {\n                \"lang\": \"Python\",\n                \"langSlug\": \"python\",\n                \"code\": \"class Solution(object):\\n    def twoSum(self, nums, target):\\n        \\\"\\\"\\\"\\n        :type nums: List[int]\\n        :type target: int\\n        :rtype: List[int]\\n        \\\"\\\"\\\"\\n        \"\n            },\n            {\n                \"lang\": \"Python3\",\n                \"langSlug\": \"python3\",\n                \"code\": \"class Solution:\\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\\n        \"\n            },\n            {\n                \"lang\": \"C\",\n                \"langSlug\": \"c\",\n                \"code\": \"/**\\r\\n * Note: The returned array must be malloced, assume caller calls free().\\r\\n */\\r\\nint* twoSum(int* nums, int numsSize, int target) {\\r\\n    \\r\\n}\"\n            },\n            {\n                \"lang\": \"C#\",\n                \"langSlug\": \"csharp\",\n                \"code\": \"public class Solution {\\r\\n    public int[] TwoSum(int[] nums, int target) {\\r\\n        \\r\\n    }\\r\\n}\"\n            },\n            {\n                \"lang\": \"JavaScript\",\n                \"langSlug\": \"javascript\",\n                \"code\": \"/**\\n * @param {number[]} nums\\n * @param {number} target\\n * @return {number[]}\\n */\\nvar twoSum = function(nums, target) {\\n    \\n};\"\n            },\n            {\n                \"lang\": \"Ruby\",\n                \"langSlug\": \"ruby\",\n                \"code\": \"# @param {Integer[]} nums\\n# @param {Integer} target\\n# @return {Integer[]}\\ndef two_sum(nums, target)\\n    \\nend\"\n            },\n            {\n                \"lang\": \"Swift\",\n                \"langSlug\": \"swift\",\n                \"code\": \"class Solution {\\r\\n    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {\\r\\n        \\r\\n    }\\r\\n}\"\n            },\n            {\n                \"lang\": \"Go\",\n                \"langSlug\": \"golang\",\n                \"code\": \"func twoSum(nums []int, target int) []int {\\n    \\n}\"\n            },\n            {\n                \"lang\": \"Scala\",\n                \"langSlug\": \"scala\",\n                \"code\": \"object Solution {\\r\\n    def twoSum(nums: Array[Int], target: Int): Array[Int] = {\\r\\n        \\r\\n    }\\r\\n}\"\n            },\n            {\n                \"lang\": \"Kotlin\",\n                \"langSlug\": \"kotlin\",\n                \"code\": \"class Solution {\\r\\n    fun twoSum(nums: IntArray, target: Int): IntArray {\\r\\n        \\r\\n    }\\r\\n}\"\n            },\n            {\n                \"lang\": \"Rust\",\n                \"langSlug\": \"rust\",\n                \"code\": \"impl Solution {\\r\\n    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {\\r\\n        \\r\\n    }\\r\\n}\"\n            },\n            {\n                \"lang\": \"PHP\",\n                \"langSlug\": \"php\",\n                \"code\": \"class Solution {\\r\\n\\r\\n    /**\\r\\n     * @param Integer[] $nums\\r\\n     * @param Integer $target\\r\\n     * @return Integer[]\\r\\n     */\\r\\n    function twoSum($nums, $target) {\\r\\n        \\r\\n    }\\r\\n}\"\n            }\n        ],\n        \"stats\": \"{\\\"totalAccepted\\\": \\\"1.5M\\\", \\\"totalSubmission\\\": \\\"3.6M\\\", \\\"totalAcceptedRaw\\\": 1475430, \\\"totalSubmissionRaw\\\": 3561907, \\\"acRate\\\": \\\"41.4%\\\"}\",\n        \"hints\": [],\n        \"solution\": {\n            \"canSeeDetail\": true,\n            \"id\": \"7\"\n        },\n        \"metaData\": \"{\\r\\n  \\\"name\\\": \\\"twoSum\\\",\\r\\n  \\\"params\\\": [\\r\\n    {\\r\\n      \\\"name\\\": \\\"nums\\\",\\r\\n      \\\"type\\\": \\\"integer[]\\\"\\r\\n    },\\r\\n    {\\r\\n      \\\"name\\\": \\\"target\\\",\\r\\n      \\\"type\\\": \\\"integer\\\"\\r\\n    }\\r\\n  ],\\r\\n  \\\"return\\\": {\\r\\n    \\\"type\\\": \\\"integer[]\\\",\\r\\n    \\\"size\\\": 2\\r\\n  }\\r\\n}\",\n        \"liked\": null\n    }\n}"
 						}
 					]
 				},
