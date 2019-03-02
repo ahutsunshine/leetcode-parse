@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
 public class Topic {
-    private String id;
+    private Integer id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String title;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,11 +21,11 @@ public class Topic {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private TopicDetail post;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
