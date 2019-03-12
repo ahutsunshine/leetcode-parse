@@ -7,10 +7,6 @@ public interface ProblemService {
 
     APIResponse getAllProblems();
 
-    APIResponse getTopLikedProblems();
-
-    APIResponse getInterviewProblems();
-
     APIResponse getTags();
 
     APIResponse filterProblems(String key);

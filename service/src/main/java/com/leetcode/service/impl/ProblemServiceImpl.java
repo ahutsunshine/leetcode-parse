@@ -7,6 +7,7 @@ import com.leetcode.model.problem.list.ProblemStatusList;
 import com.leetcode.model.problem.list.TopicTag;
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
+import com.leetcode.service.TopService;
 import org.apache.http.entity.StringEntity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,7 +29,7 @@ import static com.leetcode.util.RequestParamUtil.buildProblemReqBody;
 
 @Service
 @CacheConfig(cacheNames = "problem", keyGenerator = "cacheKeyGenerator")
-public class ProblemServiceImpl implements ProblemService {
+public class ProblemServiceImpl implements ProblemService, TopService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProblemServiceImpl.class);
 
     private static final String TOP_100_LIKED_URI = "https://leetcode.com/api/problems/favorite_lists/top-100-liked-questions/";
