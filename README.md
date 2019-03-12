@@ -29,12 +29,14 @@ Before running, we need configure running environment.
 ### Run environment
 - JDK (1.8 or later versions)
 ```
-$ sudo apt install openjdk-8-jre-headless
+$ sudo apt install openjdk-8-jdk
 $ java -version
 openjdk version "1.8.0_191"
-OpenJDK Runtime Environment (build 1.8.0_191-8u191-b12-0ubuntu0.18.10.1-b12)
+OpenJDK Runtime Environment (build 1.8.0_191-8u191-b12-0ubuntu0.16.04.1-b12)
 OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 ```
+You can refer [here](https://askubuntu.com/questions/175514/how-to-set-java-home-for-java) to set `JAVA_HONE`.
+
 ### Package
 Leetcode-parse project provides [leetcode_parse.jar](service/main/resources/jar/leetcode_parse.jar) to run as demo. There are three steps to generate the project jar.
 - Clone down [leetcode-parse](https://github.com/ahutsunshine/leetcode-parse) and enter project root directory.
