@@ -2,6 +2,7 @@ package com.leetcode.controller;
 
 import com.leetcode.model.response.APIResponse;
 import com.leetcode.service.ProblemService;
+import com.leetcode.service.impl.ProblemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class ProblemController {
 
-    private final ProblemService problemService;
+    private final ProblemServiceImpl problemService;
 
     @Autowired
-    public ProblemController(ProblemService problemService) {
+    public ProblemController(ProblemServiceImpl problemService) {
         this.problemService = problemService;
     }
 
