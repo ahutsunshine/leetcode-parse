@@ -45,7 +45,7 @@ public class CommonUtil {
         if (cookies == null) return null;
         try {
             return URLDecoder.decode(cookies, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             LOGGER.error("Decode failure. ", e);
         }
         return null;
