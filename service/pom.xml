@@ -21,7 +21,7 @@
         <jsoup.version>1.11.3</jsoup.version>
         <fastjson.version>1.2.47</fastjson.version>
         <slf4j.version>1.7.25</slf4j.version>
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <commons.lang3.version>3.8.1</commons.lang3.version>
     </properties>
 
